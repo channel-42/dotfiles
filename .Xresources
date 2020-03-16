@@ -1,0 +1,88 @@
+!Copy paste bindings
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-C: builtin-string: 
+URxvt.keysym.Control-Meta-V: builtin-string: 
+URxvt.iso14755: false
+URxvt.scrollBar: false
+URxvt.internalBorder:  40
+URxvt*font: xft:Source Code Pro:size=9
+URxvt.cursorBlink: True
+!color-scheme old
+! special
+!*.foreground:   #c5c8c6
+*.background:   #1d1f21
+!*.cursorColor:  #c5c8c6
+
+! black
+!*.color0:       #1d1f21
+!*.color8:       #969896
+
+! red
+!*.color1:       #cc342b
+!*.color9:       #cc342b
+
+! green
+!*.color2:       #198844
+!*.color10:      #198844
+
+! yellow
+!*.color3:       #fba922
+!*.color11:      #fba922
+
+! blue
+!*.color4:       #3971ed
+!*.color12:      #3971ed
+
+!! magenta
+!*.color5:       #a36ac7
+!*.color13:      #a36ac7
+
+! cyan
+!*.color6:       #3971ed
+!*.color14:      #3971ed
+
+! white
+!*.color7:       #c5c8c6
+!*.color15:      #ffffff
+
+!ROFI SETUP
+rofi.hide-scrollbar: true
+
+! special
+*.foreground:   #ffffff
+!*.background:   #000000
+*.cursorColor:  #ffffff
+
+! black
+*.color0:       #222827
+*.color8:       #5d6f74
+
+! red
+*.color1:       #d5a8e3
+*.color9:       #cd749c
+
+! green
+*.color2:       #7bbeab
+*.color10:      #63b0b0
+
+! yellow
+*.color3:       #9898ae
+*.color11:      #c0c0dd
+
+! blue
+*.color4:       #6e70e5
+*.color12:      #5786bc
+
+! magenta
+*.color5:       #966fbc
+*.color13:      #9358cd
+
+! cyan
+*.color6:       #a9d1df
+*.color14:      #849da2
+
+! white
+*.color7:       #e6ebe5
+*.color15:      #d9d6cf
+
