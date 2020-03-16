@@ -1,8 +1,16 @@
-set nocompatible              " be iMproved, required
+"            __                            
+"    __  __ /\_\    ___ ___   _ __   ___   
+"   /\ \/\ \\/\ \ /' __` __`\/\`'__\/'___\ 
+" __\ \ \_/ |\ \ \/\ \/\ \/\ \ \ \//\ \__/ 
+"/\_\\ \___/  \ \_\ \_\ \_\ \_\ \_\\ \____\
+"\/_/ \/__/    \/_/\/_/\/_/\/_/\/_/ \/____/
+"                                          
+set nocompatible              " required
 filetype off                  " required
 
 set ignorecase
 set smartcase
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -29,6 +37,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 Plugin 'mhartington/oceanic-next'
 Plugin 'Rigellute/shades-of-purple.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 call glaive#Install()        " enable this line after the installation of glaive
@@ -53,6 +62,7 @@ set autoindent
 " indent for special file
 autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
+
 " setup for ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = 'python'
@@ -75,11 +85,13 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:markdown_enable_spell_checking = 0
+
 " autoformat
 augroup autoformat_settings
   autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   autocmd FileType python AutoFormatBuffer yapf
 augroup END
+
 " use google style for clang-format
 Glaive codefmt clang_format_style='google'
 
@@ -87,27 +99,27 @@ Glaive codefmt clang_format_style='google'
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
+"Bindings
 map <silent> <F5> : NERDTreeToggle<CR>
 nnoremap <S-s> :w! \|:silent !/home/lukas/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
 nnoremap <silent> <F4> :silent !/home/lukas/scripts/bash/opout.sh <c-r>%<CR><C-l> 
 nnoremap <silent> <C-f> :call ToggleCoding()<CR>
 
-" setup for gruvbox
-"set t_Co=256
+"colorscheme
 set background=dark
 colorscheme shades_of_purple
-"":h startify-options
+"remove colorscheme background -> use terminal bg
 hi Normal guibg=NONE ctermbg=NONE
 hi NonText ctermbg=none ctermfg=NONE 
 hi EndOfBuffer ctermbg=none
 hi LineNr ctermbg=none
-" let g:gruvbox_contrast_dark = 'soft'
 
 " setup for goyo & limelight
 let g:limelight_conceal_ctermfg = 'gray'
 let g:goyo_width = 120
 let g:goyo_height = 95
 let b:code = "no"
+
 "Toggle Goyo and Limelight on and off
 function! ToggleCoding()
     if exists("b:code") && b:code == "yes"
@@ -120,10 +132,12 @@ function! ToggleCoding()
         Limelight
     endif
 endfunction
+
 "remove weird background change on exit 
 function s:goyo_enter()
     hi! VertSplit guibg=NONE
 endfunction
+
 function s:goyo_leave()
     hi Normal guibg=NONE ctermbg=NONE
     hi NonText ctermbg=none ctermfg=NONE 
@@ -160,6 +174,7 @@ let g:header_ascii = [
             \ ]
 
 let g:startify_custom_header = startify#center(g:header_ascii)
+
 " setup for ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -173,8 +188,10 @@ let g:ctrlp_custom_ignore = {
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:vim_markdown_folding_disabled = 1
+
 " setup for tagbar
 nmap <F8> :TagbarToggle<CR>
+
 " setup for indent line
 let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
