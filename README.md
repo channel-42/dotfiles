@@ -41,3 +41,33 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
 |Firefox|[minimal functional fox](https:/a/github.com/turing753/minimal-functional-fox)|yes|
 |oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
+
+# Vim 
+
+Vim is my goto text editor and over time I've added more and more features. Functionally it has all the features I need from an dev IDE, with the main difference being way less bloat than your typical IDE.
+
+To make the most of my "selfmade IDE" I added some bindigs to execute scripts or launch plugins:
+
+| Binding | Funtion | 
+|:--------:|:----:|
+|Shift+s|compile current file|
+|F4| open compiled file|
+|F5| toggle NerdTree|
+|F8| toggle tagbar|
+|Ctrl+f| toggle focus mode|
+
+
+# Firefox
+
+![alt text](https://github.com/channel-42/dotfiles/blob/master/screenshot2.png "Screenshot of Firefox")
+
+I use Firefox with a custom stylesheet (a pretty neat feature I didn't even know existed a couple of months ago). I modified a premade stylesheet from a fellowe r/unixporn member (see the themes section).
+
+For my start/new-tab-page I use the Nighttab extension.
+
+To setup custom stylesheets the following settings need to be changed;
+- set the theme to dark in Firefox's settings
+- enable custom stylesheets by setting `toolkit.legacyUserProfileCustomizations.stylesheets` to `true` in about:config
+- move the chrome folder to `~.mozilla/firefox/<user-profile>/`
+- restart Firefox for the changes to apply
+

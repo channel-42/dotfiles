@@ -101,8 +101,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 "Bindings
 map <silent> <F5> : NERDTreeToggle<CR>
-nnoremap <S-s> :w! \|:silent !/home/lukas/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
-nnoremap <silent> <F4> :silent !/home/lukas/scripts/bash/opout.sh <c-r>%<CR><C-l> 
+nnoremap <S-s> :w! \|:silent !$HOME/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
+nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l> 
 nnoremap <silent> <C-f> :call ToggleCoding()<CR>
 
 "colorscheme
