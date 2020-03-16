@@ -6,7 +6,7 @@ These are the dotfiles of my main Arch-Machine. Some of the files may be **very*
 
 # About me
 
-<img align="left" border="0" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/Pictures/arch_senko.png">
+<img align="left" border="0" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/Pictures/arch_senko.png" width="50">
 I'm a first semester automotive comp.sci. and mechatronics student from Germany whose also doing an apprenticeship in the field of automotive mechatronics.   
 I started using Linux in September of 2019 and have been enjoying the amount of flexibilty the platform offers. My main distro of choice is Arch-Linux, which I run on both my laptop and my tower.   
 
