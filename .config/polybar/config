@@ -60,7 +60,7 @@ font-4 = FontAwesome:pixelsize=10
 
 modules-left = i3
 modules-center = mpd
-modules-right = xbacklight separator battery separator wlan separator date 
+modules-right = eth separator date 
 
 tray-position = right
 tray-padding = 2
