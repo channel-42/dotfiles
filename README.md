@@ -1,6 +1,6 @@
 # Channel_42's Dotfiles
 
-![alt text](https://github.com/channel-42/dotfiles/blob/master/screenshot.png "Screenshot of my desktop")
+![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot.png "Screenshot of my desktop")
 
 These are the dotfiles of my main Arch-Machine. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
 
@@ -43,7 +43,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
 
 # Vim 
-
+![vim1](https://github.com/channel-42/dotfiles/blob/master/.resources/vim1.png  "Screenshot of Vim")
 Vim is my goto text editor and over time I've added more and more features. Functionally it has all the features I need from an dev IDE, with the main difference being way less bloat than your typical IDE.
 
 To make the most of my "selfmade IDE" I added some bindigs to execute scripts or launch plugins:
@@ -57,9 +57,16 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 |Ctrl+f| toggle focus mode|
 
 
+<img align="left" border="20" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/.resources/vim2.png" width="50%">
+Here you see (almost) all of the features of my vim setup in one screenshot. The file browser on the left is NerdTree. It uses vim bindings and can show/hide .files/.directories. The window on the right side is tagbar, which displays usefull information such as class properties and gives a general overview of your file.
+
+
+<img align="right" border="20" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/.resources/vim3.png" width="50%">
+This is the focus-mode that can be toggled with Ctrl+f. I recommend using it in fullscreen mode to minimize distraction.If you wish to disable the "block style" syntax highlight, remove all limelight mentions in the `ToggleConding` functionin the .vimrc.
+
 # Firefox
 
-![alt text](https://github.com/channel-42/dotfiles/blob/master/screenshot2.png "Screenshot of Firefox")
+![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot2.png "Screenshot of Firefox")
 
 I use Firefox with a custom stylesheet (a pretty neat feature I didn't even know existed a couple of months ago). I modified a premade stylesheet from a fellowe r/unixporn member (see the themes section).
 
