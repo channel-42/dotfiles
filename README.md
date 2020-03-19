@@ -60,26 +60,12 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 |F8| toggle tagbar|
 |Ctrl+f| toggle focus mode|
 
-<img align="left" border="20" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/.resources/vim2.png" width="50%">
-<p style="text-align: justify;">
+![vim2](https://github.com/channel-42/dotfiles/blob/master/.resources/vim2.png)
 Here you see (almost) all of the features of my vim setup in one screenshot. The file browser on the left is NerdTree. It uses vim bindings and can show/hide .files/.directories. The window on the right side is tagbar, which displays usefull information such as class properties and gives a general overview of your file.
-</p>
 
-</br>
-</br>
-</br>
-
-<div widht="100%" style="text-align: justify;">
-<img align="right" border="20" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/.resources/vim3.png" width="50%">
+![vim3](https://github.com/channel-42/dotfiles/blob/master/.resources/vim3.png)
 This is the focus-mode that can be toggled with Ctrl+f. I recommend using it in fullscreen mode to minimize distraction.If you wish to disable the "block style" syntax highlight, remove all limelight mentions in the `ToggleConding` functionin the .vimrc.
-</div>
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
 
 # Firefox
 
