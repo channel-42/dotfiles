@@ -7,7 +7,7 @@ These are the dotfiles of my main Arch-Machine. Some of the files may be **very*
 
 # About me
 
-<img align="left" border="0" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/Pictures/arch_senko.png" width="60">
+<img align="left" border="0" padding="4" src="https://github.com/channel-42/dotfiles/blob/master/Pictures/arch_senko.png" width="25%">
 
 <p style="text-align: justify;">
 I'm a first semester automotive comp.sci. and mechatronics student from Germany whose also doing an apprenticeship in the field of automotive mechatronics.   
