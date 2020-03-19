@@ -12,6 +12,10 @@ case "$1" in                    #check if user has inputed request
         RANDOM=$$$(date +%s)    #generate random number
         selectedwall=${WALLS[$RANDOM % ${#WALLS[@]} ]}  #select a random wallpaper
         final="${DIR}${selectedwall}"   #join strings for final command
+        ;; 
+    "-s")                       #show all Wallpapers user ui
+        selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/materia.rasi)
+        final=("${DIR}${selectedwall}")
         ;;
     *)                          #if input, user wallpaper
         if test -f "$DIR""$1"; then #check files existance
