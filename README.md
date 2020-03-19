@@ -2,7 +2,9 @@
 
 ![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot.png "Screenshot of my desktop")
 
+<p style="text-align: justify;">
 These are the dotfiles of my main Arch-Machine. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
+</p>
 
 # About me
 
