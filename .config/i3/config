@@ -95,8 +95,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 #WINDOW COSMETICS
-gaps inner 30
-gaps outer 30
+gaps inner 40
+gaps outer 70
 new_window pixel 0
 default_border pixel 3
 default_floating_border pixel 3
