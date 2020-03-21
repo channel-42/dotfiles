@@ -1,8 +1,8 @@
-# Channel_42's Dotfiles
+# Channel_42's Dotfiles [Tower Branch]
 
-![alt text](https://github.com/channel-42/dotfiles/blob/master/screenshot.png "Screenshot of my desktop")
+![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot1.png "Screenshot of my desktop")
 
-These are the dotfiles of my main Arch-Machine. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
+These are the dotfiles of my main Arch-Tower. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
 
 # About me
 

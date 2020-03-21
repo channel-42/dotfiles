@@ -65,8 +65,9 @@ modules-left = i3
 modules-center = mpd
 modules-right = eth separator date 
 
-tray-position = right
+tray-position = 
 tray-padding = 2
+tray-background = ${colors.background}
 
 ;wm-restack = i3
 
