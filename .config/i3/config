@@ -98,7 +98,7 @@ bindsym $mod+a focus parent
 gaps inner 40
 gaps outer 70
 new_window pixel 0
-default_border pixel 3
+default_border pixel 5
 default_floating_border pixel 3
 
 #BORDER COLORS
