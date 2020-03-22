@@ -5,11 +5,11 @@
 These are the dotfiles of my main Arch-Tower. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
 
 # Contents
-[About Me](#about-me)
-[General Information](#general-information)
-[Themes and Colorschemes](#themes-and-colorschemes)
-[Vim](#vim)
-[Firefox](#firefox)
+[About Me](#about-me)     
+[General Information](#general-information)      
+[Themes and Colorschemes](#themes-and-colorschemes)       
+[Vim](#vim)       
+[Firefox](#firefox)      
 
 
 # About me
