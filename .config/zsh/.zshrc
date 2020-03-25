@@ -30,7 +30,7 @@ alias wpp="/home/lukas/scripts/bash/wallpaper_automation.sh"
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit
+compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
 _comp_options+=(globdots)		# Include hidden files.
 
 # Use vim keys in tab complete menu:
