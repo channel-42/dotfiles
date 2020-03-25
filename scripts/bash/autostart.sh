@@ -10,5 +10,7 @@ sleep 1
 #mot sleeping may cause issues with multiple monitors
 
 #launch polybar
-polybar main -r & 
+polybar wm -r &
+polybar music -r &
+polybar info -r &
 

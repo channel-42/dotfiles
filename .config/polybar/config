@@ -30,27 +30,27 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/main]
+[bar/wm]
 monitor = ${env:MONITOR:DP-4}
-width = 96%:25
+width = 11%:-12
 height = 50
 fixed-center = true
-
+override-redirect = true
 background = ${colors.background}
 foreground = ${colors.foreground}
+
+radius = 20
 
 line-size = 0
 line-color = #f00
 
-border-left-size = 3%:5
-border-top-size = 40
 border-color = #00000000
 
-offset-x = -1000
+offset-x = 3%:5
+offset-y = 40
 
 padding-left = 0
 padding-right = 10
-
 
 module-margin-left = 3
 module-margin-right = 2
@@ -62,17 +62,86 @@ font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
 font-4 = FontAwesome:pixelsize=10
 
 modules-left = i3
-modules-center = mpd
-modules-right = eth separator date 
-
-tray-position = 
-tray-padding = 2
-tray-background = ${colors.background}
-
-;wm-restack = i3
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+
+[bar/music]
+monitor = ${env:MONITOR:DP-4}
+width = 20%
+height = 50
+fixed-center = true
+override-redirect = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 20
+
+line-size = 0
+line-color = #f00
+
+border-left-size = 0
+border-color = #00000000
+
+offset-x = 40%
+offset-y = 40
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 3
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=15;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
+font-4 = FontAwesome:pixelsize=10
+
+modules-center = mpd
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[bar/info]
+monitor = ${env:MONITOR:DP-4}
+width = 13%
+height = 50
+fixed-center = true
+override-redirect = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 20
+
+line-size = 0
+line-color = #f00
+
+border-left-size = 0
+border-color = #00000000
+
+offset-x = 84%:-10
+offset-y = 40
+
+padding-left = 0
+padding-right = 5
+
+module-margin-left = 3
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=15;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
+font-4 = FontAwesome:pixelsize=10
+
+modules-right = eth separator date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
 
 
 [module/separator]
