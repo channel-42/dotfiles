@@ -116,7 +116,7 @@ hi LineNr ctermbg=none
 
 " setup for goyo & limelight
 let g:limelight_conceal_ctermfg = 'gray'
-let g:goyo_width = 120
+let g:goyo_width = 130
 let g:goyo_height = 95
 let b:code = "no"
 
