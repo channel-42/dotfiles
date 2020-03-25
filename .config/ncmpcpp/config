@@ -1,8 +1,8 @@
 ##
 # Files
  mpd_music_dir = "~/Music"  
- lyrics_directory  = ~/.ncmpcpp/lyrics
- ncmpcpp_directory  = ~/.config/ncmpcpp/
+ lyrics_directory  = ~/.config/ncmpcpp/lyrics
+ ncmpcpp_directory  = ~/.config/ncmpcpp
  mpd_host = "localhost"
  mpd_port = "6600"  
  mpd_connection_timeout = "5"  
