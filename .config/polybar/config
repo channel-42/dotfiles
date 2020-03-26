@@ -21,8 +21,8 @@
 ;Note: future version will exclusive use .Xresouces colors for Polybar
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1d1f21
-background-alt = #966fbc
+background = ${xrdb:background-no-transparancy}
+background-alt = ${xrdb:highlight}
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555

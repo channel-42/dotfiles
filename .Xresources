@@ -18,16 +18,22 @@ URxvt.scrollBar: false
 URxvt.internalBorder:  40
 URxvt*font: xft:Source Code Pro:size=9
 URxvt.cursorBlink: True
-
+URxvt*depth: 32
 !ROFI SETUP
 rofi.hide-scrollbar: true
 
 !COLORSCHMES
-! special
+! SPECIAL DONT CHANGE
 *.foreground:   #ffffff
-*.background:   #1d1f21
+*.background:   [50]#1d1f21
+!needed for polybar
+*.background-no-transparancy: #1d1f21
 *.cursorColor:  #ffffff
+*.highlight:    #83b5ae
+!#da4363 
+!#966fbc
 
+!MAIN COLORS
 ! black
 *.color0:       #222827
 *.color8:       #5d6f74

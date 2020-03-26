@@ -95,6 +95,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 #WINDOW COSMETICS
+set_from_resource $hi highlight
 gaps inner 40
 gaps outer 70
 gaps top 85
@@ -103,8 +104,8 @@ default_border pixel 5
 default_floating_border pixel 3
 
 #BORDER COLORS
-#class                 border  bground text    indicator child_border
-client.focused          #966fbc #FF6C110 #FFFFFF #966fbc  #966fbc
+#class                 border  bground  text    indicator child_border
+client.focused          $hi     #FF6C110 #FFFFFF $hi       $hi
 client.unfocused        #373B41 #373B41 #373B41 #373B41   #373B41 
 client.urgent           #7F130E #900000 #FFFFFF #900000   #900000
 
