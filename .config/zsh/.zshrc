@@ -42,7 +42,8 @@ bindkey -v '^?' backward-delete-char
 
 #aliases
 alias dgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
-alias syssus="systemctl suspend"
+alias down="systemctl suspend"
+alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
