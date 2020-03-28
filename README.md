@@ -63,6 +63,8 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 |F5| toggle NerdTree|
 |F8| toggle tagbar|
 |Ctrl+f| toggle focus mode|
+|Space| toggle fold|
+|Ctrl+space| create docstring|
 
 
 # Firefox
