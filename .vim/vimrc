@@ -81,11 +81,24 @@ let g:ycm_semantic_triggers =  {
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:markdown_enable_spell_checking = 0
+let b:syntastic_mode = "passive"
+let b:check = "no"
+
+"Toggle Syntastic 
+function! ToggleSyntastic()
+   if exists("b:check") && b:check == "yes"
+       let b:check = "no"
+       SyntasticReset
+    else
+        let b:check = "yes"
+        SyntasticCheck
+    endif
+endfunction
 
 " autoformat
 augroup autoformat_settings
@@ -121,6 +134,7 @@ nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l>
 nnoremap <silent> <C-f> :call ToggleCoding()<CR>
 nnoremap <silent> <NUL> :Pydocstring <CR>
 nnoremap <silent> <space> za
+nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
 
 "colorscheme
 set background=dark
@@ -147,7 +161,7 @@ function! ToggleCoding()
         Goyo!
         Limelight!
     else
-        let b:code= "yes"
+        let b:code = "yes"
         Goyo
         Limelight
     endif
