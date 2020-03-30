@@ -45,7 +45,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi(a program launcher)
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/materia.rasi
+bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/materia.rasi
 
 # change focus
 bindsym $mod+j focus left
@@ -89,7 +89,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+f focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
