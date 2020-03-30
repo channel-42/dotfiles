@@ -21,6 +21,7 @@ URxvt.cursorBlink: True
 URxvt*depth: 32
 !ROFI SETUP
 rofi.hide-scrollbar: true
+rofi.show-icons: true
 
 !COLORSCHMES
 ! SPECIAL DONT CHANGE
