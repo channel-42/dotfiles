@@ -9,6 +9,7 @@
 #load oh-my-zsh
 export ZSH=/usr/share/oh-my-zsh
 export LAMBDA_MOD_N_DIR_LEVELS=5
+export PATH="$HOME/.local/bin:$PATH"
 autoload -U colors && colors
 #is overwritten by oh-my-zsh
 PROMPT="%B%n@%M [ %~ ] 
