@@ -98,6 +98,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
 font-4 = FontAwesome:pixelsize=10
+font-5 = IPAGothic:pixelsize=20:antialias=true;3
 
 modules-center = mpd
 
