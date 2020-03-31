@@ -39,6 +39,7 @@ Plugin 'mhartington/oceanic-next'
 Plugin 'Rigellute/shades-of-purple.vim'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'ap/vim-css-color'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
