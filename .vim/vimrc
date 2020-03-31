@@ -65,6 +65,18 @@ set autoindent
 autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 
+" get current song
+function! NowPlaying()
+    "shell script checks if mpc first line starts with 'volume' (output when
+    "not playing) and returns ~~, else returns song name
+    let g:song = system("[[ $(mpc | head -n 1) = volume* ]] && echo ' ~~ '  || echo $(mpc | head -n 1)") 
+    return g:song[:-2]
+endfunction
+" setup for airline
+let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
+let g:airline_section_y = '%{NowPlaying()}'
+let g:airline_powerline_fonts = 1
+
 " setup for ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = 'python'
