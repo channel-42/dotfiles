@@ -1,0 +1,32 @@
+#! /bin/sh
+
+exec $HOME/scripts/bash/autostart.sh &
+exec $HOME/scripts/bash/wallpaper_automation.sh &
+
+killall compton
+compton &
+
+bspc monitor DP-4 -d DEV WWW DOC ETC MEDIA 
+
+killall mpd
+mpd &
+
+bspc config border_width 5
+bspc config window_gap 50
+bspc config top_padding 100
+bspc config left_padding 60
+bspc config right_padding 60
+bspc config border_radius 10
+
+#get xrdb colors
+highlight=$(xrdb -query | grep "*.highlight" | cut -f 2)
+background=$(xrdb -query | grep "*.background-no-transparancy:" | cut -f 2)
+
+bspc config focused_border_color "$highlight"
+bspc config normal_border_color "$background"
+
+bspc config focus_follows_pointer true
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle false
+

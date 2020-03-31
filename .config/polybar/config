@@ -61,7 +61,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
 font-4 = FontAwesome:pixelsize=10
 
-modules-left = i3
+modules-left = bspwm
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -179,6 +179,27 @@ label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %name%
+label-occupied-padding = 3
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty = 
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
+; Separator in between workspaces
+; label-separator = |
 
 [module/i3]
 type = internal/i3
