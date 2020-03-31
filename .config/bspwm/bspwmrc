@@ -16,7 +16,7 @@ bspc config window_gap 50
 bspc config top_padding 100
 bspc config left_padding 60
 bspc config right_padding 60
-bspc config border_radius 10
+bspc config border_radius 20
 
 #get xrdb colors
 highlight=$(xrdb -query | grep "*.highlight" | cut -f 2)
