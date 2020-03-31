@@ -1,4 +1,5 @@
-# Channel_42's Dotfiles
+# Channel_42's Dotfiles ![](https://img.shields.io/badge/Branch-Laptop-green.svg) [![](https://img.shields.io/badge/Branch-Tower-purple.svg)](https://github.com/channel-42/dotfiles/tree/tower_branch) ![](https://img.shields.io/badge/License-MIT-orange.svg) ![](https://img.shields.io/badge/Distro-Arch-blue.svg)
+
 
 ![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot.png "Screenshot of my desktop")
 
