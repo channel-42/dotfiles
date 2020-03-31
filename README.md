@@ -24,7 +24,7 @@ Here's a basic of most of the software I use in my setup:
 
 | Category | Name |
 |:--------:|:----:|
-|WM| i3-gaps|
+|WM| bspwm (rounded corners fork)|
 |Bar|Polybar|
 |Terminal|Urxvt|
 |Shell|zsh with oh-my-zsh|
@@ -52,6 +52,8 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 
 # Vim 
 
+![](https://github.com/channel-42/dotfiles/blob/tower_branch/.resources/vim1.png)
+
 Vim is my goto text editor and over time I've added more and more features. Functionally it has all the features I need from an dev IDE, with the main difference being way less bloat than your typical IDE.
 
 To make the most of my "selfmade IDE" I added some bindigs to execute scripts or launch plugins:
@@ -65,7 +67,12 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 |Ctrl+f| toggle focus mode|
 |Space| toggle fold|
 |Ctrl+space| create docstring|
+|Shift+c| toggle syntax checking|
 
+
+![](https://github.com/channel-42/dotfiles/blob/tower_branch/.resources/vim2.png)
+
+> This the "focus mode". It even has hex color previews  
 
 # Firefox
 
