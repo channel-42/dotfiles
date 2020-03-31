@@ -37,6 +37,9 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 Plugin 'mhartington/oceanic-next'
 Plugin 'Rigellute/shades-of-purple.vim'
+Plugin 'heavenshell/vim-pydocstring'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'ap/vim-css-color'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -63,6 +66,10 @@ set autoindent
 autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 
+" setup for airline
+let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
+let g:airline_powerline_fonts = 1
+
 " setup for ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = 'python'
@@ -79,12 +86,24 @@ let g:ycm_semantic_triggers =  {
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
 let g:markdown_enable_spell_checking = 0
+let b:syntastic_mode = "passive"
+let b:check = "no"
+
+"Toggle Syntastic 
+function! ToggleSyntastic()
+   if exists("b:check") && b:check == "yes"
+       let b:check = "no"
+       SyntasticReset
+    else
+        let b:check = "yes"
+        SyntasticCheck
+    endif
+endfunction
 
 " autoformat
 augroup autoformat_settings
@@ -99,24 +118,44 @@ Glaive codefmt clang_format_style='google'
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
+"pydocstring and autohiding
+set foldmethod=syntax  
+set foldnestmax=10
+set foldenable
+set foldlevel=0
+set foldclose=all
+
+autocmd FileType python setlocal foldenable foldmethod=syntax
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+let g:SimpylFold_docstring_preview = 1
+let g:pydocstring_doq_path = '/usr/bin/doq'
+let g:pydocstring_formatter = 'google'
+set foldtext=getline(v:foldstart+1)
+
 "Bindings
 map <silent> <F5> : NERDTreeToggle<CR>
 nnoremap <S-s> :w! \|:silent !$HOME/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
 nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l> 
 nnoremap <silent> <C-f> :call ToggleCoding()<CR>
+nnoremap <silent> <NUL> :Pydocstring <CR>
+nnoremap <silent> <space> za
+nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
 
 "colorscheme
 set background=dark
 colorscheme shades_of_purple
+
 "remove colorscheme background -> use terminal bg
 hi Normal guibg=NONE ctermbg=NONE
 hi NonText ctermbg=none ctermfg=NONE 
 hi EndOfBuffer ctermbg=none
 hi LineNr ctermbg=none
+hi Folded ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 
 " setup for goyo & limelight
 let g:limelight_conceal_ctermfg = 'gray'
-let g:goyo_width = 120
+let g:goyo_width = 130
 let g:goyo_height = 95
 let b:code = "no"
 
@@ -127,7 +166,7 @@ function! ToggleCoding()
         Goyo!
         Limelight!
     else
-        let b:code= "yes"
+        let b:code = "yes"
         Goyo
         Limelight
     endif
@@ -197,3 +236,4 @@ let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
 
 "source ~/cscope_maps.vim
+

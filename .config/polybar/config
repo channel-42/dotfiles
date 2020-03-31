@@ -21,8 +21,8 @@
 ;Note: future version will exclusive use .Xresouces colors for Polybar
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1d1f21
-background-alt = #966fbc
+background = ${xrdb:solid-background}
+background-alt = ${xrdb:highlight}
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
@@ -30,21 +30,101 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
-[bar/main]
-;monitor = ${env:MONITOR:HDMI-1}
-width = 97%
-height = 40
+[bar/wm]
+monitor = ${env:MONITOR:eDP-1}
+width = 14%:-12
+height = 50
 fixed-center = true
-
+override-redirect = true
 background = ${colors.background}
 foreground = ${colors.foreground}
+
+radius = 20
 
 line-size = 0
 line-color = #f00
 
-border-left-size = 60
-border-top-size = 20
 border-color = #00000000
+
+offset-x = 3%:5
+offset-y = 15
+
+padding-left = 0
+padding-right = 10
+
+module-margin-left = 3
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=14;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
+font-4 = FontAwesome:pixelsize=10
+
+modules-left = bspwm
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[bar/music]
+monitor = ${env:MONITOR:eDP-1}
+width = 20%
+height = 50
+fixed-center = true
+override-redirect = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 20
+
+line-size = 0
+line-color = #f00
+
+border-left-size = 0
+border-color = #00000000
+
+offset-x = 40%
+offset-y = 15
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 3
+module-margin-right = 2
+
+font-0 = fixed:pixelsize=14;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
+font-4 = FontAwesome:pixelsize=10
+font-5 = IPAGothic:pixelsize=20:antialias=true;3
+
+modules-center = mpd
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+
+[bar/info]
+monitor = ${env:MONITOR:eDP-1}
+width = 30%
+height = 50
+fixed-center = true
+override-redirect = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 20
+
+line-size = 0
+line-color = #f00
+
+border-left-size = 0
+border-color = #00000000
+
+offset-x = 67%:-5
+offset-y = 15
 
 padding-left = 0
 padding-right = 5
@@ -52,28 +132,27 @@ padding-right = 5
 module-margin-left = 3
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=13;1
+font-0 = fixed:pixelsize=14;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
 font-4 = FontAwesome:pixelsize=10
 
-modules-left = i3
-modules-center = mpd
-modules-right = xbacklight separator battery separator wlan separator date 
-
-tray-position = right
-tray-padding = 2
-
-wm-restack = i3
+modules-right = light separator battery separator wlan separator date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-
 [module/separator]
 type = custom/text
 content = |
+
+[module/light]
+type = custom/script 
+exec = light -G | rev | cut -c 4- | rev
+format = <label>
+tail = false
+label = "   %output%%"
 
 [module/xwindow]
 type = internal/xwindow
@@ -104,6 +183,28 @@ mount-0 = /
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %name%
+label-occupied-padding = 3
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty =
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
+; Separator in between workspaces
+; label-separator = |
 
 
 [module/i3]

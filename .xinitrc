@@ -1,3 +1,4 @@
 setxkbmap de
 xrdb -load ~/.Xresources
-exec i3
+sxhkd &
+exec bspwm

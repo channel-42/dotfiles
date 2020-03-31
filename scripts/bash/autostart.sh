@@ -10,5 +10,9 @@ sleep 1
 #mot sleeping may cause issues with multiple monitors
 
 #launch polybar
-polybar main -r & 
+polybar wm -r & 
+if [[ $(pgrep -f mpd) ]];then
+    polybar music -r & 
+fi
+polybar info -r & 
 
