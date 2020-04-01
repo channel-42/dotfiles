@@ -21,7 +21,7 @@ Here's a basic of most of the software I use in my setup:
 
 | Category | Name |
 |:--------:|:----:|
-|WM| i3-gaps|
+|WM| bspwm (rounded corners fork)|
 |Bar|Polybar|
 |Terminal|Urxvt|
 |Shell|zsh with oh-my-zsh|
@@ -60,6 +60,9 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 |F5| toggle NerdTree|
 |F8| toggle tagbar|
 |Ctrl+f| toggle focus mode|
+|Space| toggle fold|
+|Ctrl + space| create docstring|
+|Shift + c | toggle syntax checking|
 
 ![vim2](https://github.com/channel-42/dotfiles/blob/master/.resources/vim2.png)
 Here you see (almost) all of the features of my vim setup in one screenshot. The file browser on the left is NerdTree. It uses vim bindings and can show/hide .files/.directories. The window on the right side is tagbar, which displays usefull information such as class properties and gives a general overview of your file.
