@@ -108,7 +108,7 @@ cursor-scroll = ns-resize
 
 [bar/info]
 monitor = ${env:MONITOR:eDP-1}
-width = 30%
+width = 29%
 height = 50
 fixed-center = true
 override-redirect = true
@@ -123,7 +123,7 @@ line-color = #f00
 border-left-size = 0
 border-color = #00000000
 
-offset-x = 67%:-5
+offset-x = 68%:-5
 offset-y = 15
 
 padding-left = 0

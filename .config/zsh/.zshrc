@@ -16,7 +16,7 @@ PROMPT="%B%n@%M [ %~ ]
 > "
 #"%B%{%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[red]%} [ %{$fg[magenta]%}%~ %{$fg[red]%}]%{$reset_color%}%b% 
 #> "
-ZSH_THEME="lambda-mod"
+ZSH_THEME="bubblified"
 
 # History in cache directory:
 HISTSIZE=10000

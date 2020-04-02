@@ -16,7 +16,7 @@ URxvt.iso14755: false
 !General settings
 URxvt.scrollBar: false
 URxvt.internalBorder:  40
-URxvt*font: xft:Hack:size=9:, xft:M+ 1c
+URxvt*font: xft:Hack Nerd Font Mono:size=10, xft:M+ 1c
 URxvt.cursorBlink: True
 
 !ROFI SETUP
@@ -32,20 +32,35 @@ rofi.hide-scrollbar: true
 
 *.highlight:    #fb3d66
 
+! black
 *.color0:       #051519
 *.color8:       #323b3e
+
+! red
 *.color1:       #f8818e
 *.color9:       #fb3d66
-*.color2:       #84969a
-*.color10:      #22292a
-*.color3:       #97a6aa
-*.color11:      #3e494c
-*.color4:       #5e6f73
-*.color12:      #a2b0b3
-*.color5:       #677a7e
-*.color13:      #e0e5e6
+
+! green
+*.color2:       #7b9679
+*.color10:      #6d8c63
+
+! yellow
+*.color3:       #bf946b
+*.color11:      #e4cd7b
+
+! blue
+*.color4:       #8b9eb2
+*.color12:      #b0ecee
+
+! magenta
+*.color5:       #796e7f
+*.color13:      #cdafd9
+
+! cyan
 *.color6:       #7b8e93
 *.color14:      #556468
+
+! white
 *.color7:       #b3bec1
 *.color15:      #f7f8f8
 
