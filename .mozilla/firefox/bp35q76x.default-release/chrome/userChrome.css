@@ -1,7 +1,7 @@
 html#main-window {
 	--color-bg: #1d1f21;
 	--toolbar-bgcolor: var(--color-bg) !important;
-        --color-accent: #966fbc;
+        --color-accent: #fb3d66;
 	--gap-between-tabs: 5px;
 	--margin-after-tab-list: 8x;
 	--margin-before-tab-list: 8px;
