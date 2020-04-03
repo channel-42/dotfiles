@@ -10,13 +10,14 @@
 export ZSH=/usr/share/oh-my-zsh
 export LAMBDA_MOD_N_DIR_LEVELS=5
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="vim"
 autoload -U colors && colors
 #is overwritten by oh-my-zsh
 PROMPT="%B%n@%M [ %~ ] 
 > "
 #"%B%{%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[red]%} [ %{$fg[magenta]%}%~ %{$fg[red]%}]%{$reset_color%}%b% 
 #> "
-ZSH_THEME="lambda-mod"
+ZSH_THEME="bubblified"
 
 # History in cache directory:
 HISTSIZE=10000

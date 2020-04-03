@@ -63,7 +63,7 @@ set softtabstop=4
 set autoindent
 
 " indent for special file
-autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent 
+autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 
 " get current song
