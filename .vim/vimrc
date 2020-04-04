@@ -54,6 +54,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 set cursorline
 set guioptions=
+set nospell
 syntax on
 
 " indent for global
@@ -87,7 +88,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_semantic_triggers =  {
   \ 'c' : ['re!\w{2}'],
   \ 'cpp' : ['re!\w{2}'],
-  \ 'python' : ['re!\w{2}'],
+  \ 'python' : ['re!\w{2}'], 
   \ }
 
 " setup for syntastic
@@ -119,6 +120,7 @@ augroup autoformat_settings
   autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
+autocmd FileType tex set spell spelllang=de
 " use google style for clang-format
 Glaive codefmt clang_format_style='google'
 
