@@ -88,3 +88,4 @@ To setup custom stylesheets the following settings need to be changed;
 - move the chrome folder to `~.mozilla/firefox/<user-profile>/`
 - restart Firefox for the changes to apply
 
+

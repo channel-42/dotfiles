@@ -44,6 +44,7 @@ bindkey -v '^?' backward-delete-char
 
 #aliases
 alias dgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+alias ugit='/usr/bin/git --git-dir=$HOME/Documents/.uni/ --work-tree=$HOME/Documents'
 alias down="systemctl suspend"
 alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
 
