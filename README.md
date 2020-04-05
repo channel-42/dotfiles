@@ -3,7 +3,7 @@
 
 ![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot.png "Screenshot of my desktop")
 
-These are the dotfiles of my main Arch-Machine. Some of the files may be **very** messy, but I'm working on cleaning everything up. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
+These are the dotfiles of my main Arch-Machine. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
 
 
 # About me
@@ -17,7 +17,7 @@ I started using Linux in September of 2019 and have been enjoying the amount of 
 
 # General Information
 
-Here's a basic of most of the software I use in my setup:
+Here's a basic rundown of most of the software I use in my setup:
 
 | Category | Name |
 |:--------:|:----:|
@@ -44,7 +44,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Terminal|[cloud](http://terminal.sexy/#AAAA____Iign1ajjnHXdmJiuZUqWYlVmqdHf5uvlXW90zXScY7CwwMDdV4a8PzRChJ2i2dbP)|yes|
 |Vim|[shades of purple](https://github.com/Rigellute/shades-of-purple.vim)|no|
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
-|Firefox|[minimal functional fox](https:/a/github.com/turing753/minimal-functional-fox)|yes|
+|Firefox|[minimal functional fox](https://github.com/mut-ex/minimal-functional-fox)|yes|
 |oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
 
 # Vim 
