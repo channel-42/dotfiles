@@ -45,7 +45,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Vim|[shades of purple](https://github.com/Rigellute/shades-of-purple.vim)|no|
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
 |Firefox|[minimal functional fox](https://github.com/mut-ex/minimal-functional-fox)|yes|
-|oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
+|oh-my-zsh|[bubblified](https://github.com/hohmannr/bubblified)|yes|
 
 # Vim 
 ![vim1](https://github.com/channel-42/dotfiles/blob/master/.resources/vim1.png  "Screenshot of Vim")
