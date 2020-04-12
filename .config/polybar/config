@@ -78,7 +78,7 @@ foreground = ${colors.foreground}
 
 radius = 20
 
-line-size = 0
+line-size = 3
 line-color = #f00
 
 border-left-size = 0
@@ -89,6 +89,7 @@ offset-y = 40
 
 padding-left = 0
 padding-right = 0
+
 
 module-margin-left = 3
 module-margin-right = 2
@@ -241,6 +242,9 @@ label-urgent-padding = 5
 [module/mpd]
 type = internal/mpd
 format-online = "<label-song>          <icon-prev>     <icon-stop>     <toggle>    <icon-next>"
+
+;format-online-overline = ${colors.background-alt}
+;format-online-underline = ${colors.background-alt}
 
 icon-prev = 
 icon-stop = 

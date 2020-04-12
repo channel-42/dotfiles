@@ -31,6 +31,7 @@ Plugin 'google/vim-codefmt'
 Plugin 'google/vim-glaive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
@@ -40,6 +41,7 @@ Plugin 'Rigellute/shades-of-purple.vim'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'ap/vim-css-color'
+Plugin 'lifepillar/vim-solarized8' 
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,7 +66,7 @@ set softtabstop=4
 set autoindent
 
 " indent for special file
-autocmd FileType c,cpp setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
+autocmd FileType c,cpp,html,css setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 autocmd VimLeave *.tex !bash $HOME/scripts/bash/texclear.sh %
 
@@ -79,6 +81,8 @@ endfunction
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 let g:airline_section_y = '%{NowPlaying()}'
 let g:airline_powerline_fonts = 1
+let g:AirlineTheme  = 'solarized'
+let g:airline_solarized_bg='dark'
 
 " setup for ycm
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
@@ -154,7 +158,7 @@ nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
 
 "colorscheme
 set background=dark
-colorscheme shades_of_purple
+colorscheme solarized8
 
 "remove colorscheme background -> use terminal bg
 hi Normal guibg=NONE ctermbg=NONE

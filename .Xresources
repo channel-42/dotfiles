@@ -26,45 +26,76 @@ rofi.show-icons: true
 !COLORSCHMES
 ! SPECIAL DONT CHANGE
 *.foreground:   #ffffff
-*.background:   [15]#1d1f21
+*.background:   [30]#002b36
 !needed for polybar
-*.background-no-transparancy: #1d1f21
+*.background-no-transparancy: #002b36 
 *.cursorColor:  #ffffff
-*.highlight:    #966fbc
-!#83b5ae
-!#da4363 
-!#966fbc
+*.highlight:    #007a99
 
-!MAIN COLORS
+
 ! black
-*.color0:       #222827
-*.color8:       #5d6f74
+*.color0:       #002b36
+*.color8:       #657b83
 
 ! red
-*.color1:       #d5a8e3
-*.color9:       #cd749c
+*.color1:       #dc322f
+*.color9:       #dc322f
 
 ! green
-*.color2:       #7bbeab
-*.color10:      #63b0b0
+*.color2:       #859900
+*.color10:      #859900
 
 ! yellow
-*.color3:       #9898ae
-*.color11:      #c0c0dd
+*.color3:       #b58900
+*.color11:      #b58900
 
 ! blue
-*.color4:       #6e70e5
-*.color12:      #5786bc
+*.color4:       #268bd2
+*.color12:      #268bd2
 
 ! magenta
-*.color5:       #966fbc
-*.color13:      #9358cd
+*.color5:       #6c71c4
+*.color13:      #6c71c4
 
 ! cyan
-*.color6:       #a9d1df
-*.color14:      #849da2
+*.color6:       #2aa198
+*.color14:      #2aa198
 
 ! white
-*.color7:       #e6ebe5
-*.color15:      #d9d6cf
+*.color7:       #93a1a1
+*.color15:      #fdf6e3
+
+!OLD
+!MAIN COLORS
+! black
+!*.color0:       #222827
+!*.color8:       #5d6f74
+
+! red
+!*.color1:       #d5a8e3
+!*.color9:       #cd749c
+
+! green
+!*.color2:       #7bbeab
+!*.color10:      #63b0b0
+
+! yellow
+!*.color3:       #9898ae
+!*.color11:      #c0c0dd
+
+! blue
+!*.color4:       #6e70e5
+!*.color12:      #5786bc
+
+! magenta
+!*.color5:       #966fbc
+!*.color13:      #9358cd
+
+! cyan
+!*.color6:       #a9d1df
+!*.color14:      #849da2
+
+! white
+!*.color7:       #e6ebe5
+!*.color15:      #d9d6cf
 
