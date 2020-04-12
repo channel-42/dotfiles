@@ -22,11 +22,12 @@ URxvt*depth: 32
 !ROFI SETUP
 rofi.hide-scrollbar: true
 rofi.show-icons: true
+rofi.padding: 50
 
 !COLORSCHMES
 ! SPECIAL DONT CHANGE
 *.foreground:   #ffffff
-*.background:   [30]#002b36
+*.background:   [50]#002b36
 !needed for polybar
 *.background-no-transparancy: #002b36 
 *.cursorColor:  #ffffff
