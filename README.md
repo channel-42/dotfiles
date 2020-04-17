@@ -5,6 +5,12 @@
 
 These are the dotfiles of my main Arch-Machine. If you have any questions about anything, you can reach out to me on reddit [u/Channel_42](https://www.reddit.com/user/Channel_42).
 
+# Contents
+1. [About Me](#about-me)     
+2. [General Information](#general-information)      
+3. [Themes and Colorschemes](#themes-and-colorschemes)       
+4. [Vim](#vim)       
+5. [Firefox](#firefox)  
 
 # About me
 
