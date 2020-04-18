@@ -2,6 +2,7 @@
 
 exec $HOME/scripts/bash/autostart.sh &
 exec $HOME/scripts/bash/wallpaper_automation.sh &
+exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" & 
 
 killall compton
 compton &

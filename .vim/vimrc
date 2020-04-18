@@ -42,7 +42,7 @@ Plugin 'heavenshell/vim-pydocstring'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'ap/vim-css-color'
 Plugin 'lifepillar/vim-solarized8' 
-
+Plugin 'Yggdroot/indentLine'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 call glaive#Install()        " enable this line after the installation of glaive

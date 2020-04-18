@@ -1,93 +1,133 @@
 ##
 # Files
  mpd_music_dir = "~/Music"  
- lyrics_directory  = ~/.config/ncmpcpp/lyrics
- ncmpcpp_directory  = ~/.config/ncmpcpp
+ lyrics_directory  = "~/.config/ncmpcpp/lyrics"
+ ncmpcpp_directory  = "~/.config/ncmpcpp"
+ log_directory = "~/.config/ncmpcpp"
  mpd_host = "localhost"
  mpd_port = "6600"  
  mpd_connection_timeout = "5"  
  mpd_crossfade_time = "5"  
 
- # Playlist
- playlist_disable_highlight_delay = "0"  
- playlist_display_mode = "columns"  
- playlist_show_remaining_time = "yes"
-
- browser_display_mode = "columns"  
- autocenter_mode = "yes"  
- fancy_scrolling = "yes"  
- follow_now_playing_lyrics = "yes"  
- display_screens_numbers_on_start = "yes"  
- ignore_leading_the = "yes"  
- lyrics_database = "1"  
- song_columns_list_format = "(10)[blue]{l} (30)[green]{a} (30)[magenta]{b} (50)[yellow]{t}"  
- 
- colors_enabled = "yes"  
- main_window_color = "white"  
- main_window_highlight_color =  "blue"
- header_window_color = "cyan"  
- volume_color = "red"  
- progressbar_color = "cyan"  
- statusbar_color = "white"  
- active_column_color = "cyan"  
- active_window_border = "blue"
-media_library_albums_split_by_date = "no"
-alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$5%t$9}|{$8%f$9} $0$atqq$/a$9"
-alternative_header_second_line_format = "{{$6%b$9}{ [$6%y$9]}}|{%D}"
-song_list_format = "{$3%n │ $9}{$7%a - $9}{$5%t$9}|{$8%f$9}$R{$6 │ %b$9}{$3 │ %l$9}"
-user_interface = "alternative"
-#user_interface =                    "classic"
-default_place_to_search_in = "database"
-
-
-# visualizer
+visualizer_in_stereo = "no"
 visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
-visualizer_sync_interval = "12"
-#visualizer_type = "wave" (spectrum/wave)
-visualizer_type = "wave" (spectrum/wave)
-visualizer_in_stereo = "yes"
-visualizer_look = "+."
+visualizer_sync_interval = "10"
+visualizer_type = "ellipse"
+#visualizer_look = "▋▋"
+visualizer_look = "▀▋"
+visualizer_color = "blue, cyan, green, yellow, magenta, red, black"
 
+message_delay_time = "2"
 
-## Navigation ##
-cyclic_scrolling = "yes"
-header_text_scrolling = "yes"
-jump_to_now_playing_song_at_start = "yes"
-lines_scrolled = "2"
+playlist_shorten_total_times = "yes"
+playlist_display_mode = "classic"
+playlist_editor_display_mode = "columns"
 
-## Other ##
-system_encoding = "utf-8"
-regular_expressions = "extended"
+browser_display_mode = "columns"
 
+search_engine_display_mode = "columns"
 
-
-## Selected tracks ##
-selected_item_prefix = "* "
-discard_colors_if_item_is_selected = "no"
-
-## Seeking ##
-incremental_seeking = "yes"
-seek_time = "1"
-
-## Visivility ##
-header_visibility = "yes"
-statusbar_visibility = "yes"
-titles_visibility = "yes"
-
-
-progressbar_look =  "->."
-progressbar_boldness = "yes"
-progressbar_elapsed_color = "white"
-
-now_playing_prefix = "> "
-song_status_format = " $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
 autocenter_mode = "yes"
+
+mouse_support = "yes"
+
 centered_cursor = "yes"
 
-# Misc
-display_bitrate = "yes"
-# enable_window_title = "no"
+user_interface = "classic"
+
 follow_now_playing_lyrics = "yes"
-ignore_leading_the = "yes"
-empty_tag_marker 
+
+locked_screen_width_part = "60"
+
+display_bitrate = "no"
+
+external_editor = "vim"
+
+progressbar_elapsed_color = "white"
+progressbar_color = "black"
+
+#progressbar_look = "▃▃▃"
+#progressbar_look = "──"
+progressbar_look = "==─"
+
+header_visibility = "no"
+statusbar_visibility = "yes"
+titles_visibility = "no"
+
+statusbar_color = "white"
+
+enable_window_title = "yes"
+
+now_playing_prefix = "$b$1"
+now_playing_suffix = "$8$/b"
+
+#now_playing_prefix = "$u$2"
+#now_playing_suffix = "$2$/u$2"
+
+song_columns_list_format = "(6)[]{} (23)[red]{a} (26)[yellow]{t|f} (40)[green]{b} (4)[blue]{l}"
+
+#song_list_format = " $7%l  $2%t $R$5%a "
+song_list_format = "$1> $2%a$8 - $3%b - $8%t | %f $R $3%l  "
+
+song_status_format = "$b$7♫ $2%a $8- $3%b $8- $8%t "
+song_window_title_format = " {%a} - {%t}"
+
+
+###################
+##  song format  ##
+##
+## For a song format you can use:
+##
+## %l - length
+## %f - filename
+## %D - directory
+## %a - artist
+## %A - album artist
+## %t - title
+## %b - album
+## %y - date
+## %n - track number (01/12 -> 01)
+## %N - full track info (01/12 -> 01/12)
+## %g - genre
+## %c - composer
+## %p - performer
+## %d - disc
+## %C - comment
+## %P - priority
+## $R - begin right alignment
+##
+##
+## Colors:
+##
+## - 0 - default window color (discards all other colors)
+## - 1 - black
+## - 2 - red
+## - 3 - green
+## - 4 - yellow
+## - 5 - blue
+## - 6 - magenta
+## - 7 - cyan
+## - 8 - white
+## - 9 - end of current color
+## - b - bold text
+## - u - underline text
+## - r - reverse colors
+## - a - use alternative character set
+##
+##
+###################################################################
+##  Custom command that will be executed each time song changes  ##
+##
+#execute_on_song_change = 
+#
+##
+###########################################################################
+##  Custom command that will be executed each time player state changes  ##
+##    The environment variable MPD_PLAYER_STATE is set to the current    ##
+##     state (either unknown, play, pause, or stop) for its duration     ##
+##
+#
+#execute_on_player_state_change = notify-send "$(mpc current)"
+
+startup_slave_screen=visualizer 
