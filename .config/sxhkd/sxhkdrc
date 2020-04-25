@@ -38,6 +38,10 @@ super + y
 super + g
 	bspc node -s biggest
 
+#lock screen
+ctrl + shift + x
+    betterlockscreen -l dimblur
+
 #
 # Audio and Brightness
 #

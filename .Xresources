@@ -16,7 +16,7 @@ URxvt.iso14755: false
 !General settings
 URxvt.scrollBar: false
 URxvt.internalBorder:  40
-URxvt*font: xft:Hack Nerd Font Mono:size=9, xft:DejaVu Sans Mono:size=10
+URxvt*font: xft:Hack Nerd Font Mono:size=9, xft:M+ 1c
 URxvt.cursorBlink: True
 URxvt*depth: 32
 !ROFI SETUP
