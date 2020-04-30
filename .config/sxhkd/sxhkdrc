@@ -161,5 +161,5 @@ super + alt + {Left,Up,Down,Right}
 super + alt + shift + {Left,Up,Down,Right}
 	bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}
 # move a floating window
-super + {Left,Down,Up,Right}
+super + ctrl + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
