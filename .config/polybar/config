@@ -24,7 +24,7 @@
 background = ${xrdb:background-no-transparancy}
 background-alt = ${xrdb:highlight}
 ;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
+foreground = ${xrdb:foreground}
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053

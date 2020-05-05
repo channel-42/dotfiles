@@ -26,7 +26,7 @@ rofi.padding: 50
 
 !COLORSCHMES
 ! SPECIAL DONT CHANGE
-*.foreground:   #ffffff
+*.foreground:   #93a1a1
 *.background:   [50]#002b36
 !needed for polybar
 *.background-no-transparancy: #002b36 
