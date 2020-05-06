@@ -31,7 +31,7 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/wm]
-monitor = ${env:MONITOR:DP-4}
+monitor = ${env:MONITOR:DP-2}
 width = 11%:-12
 height = 50
 fixed-center = true
@@ -68,7 +68,7 @@ cursor-scroll = ns-resize
 
 
 [bar/music]
-monitor = ${env:MONITOR:DP-4}
+monitor = ${env:MONITOR:DP-2}
 width = 20%
 height = 50
 fixed-center = true
@@ -108,7 +108,7 @@ cursor-scroll = ns-resize
 
 
 [bar/info]
-monitor = ${env:MONITOR:DP-4}
+monitor = ${env:MONITOR:DP-2}
 width = 13%
 height = 50
 fixed-center = true
@@ -286,7 +286,7 @@ format-disconnected = "no internet"
 
 [module/eth]
 type = internal/network
-interface = enp3s0
+interface = enp8s0
 interval = 3.0
 
 format-connected-underline = #55aa55

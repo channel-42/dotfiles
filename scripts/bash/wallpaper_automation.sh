@@ -14,7 +14,7 @@ case "$1" in                    #check if user has inputed request
         final="${DIR}${selectedwall}"   #join strings for final command
         ;; 
     "-s")                       #show all Wallpapers user ui
-        selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/materia.rasi)
+        selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/solarized.rasi)
         final=("${DIR}${selectedwall}")
         ;;
     *)                          #if input, user wallpaper

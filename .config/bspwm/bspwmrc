@@ -8,7 +8,7 @@ exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" &
 killall compton
 compton &
 
-bspc monitor DP-4 -d DEV WWW DOC ETC MEDIA 
+bspc monitor DP-2 -d DEV WWW DOC ETC MEDIA 
 
 killall mpd
 mpd &
