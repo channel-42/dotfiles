@@ -139,7 +139,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
 font-4 = FontAwesome:pixelsize=10
 
-modules-right = eth separator date
+modules-right = temperature separator eth separator date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -272,6 +272,16 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
+[module/temperature]
+type = internal/temperature
+interval = 0.5
+format = <label>
+label = "%temperature%"
+thermal-zone = 0
+hwmon-path = /sys/devices/platform/nct6775.656/hwmon/hwmon2/temp2_input
+base-temperature = 20
+warn-temperature = 60
+
 [module/wlan]
 type = internal/network
 interface = wlp59s0
@@ -292,7 +302,8 @@ interval = 3.0
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = " %downspeed:9%      %upspeed:9%"
+label-connected = " %downspeed:9%"
+;label-connected = " %downspeed:9%      %upspeed:9%"
 format-disconnected = " no internet"
 
 

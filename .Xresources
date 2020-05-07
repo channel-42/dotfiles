@@ -6,6 +6,8 @@
 !/\_\/\_\\ \_\ \_\\ \____\/\____/\ \____/\ \____/\ \____\ \____\/\____/
 !\/_/\/_/ \/_/\/_/ \/____/\/___/  \/___/  \/___/  \/____/\/____/\/___/ 
 
+Xcursor.theme: Breeze
+Xcursor.size: 16
 !Copy paste bindings
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
