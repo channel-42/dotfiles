@@ -5,6 +5,7 @@
 
 DIR="$HOME/Pictures/Wallpapers/"   #Wallpaper Directory
 
+
 case "$1" in                    #check if user has inputed request
     "")                         #if no imput, randowm wallpaper
         cd "$DIR"               #change to wpp dir
