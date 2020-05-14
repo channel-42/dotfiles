@@ -109,7 +109,7 @@ cursor-scroll = ns-resize
 
 [bar/info]
 monitor = ${env:MONITOR:DP-2}
-width = 13%
+width = 10.5%
 height = 50
 fixed-center = true
 override-redirect = true
@@ -137,14 +137,24 @@ font-0 = fixed:pixelsize=15;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
-font-4 = FontAwesome:pixelsize=10
+font-4 = FontAwesome5Free:style=Solid:pixelsize=8:antialias=true;1
 
-modules-right = temperature separator eth separator date
+modules-right = temperature separator vpn eth separator date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-
+[module/vpn]
+type=custom/script
+exec=echo 
+format-foreground=${colors.background-alt}
+exec-if=pgrep -x openvpn
+interval = 5
+format = <label>
+label = %output%
+format-padding=0
+format-offset=-23
+format-font=5
 
 [module/separator]
 type = custom/text
@@ -300,9 +310,8 @@ interface = enp8s0
 interval = 3.0
 
 format-connected-underline = #55aa55
-format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = " %downspeed:9%"
+label-connected = ""
 ;label-connected = " %downspeed:9%      %upspeed:9%"
 format-disconnected = " no internet"
 
