@@ -109,7 +109,7 @@ cursor-scroll = ns-resize
 
 [bar/info]
 monitor = ${env:MONITOR:DP-2}
-width = 10.5%
+width = 10.2%
 height = 50
 fixed-center = true
 override-redirect = true
@@ -124,7 +124,7 @@ line-color = #f00
 border-left-size = 0
 border-color = #00000000
 
-offset-x = 84%:-10
+offset-x = 87%:-15
 offset-y = 40
 
 padding-left = 0
