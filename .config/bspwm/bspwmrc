@@ -5,8 +5,10 @@ exec $HOME/scripts/bash/wallpaper_automation.sh &
 exec urxvt -e sh -c "neofetch && zsh" & 
 exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" & 
 
+ffplay -nodisp -autoexit -volume 10 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
+
 killall compton
-compton &
+compton --dbus &
 
 bspc monitor DP-2 -d DEV WWW DOC ETC MEDIA 
 

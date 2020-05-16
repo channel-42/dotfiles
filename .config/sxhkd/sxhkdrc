@@ -35,8 +35,8 @@ super + g
 	bspc node -s biggest
 
 #lock screen
-ctrl + shift + x
-    betterlockscreen -l dimblur
+super + x
+    mantablockscreen
 
 #man page searcher
 super + m
