@@ -40,7 +40,6 @@ Plugin 'mhinz/vim-startify'
 Plugin 'mhartington/oceanic-next'
 Plugin 'Rigellute/shades-of-purple.vim'
 Plugin 'heavenshell/vim-pydocstring'
-Plugin 'tmhedberg/SimpylFold'
 Plugin 'ap/vim-css-color'
 Plugin 'lifepillar/vim-solarized8' 
 Plugin 'Yggdroot/indentLine'
@@ -143,8 +142,7 @@ set foldclose=all
 
 autocmd FileType python setlocal foldenable foldmethod=syntax
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
-let g:SimpylFold_docstring_preview = 1
-let g:pydocstring_doq_path = '/usr/bin/doq'
+let g:pydocstring_doq_path = '~/.local/bin/doq'
 let g:pydocstring_formatter = 'google'
 set foldtext=getline(v:foldstart+1)
 
