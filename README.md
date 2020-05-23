@@ -76,7 +76,7 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 
 # Firefox
 
-![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot2.png "Screenshot of Firefox")
+![alt text](https://github.com/channel-42/dotfiles/blob/tower_branch/.resources/firefox.png "Screenshot of Firefox")
 
 I use Firefox with a custom stylesheet (a pretty neat feature I didn't even know existed a couple of months ago).
 
