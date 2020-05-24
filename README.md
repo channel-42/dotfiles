@@ -47,7 +47,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Terminal|[cloud](http://terminal.sexy/#AAAA____Iign1ajjnHXdmJiuZUqWYlVmqdHf5uvlXW90zXScY7CwwMDdV4a8PzRChJ2i2dbP)|yes|
 |Vim|[shades of purple](https://github.com/Rigellute/shades-of-purple.vim)|no|
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
-|Firefox|[minimal functional fox](https:/a/github.com/turing753/minimal-functional-fox)|yes|
+|Firefox|[partially custom](https://github.com/akshat46/FlyingFox)|yes|
 |oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
 
 # Vim 
@@ -76,9 +76,11 @@ To make the most of my "selfmade IDE" I added some bindigs to execute scripts or
 
 # Firefox
 
-![alt text](https://github.com/channel-42/dotfiles/blob/master/.resources/screenshot2.png "Screenshot of Firefox")
+![alt text](https://github.com/channel-42/dotfiles/blob/tower_branch/.resources/firefox.png "Screenshot of Firefox")
 
-I use Firefox with a custom stylesheet (a pretty neat feature I didn't even know existed a couple of months ago). I modified a premade stylesheet from a fellowe r/unixporn member (see the themes section).
+I use Firefox with a custom stylesheet (a pretty neat feature I didn't even know existed a couple of months ago).
+
+For tabs I use Tree Style Tab.
 
 For my start/new-tab-page I use the Nighttab extension.
 
