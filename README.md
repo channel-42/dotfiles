@@ -47,7 +47,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Terminal|[cloud](http://terminal.sexy/#AAAA____Iign1ajjnHXdmJiuZUqWYlVmqdHf5uvlXW90zXScY7CwwMDdV4a8PzRChJ2i2dbP)|yes|
 |Vim|[shades of purple](https://github.com/Rigellute/shades-of-purple.vim)|no|
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
-|Firefox|custom|yes|
+|Firefox|[partially custom](https://github.com/akshat46/FlyingFox)|yes|
 |oh-my-zsh|[lambda-mod](https://github.com/halfo/lambda-mod-zsh-theme)|yes|
 
 # Vim 
