@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/materia.rasi
+	rofi -show run -lines 3 -eh 2 -width 30 -theme /usr/share/rofi/themes/materia.rasi
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -38,6 +38,8 @@ super + y
 super + g
 	bspc node -s biggest
 
+super + x
+    mantablockscreen
 #
 # Audio and Brightness
 #

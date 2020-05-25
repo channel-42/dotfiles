@@ -1,3 +1,15 @@
+/* material firefox imports */
+@import "global/variables.css";
+@import "global/global.css";
+@import "icons/icons.css";
+@import "tabbar/tabbar.css";
+@import "navbar/navbar.css";
+@import "personalbar/personalbar.css";
+@import "popup/popup.css";
+@import "urlbar/urlbar.css";
+@import "findbar/findbar.css";
+
+
 html#main-window {
 	--color-bg: #1d1f21;
 	--toolbar-bgcolor: var(--color-bg) !important;
@@ -26,48 +38,94 @@ html#main-window {
 	--arrowpanel-border-color: transparent !important;
 }
 
-/* This positions the tabs under the navaigator container */
-#titlebar {
-	-moz-box-ordinal-group: 3 !important;
+:root {
+  --initial-width     : 70px;     /* initial width of the sidebar */
+  --sidebar-width     : 250px;    /* expanded width of the sidebar */
+  --toolbar-height    : 0;
+  --menubar-height    : 0px;
+  --toolmenubar-height: -40px;    /* sum of previous two */
+  --shadow-color      : #1d1f21;  /* shadow color. set to #00000000 for no shadow. same as folder color from hntp and tab-hover color from tst*/
 }
 
-/* *******************************************************************
-	Toolbar Elements
+/* show bookmarks toolbar on new tab only */
+#main-window #PersonalToolbar {
+  visibility : collapse !important;
+  z-index    : 1!important;
+  position   : relative!important;
+  margin-left: var(--initial-width);              /* shift toolbar to the right based on initial width */
+  margin-top : var(--toolbar-height) !important;
+}
+
+#main-window[title^="Firefox Developer Edition"] #PersonalToolbar {
+  visibility: visible !important;
+  margin-top: -1px !important;
+}
+
+/* 
+There's two main sidebar components. 
+1. #sidebar-box (outer)
+2. #sidebar (inner) 
 */
-.browser-toolbar {
-	padding-left: 10px !important;
-	padding-top: 10px !important;
-	padding-right: 10px !important;
+/* lock outer to height by doing the inverse margin of the toolbar element */
+/* set outer width = initial width */
+#sidebar-box {
+  z-index      : 1000 !important;
+  position     : relative!important;
+  margin-top   : var(--menubar-height) !important;
+  padding-top  : calc(-1*var(--menubar-height));
+  border-radius: 0;
+  min-width    : var(--initial-width) !important;
+  max-width    : var(--initial-width) !important;
 }
 
-/* Bookmarks bar tweaks */
-#PlacesToolbar {
-	align-items: center !important;
-	display: flex !important;
-	font-family: "mononoki Nerd Font", sans-serif !important;
-	font-size: 12pt !important;
-	font-weight: 700 !important;
-	justify-content: center !important;
+/* inner width = expanded width & move inner to only show initial-width long section */
+#sidebar-box #sidebar {
+    min-width    : var(--sidebar-width) !important;
+    max-width    : var(--sidebar-width) !important;
+    transform    : translateX(calc(var(--initial-width) - var(--sidebar-width))) !important;
+    border-radius: 0;
+    transition   : all 0.2s ease-in-out;
 }
 
-/* Custom back and forward buttons */
-#back-button {
-	list-style-image: url("left-arrow.svg") !important;
+/* move inner to show entire sidebar */
+#sidebar-box #sidebar:hover {
+    transform : translateX(0) !important;
+    box-shadow: 2px 0 33px var(--shadow-color);
 }
 
-#forward-button {
-	list-style-image: url("right-arrow.svg") !important;
+#main-window[title^="Firefox Developer Edition"] #sidebar-box {
+  margin-top: var(--toolmenubar-height) !important;
 }
 
-#navigator-toolbox {
-	--tabs-border-color: var(--color-bg) !important;
-	background-color: var(--color-bg) !important;
-	border: none !important;
-	box-shadow: none !important;
-	max-height: var(		--tabs-container-height	) !important;
-	min-height: var(		--tabs-container-height	) !important;
+/* hide sidebar header for tree style tabs sidebar */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
 }
 
+/* Hide the title bar */
+#titlebar{ visibility: collapse; }
+
+/* hide normal horizontal tab bar */
+#TabsToolbar { visibility: collapse; }
+
+#sidebar { border-right: none !important; }
+
+toolbar#nav-bar {
+  padding-top   : 12px;
+  padding-bottom: 7px;
+  margin-left   : var(--initial-width);
+  padding-left  : 7px;
+  border        : none !important;
+}
+
+toolbar{
+  border: none !important;
+}
+
+/* Hide splitter, when using Tree Style Tab. */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+  display: none !important;
+}
 /* *******************************************************************
 	Urlbar
 */
@@ -146,98 +204,3 @@ input#urlbar-input {
 	background-image: none !important;
 	border: none !important;
 }
-
-/* *******************************************************************
-	Browser tabs
-*/
-
-/* Hide some bloat */
-.tab-close-button,
-.tab-line,
-.tabbrowser-tab::before,
-.tabbrowser-tab::after,
-.tabbrowser-tab .tab-icon-image {
-	display: none !important;
-}
-
-/* Regular browser tabs */
-.tabbrowser-tab {
-	background-color: var(--color-bg) !important;
-	background-image: linear-gradient(to left, var(--color-tab-normal-start), var(--color-accent)) !important;
-	border-radius: var(--tab-height) !important;
-	margin-inline-end: var(--gap-between-tabs) !important;
-	max-height: var(--tab-height) !important;
-	min-height: var(--tab-height) !important;
-}
-
-.tabbrowser-tab:hover {
-	background-color: none !important;
-	background-image: linear-gradient(to left, #c97dff, var(--color-accent)) !important;
-	color: black !important;
-}
-
-.tabbrowser-tab[selected="true"] {
-	background-color: none !important;
-	background-image: linear-gradient(to left, #1d1f21, var(--color-accent)) !important;
-	color: black !important;
-	font-weight: var(--tab-font-weight) !important;
-}
-
-.tab-content {
-	background-color: none !important;
-	background-image: none !important;
-	font-family: var(--tab-font) !important;
-}
-
-/* pinned browser tabs */
-/* TODO: Find a way to add spacing between the pinned tabs when tab list scrolling is triggered. Adding a margin just screws everything up */
-.tabbrowser-tab:hover[pinned="true"] {
-	background-image: linear-gradient(to left, #ff8989, #ff8989) !important;
-}
-
-.tabbrowser-tab[pinned="true"][selected="true"] {
-	background-image: linear-gradient(to left, #a1ffb6, #a1ffb6) !important;
-}
-
-.tabbrowser-tab[pinned="true"] {
-	background-image: linear-gradient(to left, #ffc386, #ffc386) !important;
-	color: #1d1d1d !important;
-	max-width: var(--tab-height) !important;
-	min-width: var(--tab-height) !important;
-}
-
-.tabbrowser-tab[pinned="true"] .tab-icon-image {
-	align-items: center !important;
-	display: inline-block !important;
-	min-height: var(--pinned-tab-favicon-dim) !important;
-	min-width: var(--pinned-tab-favicon-dim) !important;
-}
-
-.tabbrowser-tab[pinned="true"] .tab-label-container {
-	display: none !important;
-}
-
-.tab-stack {
-	display: flex !important;
-	justify-content: center !important;
-}
-
-/* Modify these values to tweak the start point of the tab list */
-.tabbrowser-arrowscrollbox {
-	margin-inline-start: var(--margin-before-tab-list) !important;
-	margin-inline-end: var(--margin-after-tab-list) !important;
-}
-
-/* *******************************************************************
-	Settings menu pop-up
-*/
-.panel-arrowbox {
-	margin: 0 !important;
-	display: none !important;
-}
-
-.panel-arrowcontent {
-	opacity: 1 !important;
-	margin: 0 !important;
-}
-

@@ -36,6 +36,7 @@ width = 14%:-12
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -73,6 +74,7 @@ width = 20%
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -108,10 +110,11 @@ cursor-scroll = ns-resize
 
 [bar/info]
 monitor = ${env:MONITOR:eDP-1}
-width = 29%
+width = 23%
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -123,7 +126,7 @@ line-color = #f00
 border-left-size = 0
 border-color = #00000000
 
-offset-x = 68%:-5
+offset-x = 74%:-5
 offset-y = 15
 
 padding-left = 0
@@ -146,6 +149,7 @@ cursor-scroll = ns-resize
 [module/separator]
 type = custom/text
 content = |
+content-foreground = ${colors.background-alt}
 
 [module/light]
 type = custom/script 
@@ -279,7 +283,7 @@ interval = 3.0
 
 format-connected = <label-connected>
 format-connected-underline = #9f78e1
-label-connected = "%downspeed:9% "    
+label-connected = ""    
 ; %upspeed:9%"
 
 format-disconnected = "no internet"
@@ -301,10 +305,10 @@ type = internal/date
 interval = 5
 
 date = %a
-date-alt = " %d.%m.%Y"
+date-alt = %d.%m.%Y
 
 time = %H:%M
-time-alt = %H:%M:%S
+time-alt = 
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
@@ -322,16 +326,18 @@ full-at = 98
 format-charging = <animation-charging>   <label-charging>
 format-charging-underline = #ffb52a
 
-format-discharging = <ramp-capacity>   <label-discharging>
+format-discharging = <ramp-capacity>   
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground}
 
 animation-charging-0 = 
