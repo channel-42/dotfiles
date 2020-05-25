@@ -33,7 +33,7 @@ rofi.hide-scrollbar: true
 *.highlight:    #fb3d66
 
 ! black
-*.color0:       #051519
+*.color0:       #1d1f21
 *.color8:       #323b3e
 
 ! red
