@@ -50,7 +50,7 @@ I usually modify premade themes and colorschemes to fit my setup/taste.
 |Terminal|[cloud](http://terminal.sexy/#AAAA____Iign1ajjnHXdmJiuZUqWYlVmqdHf5uvlXW90zXScY7CwwMDdV4a8PzRChJ2i2dbP)|yes|
 |Vim|[shades of purple](https://github.com/Rigellute/shades-of-purple.vim)|no|
 |Rofi|[materia](https://github.com/DefunctLizard/materia-rofi-theme/blob/master/README.md)|no|
-|Firefox|[minimal functional fox](https://github.com/mut-ex/minimal-functional-fox)|yes|
+|Firefox|[flying fox](https://github.com/akshat46/FlyingFox)|yes|
 |oh-my-zsh|[bubblified](https://github.com/hohmannr/bubblified)|yes|
 
 # Vim 
