@@ -36,6 +36,7 @@ width = 11%:-12
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -73,6 +74,7 @@ width = 20%
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
@@ -113,6 +115,7 @@ width = 10.2%
 height = 50
 fixed-center = true
 override-redirect = true
+wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
