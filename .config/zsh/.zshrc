@@ -49,6 +49,7 @@ alias down="systemctl suspend"
 alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
 alias banner='$HOME/scripts/bash/palette.sh'
 alias lstat='sudo liquidctl status'
+alias gtp='gotop'
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

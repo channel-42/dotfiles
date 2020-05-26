@@ -14,7 +14,7 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Control-Meta-C: builtin-string: 
 URxvt.keysym.Control-Meta-V: builtin-string: 
 URxvt.iso14755: false
-
+URxvt*iconFile:            /usr/share/icons/custom/urxvt_ico.png
 !General settings
 URxvt.scrollBar: false
 URxvt.internalBorder:  40

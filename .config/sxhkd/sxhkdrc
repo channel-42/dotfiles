@@ -10,6 +10,9 @@ super + Return
 super + @space
 	rofi -show run -lines 5 -eh 2 -width 100 -theme /usr/share/rofi/themes/solarized.rasi
 
+alt + Tab
+        rofi -show window -lines 5 -eh 1 -width 30 -theme /usr/share/rofi/themes/solarized_alternate.rasi
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
