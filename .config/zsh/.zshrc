@@ -48,6 +48,7 @@ alias down='systemctl suspend'
 alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
 alias bat='cat /sys/class/power_supply/BAT0/capacity'
 alias banner='$HOME/scripts/bash/palette.sh'
+alias gtp='gotop -c minimal'
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
