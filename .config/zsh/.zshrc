@@ -9,7 +9,7 @@
 #load oh-my-zsh
 export ZSH=/usr/share/oh-my-zsh
 export LAMBDA_MOD_N_DIR_LEVELS=5
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/scripts/bash:$PATH"
 export EDITOR="vim"
 autoload -U colors && colors
 #is overwritten by oh-my-zsh
@@ -26,7 +26,6 @@ HISTFILE=~/.cache/zsh/history
 
 #PLUGINS
 plugins=(git)
-alias wpp="/home/lukas/scripts/bash/wallpaper_automation.sh"
 
 # Basic auto/tab complete:
 autoload -U compinit
