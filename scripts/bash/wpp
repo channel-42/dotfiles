@@ -5,7 +5,13 @@
 
 DIR="$HOME/Pictures/Wallpapers/"   #Wallpaper Directory
 
-
+help="Usage:
+$(basename $0) [-h] [-s] [-c <path/to/file>]
+Options:
+ -h,        display this help
+ -s,        display graphical menu (requires rofi)
+ -c,        set provided image as wallpaper
+"
 case "$1" in                    #check if user has inputed request
     "")                         #if no imput, randowm wallpaper
         cd "$DIR"               #change to wpp dir
@@ -18,12 +24,17 @@ case "$1" in                    #check if user has inputed request
         selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
         final=("${DIR}${selectedwall}")
         ;;
-    *)                          #if input, user wallpaper
-        if test -f "$DIR""$1"; then #check files existance
-            final="$DIR""$1"
+    "-c")                          #custom path to wpp
+        if test -f "$2"; then #check files existance
+            final="$2"
         else
-            echo "File not found"   #on error
+            echo "Error: File not found"   #on error
         fi
+        ;;
+    "-h")
+        echo "$help"
+        ;;
 esac
-
-feh --bg-fill "$final" &>/dev/null    #set wallpaper; supress errors
+if [[ "$final" != "" ]]; then
+    feh --bg-fill "$final" &>/dev/null    #set wallpaper; supress errors
+fi
