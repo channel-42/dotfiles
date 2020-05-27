@@ -15,6 +15,12 @@ bspc monitor DP-2 -d DEV WWW DOC ETC MEDIA
 killall mpd
 mpd &
 
+#mouse moving/resizing in floating mode with alt with alt
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_corner
+
+#cosmetics
 bspc config border_width 5
 bspc config window_gap 50
 bspc config top_padding 100
