@@ -1,7 +1,7 @@
 #! /bin/sh
 
 exec $HOME/scripts/bash/autostart.sh &
-exec $HOME/scripts/bash/wallpaper_automation.sh &
+exec $HOME/scripts/bash/quotewpp.sh &
 exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" &
 ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
 
