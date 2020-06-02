@@ -24,7 +24,7 @@ SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
 #PLUGINS
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 alias wpp="/home/lukas/scripts/bash/wallpaper_automation.sh"
 
 # Basic auto/tab complete:
