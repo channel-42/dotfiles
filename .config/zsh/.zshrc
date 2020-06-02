@@ -25,7 +25,7 @@ SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
 #PLUGINS
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 # Basic auto/tab complete:
 autoload -U compinit
