@@ -1,7 +1,7 @@
 #! /bin/sh
 
 exec $HOME/scripts/bash/autostart.sh &
-exec $HOME/scripts/bash/wallpaper_automation.sh &
+exec $HOME/scripts/bash/wpp &
 exec urxvt -e sh -c "neofetch && zsh" & 
 exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" & 
 
@@ -15,7 +15,7 @@ bspc monitor DP-2 -d DEV WWW DOC ETC MEDIA
 killall mpd
 mpd &
 
-#mouse moving/resizing in floating mode with alt with alt
+#mouse moving/resizing in floating mode with alt
 bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_corner
