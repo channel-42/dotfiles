@@ -29,6 +29,7 @@ case "$1" in                    #check if user has inputed request
             final="$2"
         else
             echo "Error: File not found"   #on error
+            exit 1
         fi
         ;;
     "-h")
