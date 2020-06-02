@@ -172,7 +172,10 @@ toolbar{
 .urlbar-input-box {
 	background-color: var(--color-bg) !important;
 	background-image: none !important;
+        border: none !important;
 }
+
+
 
 #urlbar:not(.megabar),
 #urlbar.megabar > #urlbar-background,
