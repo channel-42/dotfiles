@@ -72,7 +72,7 @@ autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 " setup for airline
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 let g:airline_powerline_fonts = 1
-let g:AirlineTheme = 'solarized'
+let g:airline_theme = 'luna'
 let g:airline_solarized_bg = 'dark'
 
 " setup for ycm
