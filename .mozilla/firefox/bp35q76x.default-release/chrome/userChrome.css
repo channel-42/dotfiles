@@ -133,7 +133,7 @@ toolbar{
 /* Url bar suggestions list container */
 .urlbarView {
 	background-color: var(--color-bg) !important;
-	border-radius: 0 8px 8px !important;
+	border-radius: 20pt !important;
 	box-shadow: 0px 0px 40px rgba(0, 0, 0, 35%) !important;
 	box-shadow: none !important;
 	margin: auto !important;
@@ -144,13 +144,17 @@ toolbar{
 .urlbarView:not(.megabar) .urlbarView-row:not([type="tip"])[selected],
 .urlbarView.megabar .urlbarView-row:not([type="tip"])[selected] > .urlbarView-row-inner {
 	background: var(--color-accent)!important;
-	color: black !important;
-	fill-opacity: 1;
+	color: white !important;
+	opacity: 1;
 }
 
+.urlbarView:not(.megabar) .urlbarView-row:not([type="tip"])[selected] > .urlbarView-row-inner {
+	background: var(--color-accent)!important;
+	opacity: 1;
+}
 /* The text that says 'Search with ...' */
 .urlbarView-action {
-	color: black !important;
+	color: white !important;
 }
 
 /* Url bar suggestions' row that is being hovered over */
@@ -173,6 +177,7 @@ toolbar{
 	background-color: var(--color-bg) !important;
 	background-image: none !important;
         border: none !important;
+        border-radius: 20pt !important;
 }
 
 
