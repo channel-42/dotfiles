@@ -9,6 +9,7 @@ html#main-window {
 	--tab-font-weight: 700;
 	--tab-height: 0px;
 	--tabs-container-height: 60px;
+        --mbarstyler-top-bar-display: none;
 
 	--urlbar-container-margin: 5px;
 	--urlbar-list-width: 60%;
@@ -189,7 +190,11 @@ toolbar{
 .urlbarView.megabar .urlbarView-row:not([type="tip"])[selected] > .urlbarView-row-inner {
 	background: var(--color-accent)!important;
 	color: black !important;
-	fill-opacity: 1;
+	opacity: 1;
+}
+.urlbarView-row:not([type="tip"])[selected] > .urlbarView-row-inner {
+  background: var(--color-accent)!important;
+  opacity: 1;
 }
 
 /* The text that says 'Search with ...' */
@@ -211,11 +216,14 @@ toolbar{
 	font-weight: 700 !important;
 }
 
+
 #urlbar-background,
 #urlbar-container,
 .urlbar-input-box {
 	background-color: var(--color-bg) !important;
 	background-image: none !important;
+        border: 0px !important;
+        border-radius: 20pt !important;
 }
 
 #urlbar:not(.megabar),
