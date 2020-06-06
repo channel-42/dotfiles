@@ -26,7 +26,7 @@ HISTFILE=~/.cache/zsh/history
 
 #PLUGINS
 plugins=(git zsh-autosuggestions)
-
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=5"
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ':completion:*' menu select
