@@ -25,6 +25,7 @@ HISTFILE=~/.cache/zsh/history
 
 #PLUGINS
 plugins=(git zsh-autosuggestions)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14"
 alias wpp="/home/lukas/scripts/bash/wallpaper_automation.sh"
 
 # Basic auto/tab complete:
