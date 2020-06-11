@@ -10,6 +10,7 @@ $(basename $0) [-h] [-s] [-c <path/to/file>]
 Options:
  -h,        display this help
  -s,        display graphical menu (requires rofi)
+ -st,       display graphical menu by date (requires rofi)
  -c,        set provided image as wallpaper
 "
 case "$1" in                    #check if user has inputed request
@@ -22,6 +23,10 @@ case "$1" in                    #check if user has inputed request
         ;; 
     "-s")                       #show all Wallpapers user ui
         selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
+        final=("${DIR}${selectedwall}")
+        ;;
+    "-st")
+        selectedwall=$(ls -t $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
         final=("${DIR}${selectedwall}")
         ;;
     "-c")                          #custom path to wpp

@@ -21,7 +21,14 @@ print_banner(){
     figlet -f ~/.local/share/fonts/3d.flf "hello $USER" | lolcat
     printf "\n\n"
 }
-
+print_update(){
+    updates=$(sudo pacman -Sy > /dev/null && pacman -Qu | wc -l)
+    if [[ $updates != 0 ]];then
+        echo "${yellowf}pending updates: $updates"
+    else
+        echo "${greenf}pending updates: $updates"
+    fi
+}
 get_colors
 print_banner
 
@@ -32,4 +39,6 @@ ${blackf}███${reset}${blackb}█████${reset}  ${redf}███${re
    ${blackb}█████${reset}     ${redb}█████${reset}     ${greenb}█████${reset}     ${yellowb}█████${reset}     ${blueb}█████${reset}     ${purpleb}█████${reset}     ${cyanb}█████${reset}     ${whiteb}█████${reset} 
 EOF
 
+printf "\n"
+print_update
 printf "\n\n"
