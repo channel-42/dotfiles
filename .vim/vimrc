@@ -81,7 +81,7 @@ endfunction
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 let g:airline_section_y = '%{NowPlaying()}'
 let g:airline_powerline_fonts = 1
-let g:AirlineTheme  = 'solarized'
+let g:airline_theme  = 'luna'
 let g:airline_solarized_bg='dark'
 
 " setup for ycm
