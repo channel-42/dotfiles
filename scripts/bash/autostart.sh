@@ -13,4 +13,9 @@ sleep 1
 polybar wm -r &
 polybar music -r &
 polybar info -r &
+sleep 0.1
+polybar wm_outer -r &
+polybar music_outer -r &
+polybar info_outer -r &
+
 
