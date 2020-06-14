@@ -15,4 +15,8 @@ if [[ $(pgrep -f mpd) ]];then
     polybar music -r & 
 fi
 polybar info -r & 
+sleep 0.1
+
+polybar wm_outer -r & 
+polybar info_outer -r & 
 
