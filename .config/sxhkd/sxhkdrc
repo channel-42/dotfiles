@@ -45,6 +45,9 @@ super + x
 super + m
     exec ~/scripts/bash/man_menu.sh
 
+#emoji script
+super + e
+    exec ~/scripts/bash/emoji.sh
 #
 # Audio and Brightness
 #
