@@ -8,9 +8,9 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run -lines 3 -eh 2 -width 30 -theme /usr/share/rofi/themes/materia.rasi
+	rofi -show run -lines 3 -eh 2 -width 100 -theme $HOME/.config/rofi/materia.rasi 
 alt + Tab
-        rofi -show window -lines 3 -eh 1 -width 30 -theme /usr/share/rofi/themes/materia_wd.rasi
+        rofi -show window -lines 8 -eh 1 -width 100 -theme $HOME/.config/rofi/materia_wd.rasi 
 
 # make sxhkd reload its configuration files:
 super + Escape
