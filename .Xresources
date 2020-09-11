@@ -18,7 +18,7 @@ URxvt*iconFile:            /usr/share/icons/custom/urxvt_ico.png
 !General settings
 URxvt.scrollBar: false
 URxvt.internalBorder:  40
-URxvt*font: xft:Hack Nerd Font Mono:size=9, xft:M+ 1c
+URxvt*font: xft:Hack Nerd Font Mono:size=9, xft:Symbola:style=Regular:size=14,xft:M+ 1c
 URxvt.cursorBlink: True
 URxvt*depth: 32
 !ROFI SETUP

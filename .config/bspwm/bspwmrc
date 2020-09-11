@@ -1,7 +1,7 @@
 #! /bin/sh
 
 exec $HOME/scripts/bash/autostart.sh &
-exec $HOME/scripts/bash/wpp &
+exec $HOME/scripts/bash/wpp -c ~/Pictures/Wallpapers/xdr_wpp.png &
 exec urxvt -e sh -c "neofetch && zsh" & 
 exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" & 
 
