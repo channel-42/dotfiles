@@ -1,16 +1,17 @@
 #! /bin/sh
 
 exec $HOME/scripts/bash/autostart.sh &
-exec $HOME/scripts/bash/wpp -c ~/Pictures/Wallpapers/xdr_wpp.png &
+exec $HOME/scripts/bash/wpp &
 exec urxvt -e sh -c "neofetch && zsh" & 
 exec urxvt -e sh -c "$HOME/scripts/bash/palette.sh && zsh" & 
+exec dunst &
 
 ffplay -nodisp -autoexit -volume 10 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
 
 killall compton
 compton --dbus &
 
-bspc monitor DP-2 -d DEV WWW DOC ETC MEDIA 
+bspc monitor DP-2 -d DEV WWW NOT ETC MEDIA 
 
 killall mpd
 mpd &
@@ -39,4 +40,10 @@ bspc config focus_follows_pointer true
 bspc config split_ratio 0.52
 bspc config borderless_monocle true
 bspc config gapless_monocle false
+bspc config ignore_ewmh_focus true
 
+bspc rule -a firefox -o follow=off desktop=WWW
+bspc rule -a Notion -o follow=off state=fullscreen desktop=NOT
+bspc rule -a motion_recorder follow=off -o state=fullscreen desktop=NOT
+firefox &
+notion-app &
