@@ -7,7 +7,6 @@
 "                                          
 set nocompatible              " required
 filetype off                  " required
-
 set ignorecase
 set smartcase
 
@@ -24,6 +23,7 @@ Plugin 'VundleVim/Vundle.vim'
 " all plugin
 Plugin 'gabrielelana/vim-markdown'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
@@ -37,12 +37,13 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
-Plugin 'mhartington/oceanic-next'
-Plugin 'Rigellute/shades-of-purple.vim'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'ap/vim-css-color'
 Plugin 'lifepillar/vim-solarized8' 
 Plugin 'Yggdroot/indentLine'
+Plugin 'aars/syntastic-platformio'
+Plugin 'wfxr/minimap.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 call glaive#Install()        " enable this line after the installation of glaive
@@ -55,18 +56,21 @@ set number
 set encoding=utf-8
 set backspace=indent,eol,start
 set cursorline
-set guioptions=
 set nospell
-syntax on
 
+set fillchars+=vert:\▏
 " indent for global
 set expandtab
 set shiftwidth=4
 set softtabstop=4
 set autoindent
 
+"for markdown suffixes
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md  set ft=markdown
+au BufNewFile,BufRead *.ino set ft=c
+
 " indent for special file
-autocmd FileType c,cpp,html,css setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
+autocmd FileType c,cpp,html,css,ino setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 autocmd VimLeave *.tex !bash $HOME/scripts/bash/texclear.sh %
 
@@ -79,22 +83,26 @@ function! NowPlaying()
 endfunction
 " setup for airline
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
-let g:airline_section_y = '%{NowPlaying()}'
+"let g:airline_section_y = '%{NowPlaying()}'    "May cause visual glitches
+"(insertion of j,k,h,l chars)
 let g:airline_powerline_fonts = 1
 let g:airline_theme  = 'luna'
 let g:airline_solarized_bg='dark'
 
 " setup for ycm
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_binary_path = 'python'
 let g:ycm_complete_in_comments = 1
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_semantic_triggers =  {
   \ 'c' : ['re!\w{2}'],
   \ 'cpp' : ['re!\w{2}'],
   \ 'python' : ['re!\w{2}'], 
   \ }
+
 
 " setup for syntastic
 set statusline+=%#warningmsg#
@@ -107,6 +115,11 @@ let g:syntastic_check_on_wq = 0
 let g:markdown_enable_spell_checking = 0
 let b:syntastic_mode = "passive"
 let b:check = "no"
+
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_debug_file = "~/.vim/syntastic.log"
+let g:syntastic_cpp_auto_refresh_includes = 1
+let g:syntastic_cpp_compiler = 'gcc'
 
 "Toggle Syntastic 
 function! ToggleSyntastic()
@@ -126,6 +139,8 @@ augroup autoformat_settings
 augroup END
 
 autocmd FileType tex set spell spelllang=de
+autocmd FileType markdown set spell spelllang=de
+autocmd BufNewFile,BufRead *.tex IndentLinesDisable
 " use google style for clang-format
 Glaive codefmt clang_format_style='google'
 
@@ -166,6 +181,9 @@ hi EndOfBuffer ctermbg=none
 hi LineNr ctermbg=none
 hi Folded ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi VertSplit ctermbg=NONE ctermfg=6
+hi Statement cterm=italic
+hi String cterm=italic
 
 " setup for goyo & limelight
 let g:limelight_conceal_ctermfg = 'gray'
@@ -249,5 +267,10 @@ nmap <F8> :TagbarToggle<CR>
 let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
 
+let g:minimap_auto_start=1
+hi MinimapCurrentLine ctermfg=6
+let g:minimap_highlight = 'MinimapCurrentLine'
+
 "source ~/cscope_maps.vim
+
 
