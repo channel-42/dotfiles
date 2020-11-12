@@ -43,6 +43,10 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'ap/vim-css-color'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'Yggdroot/indentline'
+Plugin 'wfxr/minimap.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,12 +62,14 @@ set backspace=indent,eol,start
 set cursorline
 set guioptions=
 syntax on
+set fillchars+=vert:\│ 
 
 " indent for global
 set expandtab
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+set signcolumn=no
 
 " indent for special file
 autocmd FileType c,cpp,tml,css setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
@@ -86,6 +92,17 @@ let g:ycm_semantic_triggers =  {
   \ 'cpp' : ['re!\w{2}'],
   \ 'python' : ['re!\w{2}'],
   \ }
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsSnippetDirectories=["UltiSnips","vim-snippets"]
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " setup for syntastic
 set statusline+=%#warningmsg#
@@ -130,6 +147,15 @@ set foldenable
 set foldlevel=0
 set foldclose=all
 
+"latex
+autocmd BufNewFile,BufRead *.tex set filetype=tex syntax=tex conceallevel=1
+autocmd FileType tex let g:indentLine_enabled=0
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
 autocmd FileType python setlocal foldenable foldmethod=syntax
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 let g:SimpylFold_docstring_preview = 1
@@ -157,6 +183,7 @@ hi EndOfBuffer ctermbg=none
 hi LineNr ctermbg=none
 hi Folded ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
+hi VertSplit ctermbg=NONE ctermfg=0
 
 " setup for goyo & limelight
 let g:limelight_conceal_ctermfg = 'gray'
@@ -240,5 +267,8 @@ nmap <F8> :TagbarToggle<CR>
 let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
 
+hi MinimapCurrentLine ctermfg=1
+let g:minimap_highlight = 'MinimapCurrentLine'
+let g:minimap_auto_start=1
 "source ~/cscope_maps.vim
 
