@@ -43,6 +43,9 @@ Plugin 'lifepillar/vim-solarized8'
 Plugin 'Yggdroot/indentLine'
 Plugin 'aars/syntastic-platformio'
 Plugin 'wfxr/minimap.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'lervag/vimtex'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -103,6 +106,11 @@ let g:ycm_semantic_triggers =  {
   \ 'python' : ['re!\w{2}'], 
   \ }
 
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips","vim-snippets"]
 
 " setup for syntastic
 set statusline+=%#warningmsg#
@@ -134,13 +142,19 @@ endfunction
 
 " autoformat
 augroup autoformat_settings
-  autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
   autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
+autocmd BufNewFile,BufRead *.tex IndentLinesDisable 
+autocmd BufNewFile,BufRead *.tex set filetype=tex syntax=tex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+
 autocmd FileType tex set spell spelllang=de
 autocmd FileType markdown set spell spelllang=de
-autocmd BufNewFile,BufRead *.tex IndentLinesDisable
 " use google style for clang-format
 Glaive codefmt clang_format_style='google'
 
@@ -169,6 +183,8 @@ nnoremap <silent> <C-f> :call ToggleCoding()<CR>
 nnoremap <silent> <NUL> :Pydocstring <CR>
 nnoremap <silent> <space> za
 nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
+nnoremap <silent> <C-f> :FormatCode clang-format<CR>
+"autocmd FileType c,cpp,proto,javascript AutoFormatBuffer clang-format
 
 "colorscheme
 set background=dark
@@ -181,7 +197,7 @@ hi EndOfBuffer ctermbg=none
 hi LineNr ctermbg=none
 hi Folded ctermbg=NONE guibg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
-hi VertSplit ctermbg=NONE ctermfg=6
+hi VertSplit ctermbg=NONE ctermfg=0
 hi Statement cterm=italic
 hi String cterm=italic
 
@@ -268,7 +284,7 @@ let g:indentLine_char = '│'
 set tags=./tags,tags;$HOME
 
 let g:minimap_auto_start=1
-hi MinimapCurrentLine ctermfg=6
+hi MinimapCurrentLine ctermfg=3
 let g:minimap_highlight = 'MinimapCurrentLine'
 
 "source ~/cscope_maps.vim
