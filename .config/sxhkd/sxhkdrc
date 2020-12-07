@@ -3,11 +3,11 @@
 #
 
 # terminal emulator
-super + Return
+super + @space 
 	urxvt
 
 # program launcher
-super + @space
+super + BackSpace 
 	rofi -show run -lines 5 -eh 2 -width 100 -theme $HOME/.config/rofi/solarized_run.rasi 
 
 alt + Tab
@@ -16,6 +16,10 @@ alt + Tab
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+#take screenshot with selection box
+super + n
+        exec scrot -s &
 
 #
 # bspwm hotkeys
