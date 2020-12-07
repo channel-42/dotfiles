@@ -29,7 +29,7 @@ rofi.padding: 50
 !COLORSCHMES
 ! SPECIAL DONT CHANGE
 *.foreground:   #93a1a1
-*.background:   [40]#002b36
+*.background:   [80]#002b36
 !needed for polybar
 *.background-no-transparancy: #002b36 
 *.cursorColor:  #ffffff

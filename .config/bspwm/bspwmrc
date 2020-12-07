@@ -43,7 +43,7 @@ bspc config gapless_monocle false
 bspc config ignore_ewmh_focus true
 
 bspc rule -a firefox -o follow=off desktop=WWW
-bspc rule -a Notion -o follow=off state=fullscreen desktop=NOT
-bspc rule -a motion_recorder follow=off -o state=fullscreen desktop=NOT
+bspc rule -a Notion -o follow=off desktop=NOT
+bspc rule -a motion_recorder follow=off -o desktop=NOT
 firefox &
 notion-app &

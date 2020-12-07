@@ -49,7 +49,7 @@ progressbar_color = "black"
 
 #progressbar_look = "▃▃▃"
 #progressbar_look = "──"
-progressbar_look = "==─"
+progressbar_look = "─╼ "
 
 header_visibility = "no"
 statusbar_visibility = "yes"

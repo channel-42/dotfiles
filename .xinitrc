@@ -5,6 +5,6 @@ xset s on && xset s 300 &
 xss-lock mantablockscreen &
 setxkbmap de
 xrdb -load ~/.Xresources
-nvfancontrol &
+nvfancontrol -l 0&
 sxhkd &
 exec bspwm 
