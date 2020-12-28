@@ -11,12 +11,11 @@ sleep 1
 
 #launch polybar
 polybar wm -r & 
-if [[ $(pgrep -f mpd) ]];then
-    polybar music -r & 
-fi
+polybar music -r & 
 polybar info -r & 
 sleep 0.1
 
 polybar wm_outer -r & 
+polybar music_outer -r & 
 polybar info_outer -r & 
 
