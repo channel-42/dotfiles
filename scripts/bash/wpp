@@ -23,11 +23,24 @@ case "$1" in                    #check if user has inputed request
         ;; 
     "-s")                       #show all Wallpapers user ui
         selectedwall=$(ls  $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
-        final=("${DIR}${selectedwall}")
+        if [ -d "${DIR}${selectedwall}/" ];
+        then
+            selectedwall_next=$(ls -t $HOME/Pictures/Wallpapers/${selectedwall} | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
+            final=("${DIR}${selectedwall}/${selectedwall_next}")
+        else
+            final=("${DIR}${selectedwall}")
+        fi
         ;;
     "-st")
         selectedwall=$(ls -t $HOME/Pictures/Wallpapers | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
-        final=("${DIR}${selectedwall}")
+        if [ -d "${DIR}${selectedwall}/" ];
+        then
+            selectedwall_next=$(ls -t $HOME/Pictures/Wallpapers/${selectedwall} | rofi -dmenu -lines 3 -eh 2 -width 20 -theme /usr/share/rofi/themes/sidebar.rasi)
+            final=("${DIR}${selectedwall}/${selectedwall_next}")
+        else
+            final=("${DIR}${selectedwall}")
+        fi
+        echo "$final"
         ;;
     "-c")                          #custom path to wpp
         if test -f "$2"; then #check files existance
