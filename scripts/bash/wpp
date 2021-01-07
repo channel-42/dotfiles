@@ -40,7 +40,6 @@ case "$1" in                    #check if user has inputed request
         else
             final=("${DIR}${selectedwall}")
         fi
-        echo "$final"
         ;;
     "-c")                          #custom path to wpp
         if test -f "$2"; then #check files existance
