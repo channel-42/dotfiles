@@ -1,0 +1,46 @@
+
+"colorscheme
+set background=dark
+colorscheme solarized8 
+
+au ColorScheme * hi Normal ctermbg=None
+au ColorScheme * hi NonText ctermbg=None
+au ColorScheme * hi LineNr ctermbg=None
+au ColorScheme * hi SignColumn ctermbg=None
+au ColorScheme * hi VertSplit cterm=None ctermfg=magenta
+au ColorScheme * hi EndOfBuffer ctermfg=magenta
+au ColorScheme * hi LspDiagnostigsDefaultError ctermfg=red
+au ColorScheme * hi LspDiagnostigsDefaultWarning ctermfg=yellow 
+
+"startify options
+let g:header_ascii = [
+            \ ' =================     ===============     ===============   ========  ======== ',
+            \ ' \\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . // ',
+            \ ' ||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .|| ',
+            \ ' || . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . || ',
+            \ ' ||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .|| ',
+            \ ' || . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . || ',
+            \ ' ||. . ||   ||-''  || ||  `-||   || . .|| ||. . ||   ||-''  || ||  `|\_ . .|. .|| ',
+            \ ' || . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . || ',
+            \ ' ||_-'' ||  .|/    || ||    \|.  || `-_|| ||_-'' ||  .|/    || ||   | \  / |-_.|| ',
+            \ ' ||    ||_-''      || ||      `-_||    || ||    ||_-''      || ||   | \  / |  `|| ',
+            \ ' ||    `''         || ||         `''    || ||    `''         || ||   | \  / |   || ',
+            \ ' ||            .==='' `===.         .===''.`===.         .==='' /==. |  \/  |   || ',
+            \ ' ||         .==''   \_|-_ `===. .===''   _|_   `===. .==='' _-|/   `==  \/  |   || ',
+            \ ' ||      .==''    _-''    `-_  `=''    _-''   `-_    `=''  _-''   `-_  /|  \/  |   || ',
+            \ ' ||   .==''    _-''          `-__\._-''         `-_./__-''         `'' |. /|  |   || ',
+            \ ' ||.==''    _-''                                                     `'' |  /==.|| ',
+            \ ' ==''    _-''                                                            \/   `== ',
+            \ ' \   _-''                                                                `-_   / ',
+            \ '  `''                                                                      ``''  ',
+            \ ]
+
+let g:startify_custom_header = startify#center(g:header_ascii)
+
+" setup for airline
+let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
+"(insertion of j,k,h,l chars)
+let g:airline_powerline_fonts = 1
+let g:airline_theme  = 'minimalist'
+
+

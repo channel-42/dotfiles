@@ -1,0 +1,12 @@
+command! Format execute 'lua vim.lsp.buf.formatting()'
+
+"Bindings
+map <silent> <F5> : NERDTreeToggle<CR>
+nnoremap <S-s> :w! \|:silent !$HOME/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
+nnoremap <S-m> :w! \|:silent !$HOME/scripts/bash/make.sh <c-r>%<CR><C-l> 
+nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l> 
+nnoremap <silent> <space> za
+nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
+nnoremap <silent> <C-f> :Format<CR>
+
+
