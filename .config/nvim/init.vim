@@ -54,3 +54,12 @@ lua require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
 lua require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
 
 autocmd BufEnter * lua require'completion'.on_attach()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",  
+  highlight = {
+    enable = true,              
+  },
+}
+EOF

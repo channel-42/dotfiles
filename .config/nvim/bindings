@@ -8,5 +8,23 @@ nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l>
 nnoremap <silent> <space> za
 nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
 nnoremap <silent> <C-f> :Format<CR>
-
-
+"Better tabbing
+vnoremap < <gv
+vnoremap > >gv
+"Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+"Use alt + hjkl to resize windows
+nnoremap <M-j>    :resize -5<CR>
+nnoremap <M-k>    :resize +5<CR>
+nnoremap <M-h>    :vertical resize -5<CR>
+nnoremap <M-l>    :vertical resize +5<CR>
+"snippet mappings
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+"completion nav
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"

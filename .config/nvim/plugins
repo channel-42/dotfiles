@@ -12,7 +12,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Raimondi/delimitMate'
-" All of your Plugins must be added before the following line
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 filetype plugin indent on    " required
 
