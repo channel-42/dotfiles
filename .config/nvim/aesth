@@ -1,17 +1,38 @@
 
 "colorscheme
 set background=dark
-colorscheme solarized8 
+colorscheme tokyonight
 
+"general hl settings
 au ColorScheme * hi Normal ctermbg=None
-au ColorScheme * hi NonText ctermbg=None
-au ColorScheme * hi LineNr ctermbg=None
 au ColorScheme * hi SignColumn ctermbg=None
-au ColorScheme * hi VertSplit cterm=None ctermfg=magenta
-au ColorScheme * hi EndOfBuffer ctermfg=magenta
-au ColorScheme * hi LspDiagnostigsDefaultError ctermfg=red
-au ColorScheme * hi LspDiagnostigsDefaultWarning ctermfg=yellow 
+au ColorScheme * hi VertSplit ctermbg=None ctermfg=red
+au ColorScheme * hi CursorLineNr ctermbg=None ctermfg=1
+au ColorScheme * hi LineNr cterm=None ctermfg=9
+au ColorScheme * hi EndOfBuffer ctermfg=red ctermbg=None
+"lsp virt text hl
+au ColorScheme * hi! LspDiagnosticsDefaultError ctermfg=1
+au ColorScheme * hi! LspDiagnosticsVirtualTextWarning ctermfg=3
+au ColorScheme * hi! LspDiagnosticsDefaultWarning ctermfg=3
+" floaterm lh
+au ColorScheme * hi FloatermBorder ctermfg=red ctermbg=None
+au ColorScheme * hi Floaterm ctermbg=None
 
+sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError
+sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning
+sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation
+sign define LspDiagnosticsSignHint text= texthl=LspDiagnosticsSignHint
+
+lua <<EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+ vim.lsp.diagnostic.on_publish_diagnostics, {
+   virtual_text = {
+     prefix = " ",
+   },
+ }
+)
+
+EOF
 "startify options
 let g:header_ascii = [
             \ ' =================     ===============     ===============   ========  ======== ',
@@ -42,5 +63,3 @@ let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 "(insertion of j,k,h,l chars)
 let g:airline_powerline_fonts = 1
 let g:airline_theme  = 'minimalist'
-
-

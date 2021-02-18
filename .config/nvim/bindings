@@ -8,6 +8,9 @@ nnoremap <silent> <F4> :silent !$HOME/scripts/bash/opout.sh <c-r>%<CR><C-l>
 nnoremap <silent> <space> za
 nnoremap <silent> <S-c> :call ToggleSyntastic()<CR>
 nnoremap <silent> <C-f> :Format<CR>
+nnoremap <silent> <C-g> :FloatermNew lazygit<CR>
+nnoremap <silent> <C-s> :FloatermNew ranger<CR>
+nnoremap <silent> <C-t> :FloatermNew<CR>
 "Better tabbing
 vnoremap < <gv
 vnoremap > >gv
@@ -28,3 +31,4 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 "completion nav
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+

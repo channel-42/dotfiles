@@ -1,0 +1,23 @@
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+let g:completion_enable_snippet = 'Neosnippet'
+let g:completion_matching_smart_case = 1
+let g:neosnippet#enable_completed_snippet = 1
+
+let g:completion_trigger_on_delete = 1
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+
+lua require'lspconfig'.clangd.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.pyls.setup{on_attach=require'completion'.on_attach}
+
+autocmd BufEnter * lua require'completion'.on_attach()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {"c", "bash", "cpp", "css", "html", "python", "regex", "lua"}, 
+  highlight = {
+    enable = true 
+  },
+}
+EOF
+
