@@ -1,13 +1,13 @@
 #! /bin/sh
 
 exec $HOME/scripts/bash/autostart.sh &
-exec feh --bg-fill ~/Pictures/Wallpapers/wpp.png &>/dev/null &
+exec feh --bg-fill ~/Pictures/Wallpapers/networking.png &>/dev/null &
 #exec $HOME/scripts/bash/quotewpp.sh &
-exec urxvt -e sh -c "bspc node -t floating && bspc node -z top 200 200 && bspc node -v 0 -475 &&$HOME/scripts/bash/palette.sh && zsh" &
+exec alacritty -e sh -c "bspc node -t floating && bspc node -z top 200 200 && bspc node -v 0 -200 &&$HOME/scripts/bash/palette.sh && zsh" &
 ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
 
-killall compton
-compton --dbus &
+killall picom 
+picom --experimental-backends --dbus &
 
 bspc monitor eDP-1 -d DEV WWW DOC ETC MEDIA 
 
