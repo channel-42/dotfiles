@@ -15,6 +15,8 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Raimondi/delimitMate'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 filetype plugin indent on    " required
 

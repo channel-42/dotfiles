@@ -1,5 +1,4 @@
 command! Format execute 'lua vim.lsp.buf.formatting()'
-
 "Bindings
 map <silent> <F5> : NERDTreeToggle<CR>
 nnoremap <S-s> :w! \|:silent !$HOME/scripts/bash/compiler.sh <c-r>%<CR><C-l> 
@@ -11,6 +10,10 @@ nnoremap <silent> <C-f> :Format<CR>
 nnoremap <silent> <C-g> :FloatermNew lazygit<CR>
 nnoremap <silent> <C-s> :FloatermNew ranger<CR>
 nnoremap <silent> <C-t> :FloatermNew<CR>
+" fzf
+nnoremap <C-s> :Files<CR>
+nnoremap <C-a> :Files $HOME<CR>
+nnoremap <C-w> :Lines<CR>
 "Better tabbing
 vnoremap < <gv
 vnoremap > >gv

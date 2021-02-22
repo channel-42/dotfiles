@@ -5,6 +5,8 @@ source ~/.config/nvim/completion
 source ~/.config/nvim/aesth
 source ~/.config/nvim/bindings
 source ~/.config/nvim/floatterm
+source ~/.config/nvim/fzf
+packadd termdebug
 "settings
 syntax on
 set mouse=a
@@ -26,7 +28,7 @@ set autoindent
 set updatetime=300
 set conceallevel=0
 " some plugin options
-let g:indentLine_fileTypeExclude = ['markdown', 'startify']
+let g:indentLine_fileTypeExclude = ['markdown', 'startify', 'man']
 "autocommands
 autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md  set ft=markdown
 autocmd BufNewFile,BufRead *.ino set ft=c
@@ -34,4 +36,3 @@ autocmd FileType c,cpp,html,css,ino setlocal expandtab shiftwidth=2 softtabstop=
 autocmd FileType python setlocal expandtab shiftwidth=4 softtabstop=4 autoindent
 autocmd VimLeave *.tex !bash $HOME/scripts/bash/texclear.sh %
 autocmd VimLeave *.md :!pkill grip &
-

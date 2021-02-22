@@ -10,6 +10,7 @@ au ColorScheme * hi VertSplit ctermbg=None ctermfg=red
 au ColorScheme * hi CursorLineNr ctermbg=None ctermfg=1
 au ColorScheme * hi LineNr cterm=None ctermfg=9
 au ColorScheme * hi EndOfBuffer ctermfg=red ctermbg=None
+au ColorScheme * hi Directory ctermbg=None ctermfg=1
 "lsp virt text hl
 au ColorScheme * hi! LspDiagnosticsDefaultError ctermfg=1
 au ColorScheme * hi! LspDiagnosticsVirtualTextWarning ctermfg=3
@@ -17,6 +18,9 @@ au ColorScheme * hi! LspDiagnosticsDefaultWarning ctermfg=3
 " floaterm lh
 au ColorScheme * hi FloatermBorder ctermfg=red ctermbg=None
 au ColorScheme * hi Floaterm ctermbg=None
+" debug 
+au ColorScheme * hi debugBreakpoint ctermbg=None ctermfg=magenta
+au ColorScheme * hi debugPC ctermbg=None ctermfg=magenta
 
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning
@@ -55,11 +59,30 @@ let g:header_ascii = [
             \ ' \   _-''                                                                `-_   / ',
             \ '  `''                                                                      ``''  ',
             \ ]
-
+let g:startify_files_number = 5
 let g:startify_custom_header = startify#center(g:header_ascii)
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
 
+let g:startify_lists = [
+        \ { 'type': function('s:gitModified'),  'header': ['   ']},
+        \ { 'type': 'sessions',  'header': ['   ']       },
+        \ { 'type': 'files',     'header': ['   ']            },
+        \ { 'type': 'dir',       'header': ['      ' . getcwd()] },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+au ColorScheme * hi StartifyHeader cterm=None ctermfg=1
+au ColorScheme * hi StartifyNumber cterm=None ctermfg=3
+au ColorScheme * hi StartifyBracket cterm=None ctermfg=11
+au ColorScheme * hi StartifySection cterm=None ctermfg=1
+au ColorScheme * hi StartifyFile cterm=None ctermfg=13
+au ColorScheme * hi StartifySpecial cterm=None ctermfg=14
 " setup for airline
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 "(insertion of j,k,h,l chars)
 let g:airline_powerline_fonts = 1
 let g:airline_theme  = 'minimalist'
+let g:airline#extensions#nvimlsp#enabled = 1

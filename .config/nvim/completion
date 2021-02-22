@@ -3,6 +3,9 @@ let g:completion_enable_snippet = 'Neosnippet'
 let g:completion_matching_smart_case = 1
 let g:neosnippet#enable_completed_snippet = 1
 
+let g:termdebug_popup = 0
+let g:termdebug_wide = 1
+
 let g:completion_trigger_on_delete = 1
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
