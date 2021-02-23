@@ -21,7 +21,7 @@ au ColorScheme * hi Floaterm ctermbg=None
 " debug 
 au ColorScheme * hi debugBreakpoint ctermbg=None ctermfg=magenta
 au ColorScheme * hi debugPC ctermbg=None ctermfg=magenta
-
+"lsp signs
 sign define LspDiagnosticsSignError text= texthl=LspDiagnosticsSignError
 sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning
 sign define LspDiagnosticsSignInformation text= texthl=LspDiagnosticsSignInformation
