@@ -9,3 +9,5 @@ let g:floaterm_width=0.8
 let g:floaterm_height=0.8
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
+
+"# vim: ts=2 sw=2 et ft=vim:

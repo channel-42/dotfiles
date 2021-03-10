@@ -17,6 +17,7 @@ set number relativenumber
 set encoding=utf-8
 set backspace=indent,eol,start
 set cursorline
+set complete+=kspell
 set nospell
 set clipboard+=unnamedplus
 set fillchars+=vert:\▏

@@ -17,10 +17,14 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
 filetype plugin indent on    " required
 
 " setup for indent line
-let g:indentLine_char = '│'
+let g:indentLine_char = '¦'
+let g:indentLine_setColors = 1
 set tags=./tags,tags;$HOME
 
+"# vim: ts=2 sw=2 et ft=vim:

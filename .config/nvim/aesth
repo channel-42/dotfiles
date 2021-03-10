@@ -7,10 +7,12 @@ colorscheme tokyonight
 au ColorScheme * hi Normal ctermbg=None
 au ColorScheme * hi SignColumn ctermbg=None
 au ColorScheme * hi VertSplit ctermbg=None ctermfg=red
-au ColorScheme * hi CursorLineNr ctermbg=None ctermfg=1
-au ColorScheme * hi LineNr cterm=None ctermfg=9
+au ColorScheme * hi CursorLineNr ctermbg=None ctermfg=9
+au ColorScheme * hi LineNr cterm=None ctermfg=1
 au ColorScheme * hi EndOfBuffer ctermfg=red ctermbg=None
 au ColorScheme * hi Directory ctermbg=None ctermfg=1
+au ColorScheme * hi Pmenu ctermbg=236 ctermfg=15
+au ColorScheme * hi PmenuSel ctermbg=236 ctermfg=9
 "lsp virt text hl
 au ColorScheme * hi! LspDiagnosticsDefaultError ctermfg=1
 au ColorScheme * hi! LspDiagnosticsVirtualTextWarning ctermfg=3
@@ -74,15 +76,51 @@ let g:startify_lists = [
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
         \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
-au ColorScheme * hi StartifyHeader cterm=None ctermfg=1
-au ColorScheme * hi StartifyNumber cterm=None ctermfg=3
+au ColorScheme * hi StartifyHeader cterm=None ctermfg=9
+au ColorScheme * hi StartifyNumber cterm=None ctermfg=1
 au ColorScheme * hi StartifyBracket cterm=None ctermfg=11
-au ColorScheme * hi StartifySection cterm=None ctermfg=1
+au ColorScheme * hi StartifySection cterm=None ctermfg=9
 au ColorScheme * hi StartifyFile cterm=None ctermfg=13
-au ColorScheme * hi StartifySpecial cterm=None ctermfg=14
+au ColorScheme * hi StartifySpecial cterm=None ctermfg=94
 " setup for airline
 let g:airline_section_b = '%{strftime("%a %d. %H:%M")}'
 "(insertion of j,k,h,l chars)
 let g:airline_powerline_fonts = 1
 let g:airline_theme  = 'minimalist'
 let g:airline#extensions#nvimlsp#enabled = 1
+" setup for goyo & limelight
+let g:limelight_conceal_ctermfg = 'gray'
+let g:goyo_width = 100
+let g:goyo_height = 70
+let b:code = "no"
+
+"Toggle Goyo and Limelight on and off
+function! ToggleCoding()
+    if exists("b:code") && b:code == "yes"
+        let b:code = "no"
+        Goyo!
+        Limelight!
+    else
+        let b:code = "yes"
+        Goyo
+        Limelight
+    endif
+endfunction
+
+"remove weird background change on exit 
+function s:goyo_enter()
+    hi! VertSplit guibg=NONE
+endfunction
+
+function s:goyo_leave()
+    hi Normal guibg=NONE ctermbg=NONE
+    hi NonText ctermbg=none ctermfg=NONE 
+    hi EndOfBuffer ctermbg=none
+    hi LineNr ctermbg=none
+endfunction
+
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+"# vim: ts=2 sw=2 et ft=vim:
