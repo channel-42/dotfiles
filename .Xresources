@@ -18,9 +18,15 @@ URxvt*iconFile:            /usr/share/icons/custom/urxvt_ico.png
 !General settings
 URxvt.scrollBar: false
 URxvt.internalBorder:  40
-URxvt*font: xft:Hack Nerd Font Mono:size=9, xft:Symbola:style=Regular:size=14,xft:M+ 1c
+URxvt*font: xft:Hack Nerd Font Mono:size=10, xft:Symbola:style=Regular:size=14,xft:M+ 1c
 URxvt.cursorBlink: True
 URxvt*depth: 32
+URxvt.perl-ext-common: default,matcher,resize-font
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+Sxiv.background: #002b36
+
 !ROFI SETUP
 rofi.hide-scrollbar: true
 rofi.show-icons: true
