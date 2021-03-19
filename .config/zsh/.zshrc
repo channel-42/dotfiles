@@ -10,7 +10,12 @@
 export ZSH=/usr/share/oh-my-zsh
 export LAMBDA_MOD_N_DIR_LEVELS=5
 export PATH="$HOME/.local/bin:$HOME/scripts/bash:$PATH"
-export EDITOR="vim"
+export EDITOR="nvim"
+export GPG_TTY=$(tty)
+export MANPAGER='nvim +Man!'
+export VISUAL="nvim"
+export PAGER="bat"
+export BAT_THEME="Solarized (dark)"
 autoload -U colors && colors
 #is overwritten by oh-my-zsh
 PROMPT="%B%n@%M [ %~ ] 
@@ -42,6 +47,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
 #aliases
+alias vim='nvim'
 alias dgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
 alias ugit='/usr/bin/git --git-dir=$HOME/Documents/.uni/ --work-tree=$HOME/Documents'
 alias down="systemctl suspend"
@@ -49,6 +55,10 @@ alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
 alias banner='$HOME/scripts/bash/palette.sh'
 alias lstat='sudo liquidctl status'
 alias gtp='gotop'
+alias rpush='rsync -urvhP $HOME/Documents/share pi@rpi4.local:/home/pi/'
+alias rpull='rsync -urvhP pi@rpi4.local:/home/pi/share $HOME/Documents/'
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+alias la='exa -la --sort type'
+alias l='exa -a --sort type'
