@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + @space 
-	urxvt
+        kitty 
 
 # program launcher
 super + BackSpace 
@@ -41,9 +41,17 @@ super + y
 super + g
 	bspc node -s biggest
 
+#toggel focus mode
+super + ctrl + f
+    exec ~/scripts/bash/focus.sh
+
 #lock screen
 super + x
     mantablockscreen
+
+#launch firefox
+super + w
+    firefox 
 
 #man page searcher
 super + m
