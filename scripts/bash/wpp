@@ -12,6 +12,9 @@ Options:
  -s,        display graphical menu (requires rofi)
  -st,       display graphical menu by date (requires rofi)
  -c,        set provided image as wallpaper
+ -g,        display graphical preview menu mode (requires sxiv)
+
+In -g mode, press <m> to mark an image and <q> to exit and set the last marked image ass wallpaper.
 "
 case "$1" in                    #check if user has inputed request
     "")                         #if no imput, randowm wallpaper
@@ -52,7 +55,18 @@ case "$1" in                    #check if user has inputed request
     "-h")
         echo "$help"
         ;;
+    "-g")
+        selectedwall=$(sxiv -s d -tbo $HOME/Pictures/Wallpapers | tail -n 1)
+        final=("${selectedwall}")
+        ;;
+    *)  
+        echo "not an supported option. See wpp -h for help."
+        exit 1
 esac
 if [[ "$final" != "" ]]; then
     feh --bg-fill "$final" &>/dev/null    #set wallpaper; supress errors
+else
+    echo "no file specified"
+    exit 1
 fi
+
