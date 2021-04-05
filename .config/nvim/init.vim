@@ -1,14 +1,30 @@
 let &packpath = &runtimepath
-"source other configs
-source ~/.config/nvim/plugins
-source ~/.config/nvim/completion
-source ~/.config/nvim/aesth
-source ~/.config/nvim/bindings
-source ~/.config/nvim/floatterm
-source ~/.config/nvim/fzf
+" SOURCE OTHER CONFIGS
+" vim script files
+"source ~/.config/nvim/vimscript/colors.vim
+source ~/.config/nvim/plugins.vim
+source ~/.config/nvim/vimscript/bindings.vim
+source ~/.config/nvim/vimscript/lsp.vim
+source ~/.config/nvim/vimscript/fzf.vim
+source ~/.config/nvim/vimscript/floatterm.vim
+source ~/.config/nvim/vimscript/zen.vim
+source ~/.config/nvim/vimscript/other.vim
+
+" lua files
+luafile ~/.config/nvim/luafiles/colors.lua
+luafile ~/.config/nvim/luafiles/compe.lua
+luafile ~/.config/nvim/luafiles/dashboard.lua
+luafile ~/.config/nvim/luafiles/completion.lua
+luafile ~/.config/nvim/luafiles/nvimtree.lua
+luafile ~/.config/nvim/luafiles/galaxy.lua
+luafile ~/.config/nvim/luafiles/neogit.lua
+luafile ~/.config/nvim/luafiles/telescope.lua
+
+" add debugging
 packadd termdebug
-"settings
-syntax on
+
+" general settings
+syntax enable
 set mouse=a
 set hidden
 set splitbelow 
@@ -18,6 +34,7 @@ set encoding=utf-8
 set backspace=indent,eol,start
 set cursorline
 set complete+=kspell
+set termguicolors
 set nospell
 set clipboard+=unnamedplus
 set fillchars+=vert:\▏
@@ -28,9 +45,21 @@ set smartindent
 set autoindent
 set updatetime=300
 set conceallevel=0
-" some plugin options
-let g:indentLine_fileTypeExclude = ['markdown', 'startify', 'man']
-"autocommands
+set shortmess+=c
+set tags=./tags,tags;$HOME
+set timeout 
+" change this for which-key delay
+" also change g:which_key_timeout 
+" in vimscript/bindings.vim
+set timeoutlen=250
+
+" AUTOCOMMANDS
+" make dahsboard look clean
+autocmd FileType dashboard set showtabline=0 | autocmd WinLeave <buffer> set showtabline=0
+autocmd FileType dashboard set fillchars+=eob:\ | autocmd WinLeave <buffer> set fillchars+=vert:\▏,eob:\~
+autocmd FileType dashboard set laststatus=0 ruler | autocmd WinLeave <buffer> set laststatus=2 ruler
+
+" other autocmd
 autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md  set ft=markdown
 autocmd BufNewFile,BufRead *.ino set ft=c
 autocmd FileType c,cpp,html,css,ino setlocal expandtab shiftwidth=2 softtabstop=2 cindent nofoldenable 
