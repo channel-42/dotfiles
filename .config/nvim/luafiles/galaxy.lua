@@ -191,6 +191,7 @@ gls.right[9] = {
     highlight = {colors.orange,colors.bg_light},
   }
 }
+
 gls.right[10] = {
   DiffRemove = {
     provider = 'DiffRemove',
@@ -202,6 +203,36 @@ gls.right[10] = {
 
 gls.right[11] = {
   RainbowKek = {
+    provider = function() return "" end,
+    highlight = {colors.bg_light,colors.bg}
+  },
+}
+
+gls.short_line_left[1] = {
+  RainbowRed = {
+    provider = function() return '▊ ' end,
+    highlight = {colors.blue,colors.bg_light}
+  },
+}
+
+gls.short_line_left[2] = {
+  FileIconGrey = {
+    provider = 'FileIcon',
+    condition = condition.buffer_not_empty,
+        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg_light},
+  },
+}
+
+
+gls.short_line_left[3] = {
+  SFileName = {
+    provider =  'SFileName',
+    condition = condition.buffer_not_empty,
+    highlight = {colors.fg,colors.bg_light,'bold'}
+  }
+}
+gls.short_line_left[4] = {
+    RainbowT = {
     provider = function() return "" end,
     highlight = {colors.bg_light,colors.bg}
   },
