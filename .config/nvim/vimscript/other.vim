@@ -13,7 +13,8 @@ let g:asc_head = [
 
 " setup for indentline
 let g:indentLine_fileTypeExclude = ['markdown', 'startify', 'man', 'dashboard']
-let g:indentLine_char = '¦'
+"let g:indentLine_char = '¦'
+let g:indentLine_char = '▏'
 let g:indent_blankline_char_highlight_list = ['Comment']
 let g:indent_blankline_show_first_indent_level = v:false
 

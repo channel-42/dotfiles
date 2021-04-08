@@ -33,6 +33,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'ghifarit53/tokyonight-vim'
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'glepnir/dashboard-nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 
 call plug#end()
 filetype plugin indent on "required

@@ -42,10 +42,10 @@ local colors = {
 vim.cmd('au ColorScheme * hi Normal ctermbg=None gui=None guibg=None')
 vim.cmd('au ColorScheme * hi SignColumn ctermbg=None gui=None guibg=None')
 vim.cmd('au ColorScheme * hi NonText ctermbg=None guibg=None')
-vim.cmd('au ColorScheme * hi VertSplit cterm=None guibg=None guifg='.. colors.color9)
+vim.cmd('au ColorScheme * hi VertSplit cterm=None guibg=None guifg='.. colors.color8)
 vim.cmd('au ColorScheme * hi CursorLineNr cterm=None guibg=None ctermfg=5 guifg='.. colors.color9)
 vim.cmd('au ColorScheme * hi CursorLine ctermbg=0 ctermfg=None guifg=None guibg=' .. colors.color0)
-vim.cmd('au ColorScheme * hi EndOfBuffer ctermfg=magenta guibg=None guifg='.. colors.color9)
+vim.cmd('au ColorScheme * hi EndOfBuffer ctermfg=magenta guibg=None guifg='.. colors.color8)
 vim.cmd('au ColorScheme * hi StatusLine guifg=None guibg=None')
 vim.cmd('au ColorScheme * hi StatusLineNC guibg=None')
 
@@ -70,10 +70,13 @@ vim.cmd('au ColorScheme * hi DashboardFooter cterm=None guibg=None ctermfg=2 gui
 
 -- nvim tree
 vim.cmd('au ColorScheme * hi NvimTreeFolderIcon ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color1)
-vim.cmd('au ColorScheme * hi NvimTreeIndentMarker ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color1)
+vim.cmd('au ColorScheme * hi NvimTreeIndentMarker ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color8)
 vim.cmd('au ColorScheme * hi NvimTreeExecFile ctermbg=None guibg=None ctermfg=2 guifg='.. colors.color3)
 vim.cmd('au ColorScheme * hi NvimTreePythonIcon ctermbg=None guibg=None ctermfg=3 guifg='.. colors.color3)
 vim.cmd('au ColorScheme * hi NvimTreeLicenseIcon ctermbg=None guibg=None ctermfg=4')
+vim.cmd('au ColorScheme * hi NvimTreeFolderName ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color1)
+vim.cmd('au ColorScheme * hi NvimTreeEmptyFolderName ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color6)
+vim.cmd('au ColorScheme * hi NvimTreeRootFolder ctermbg=None guibg=None ctermfg=4 guifg='.. colors.color9)
 
 -- neogit
 vim.cmd('au ColorScheme * hi NeogitDiffAdd cterm=None guibg=None ctermfg=2 guifg='.. colors.color2)

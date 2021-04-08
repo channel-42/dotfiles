@@ -1,3 +1,4 @@
+local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
     vimgrep_arguments = {
@@ -9,9 +10,7 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    prompt_position = "bottom",
-    prompt_prefix = "> ",
-    selection_caret = "> ",
+    prompt_position = "bottom", prompt_prefix = "> ", selection_caret = "> ",
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
@@ -44,6 +43,20 @@ require('telescope').setup{
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
 
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+    mappings = {
+        i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+            ["<esc>"] = actions.close,
+            ["<CR>"] = actions.select_default + actions.center
+        },
+        n = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        }
+    }
+    }
 }

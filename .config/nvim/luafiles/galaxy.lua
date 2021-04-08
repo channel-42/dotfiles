@@ -1,10 +1,12 @@
+-- imports
 local gl = require('galaxyline')
 local condition = require('galaxyline.condition')
 local gls = gl.section
 
-gl.short_line_list = {" "} 
-
+-- short bar types
 gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+
+-- custom colors
 local colors = {
     bg=     '#1d1f21',
     red=     '#fb3d66',
@@ -17,13 +19,14 @@ local colors = {
     darkblue=    '#55648',
     cyan=     '#7b8e93',
     bg_light= "#4a4b4d",
-    bg_red = '#182332',
+    bg_blue = '#182332',
     fg=    '#f7f8f8',
     clear= 'None',
 }
 
+-- left bar
 gls.left[1] = {
-  RainbowRed = {
+  RoundLeftLight= {
     provider = function() return "" end,
     highlight = {colors.bg_light,colors.bg}
   },
@@ -49,9 +52,9 @@ gls.left[2] = {
 }
 
 gls.left[3] = {
-  Padding = {
+  PaddingBlue = {
     provider = function() return " " end,
-    highlight = {colors.bg_red,colors.bg_red}
+    highlight = {colors.bg_blue,colors.bg_blue}
   },
 }
 
@@ -59,7 +62,7 @@ gls.left[4] = {
   FileSize = {
     provider = 'FileSize',
     condition = condition.buffer_not_empty,
-    highlight = {colors.fg,colors.bg_red}
+    highlight = {colors.fg,colors.bg_blue}
   }
 }
 
@@ -68,7 +71,7 @@ gls.left[5] ={
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg_red},
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg_blue},
   },
 }
 
@@ -76,7 +79,7 @@ gls.left[6] = {
   FileName = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.red,colors.bg_red,'bold'}
+    highlight = {colors.red,colors.bg_blue,'bold'}
   }
 }
 
@@ -84,24 +87,24 @@ gls.left[6] = {
 gls.left[7] = {
   PerCent = {
     provider = 'LinePercent',
-    highlight = {colors.fg,colors.bg_red,'bold'},
+    highlight = {colors.fg,colors.bg_blue,'bold'},
   }
 }
 
-
+-- LSP stuff
 
 gls.left[8] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
-    highlight = {colors.red,colors.bg_red}
+    highlight = {colors.red,colors.bg_blue}
   }
 }
 gls.left[9] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
-    highlight = {colors.orange,colors.bg_red},
+    highlight = {colors.orange,colors.bg_blue},
   }
 }
 
@@ -109,7 +112,7 @@ gls.left[10] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '  ',
-    highlight = {colors.cyan,colors.bg_red},
+    highlight = {colors.cyan,colors.bg_blue},
   }
 }
 
@@ -117,20 +120,22 @@ gls.left[11] = {
   DiagnosticInfo = {
     provider = 'DiagnosticInfo',
     icon = '  ',
-    highlight = {colors.blue,colors.bg_red},
+    highlight = {colors.blue,colors.bg_blue},
   }
 }
 gls.left[12] = {
-  RainbowLol = {
+  RoundRightBlue = {
     provider = function() return "" end,
-    highlight = {colors.bg_red,colors.bg}
+    highlight = {colors.bg_blue,colors.bg}
   },
 }
 
+-- right bar
+
 gls.right[1] = {
-  RainbowPep = {
+  RoundLeftBlue = {
     provider = function() return "" end,
-    highlight = {colors.bg_red,colors.bg}
+    highlight = {colors.bg_blue,colors.bg}
   },
 }
 
@@ -138,15 +143,13 @@ gls.right[2] = {
   FileEncode = {
     provider = 'FileEncode',
     condition = condition.hide_in_width,
-    highlight = {colors.red,colors.bg_red,'bold'}
+    highlight = {colors.red,colors.bg_blue,'bold'}
   }
 }
 gls.right[4] = {
-  PaddingDark = {
-    provider = function() return " " end,
-    highlight = {colors.bg_red,colors.bg_red}
-  },
+    PaddingBlue = {provider = function() return " " end}
 }
+
 gls.right[5] = {
   FileFormat = {
     provider = 'FileFormat',
@@ -156,6 +159,8 @@ gls.right[5] = {
     highlight = {colors.red,colors.bg_light,'bold'}
   }
 }
+
+-- git stuff
 
 gls.right[6] = {
   GitIcon = {
@@ -201,18 +206,49 @@ gls.right[10] = {
   }
 }
 
+-- spell checking display
 gls.right[11] = {
-  RainbowKek = {
+  PaddingLight= {
+    provider = function() 
+        local spell = vim.wo.spell
+        if spell then
+            return " " 
+        else 
+            return ""
+        end
+    end,
+    condition = condition.hide_in_width,
+    highlight = {colors.bg_light,colors.bg_light}
+  },
+}
+
+gls.right[12] = {
+  Spellcheck = {
+    provider = function()
+        local spell = vim.wo.spell
+        local lang = vim.o.spelllang
+        if spell then
+            return "暈".. lang
+        else
+            return ""
+        end
+    end,
+    condition = condition.hide_in_width,
+    highlight = {colors.cyan,colors.bg_light},
+  }
+}
+
+gls.right[13] = {
+  RoundRightLight = {
     provider = function() return "" end,
     highlight = {colors.bg_light,colors.bg}
   },
 }
 
+-- bar short left
+
 gls.short_line_left[1] = {
-  RainbowRed = {
-    provider = function() return '▊ ' end,
-    highlight = {colors.blue,colors.bg_light}
-  },
+  RoundLeftLight = {provider = function() return ' ' end},
 }
 
 gls.short_line_left[2] = {
@@ -223,7 +259,6 @@ gls.short_line_left[2] = {
   },
 }
 
-
 gls.short_line_left[3] = {
   SFileName = {
     provider =  'SFileName',
@@ -231,9 +266,7 @@ gls.short_line_left[3] = {
     highlight = {colors.fg,colors.bg_light,'bold'}
   }
 }
+
 gls.short_line_left[4] = {
-    RainbowT = {
-    provider = function() return "" end,
-    highlight = {colors.bg_light,colors.bg}
-  },
+    RoundRightLight = {provider = function() return "" end},
 }
