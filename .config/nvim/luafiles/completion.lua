@@ -3,7 +3,7 @@ local util = require 'lspconfig/util'
 local lsp = require 'lspconfig'
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.ccls.setup{
+lsp.ccls.setup{
   capabilities = capabilities,
   init_options = { client = {snippetSupport = true}, completion = {placeholder = true} },
   filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -18,6 +18,14 @@ lsp.clangd.setup {
 lsp.pyls.setup {
   capabilities = capabilities,
 }
+
+lsp.texlab.setup{
+  capabilities = capabilities,
+    lint = {
+          onChange = true 
+        }
+}
+
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {"c", "bash", "cpp", "css", "html", "python", "regex", "lua"}, 
