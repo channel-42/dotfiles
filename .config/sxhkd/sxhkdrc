@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	alacritty
+        kitty	
 
 # program launcher
 super + @space
@@ -42,6 +42,9 @@ super + g
 
 super + x
     mantablockscreen
+
+super + w
+    qutebrowser 
 #
 # Audio and Brightness
 #

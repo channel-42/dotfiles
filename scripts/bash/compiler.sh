@@ -9,7 +9,7 @@ base="${file%.*}"
 #goto files dir
 cd "$dir" || exit
 
-#do the followeing depending on file's suffix
+#do the following depending on file's suffix
 case "$file" in
     *\.md) pandoc "$file" --pdf-engine=xelatex -V fontsize=10pt -V mainfont="Noto Sans" -V monofont="Source Code Pro" -o "$base".pdf && [[ 'echo $?' ]] || read -p "Press enter to continue";;
     *\.py) python3 "$file" && sleep 3;;

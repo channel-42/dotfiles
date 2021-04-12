@@ -21,7 +21,7 @@
 ;Note: future version will exclusive use .Xresouces colors for Polybar
 [colors]
 ;background = ${xrdb:color0:#222}
-background = ${xrdb:solid-background}
+background = ${xrdb:background}
 background-alt = ${xrdb:highlight}
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -32,284 +32,122 @@ alert = #bd2c40
 
 [bar/wm]
 monitor = ${env:MONITOR:eDP-1}
-width = 14%:-12
-height = 50
+width = 100%
+height = 35
 fixed-center = true
 override-redirect = true
 wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-radius = 20
+;radius = 20
 
 line-size = 0
 line-color = #f00
 
 border-color = #00000000
 
-offset-x = 3%:5
-offset-y = 15
+;offset-x = 3%:5
+;offset-y = 15
 
-padding-left = 0
-padding-right = 10
-
-module-margin-left = 3
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
-font-4 = FontAwesome:pixelsize=10
-
-modules-left = bspwm
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/wm_outer]
-monitor = ${env:MONITOR:eDP-1}
-width = 16%:5
-height = 60
-fixed-center = true
-override-redirect = true
-wm-restack = bspwm
-background = ${colors.background-alt}
-foreground = ${colors.foreground}
-
-radius = 20
-
-line-size = 0
-line-color = #f00
-
-border-color = #00000000
-
-offset-x = 3%
-offset-y = 10
-
-padding-left = 0
-padding-right = 3
-
-module-margin-left = 3
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-
-
-modules-right = label_wm
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/music]
-monitor = ${env:MONITOR:eDP-1}
-width = 35%
-height = 50
-fixed-center = true
-override-redirect = true
-wm-restack = bspwm
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-radius = 20
-
-line-size = 0
-line-color = #f00
-
-border-left-size = 0
-border-color = #00000000
-
-offset-x = 28%
-offset-y = 15
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 3
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
-font-4 = FontAwesome:pixelsize=10
-font-5 = IPAGothic:pixelsize=20:antialias=true;3
-
-modules-center = mpd
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[bar/music_outer]
-monitor = ${env:MONITOR:eDP-1}
-width = 39%:5
-height = 60
-fixed-center = true
-override-redirect = true
-wm-restack = bspwm
-background = ${colors.background-alt}
-foreground = ${colors.foreground}
-
-radius = 20
-
-line-size = 0
-line-color = #f00
-
-border-color = #00000000
-
-offset-x = 27.7%
-offset-y = 10
-
-padding-left = 0
-padding-right = 3
-
-module-margin-left = 3
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-
-
-modules-right = label_music
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-
-[bar/info]
-monitor = ${env:MONITOR:eDP-1}
-width = 23%:-2
-height = 50
-fixed-center = true
-override-redirect = true
-wm-restack = bspwm
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-radius = 20
-
-line-size = 0
-line-color = #f00
-
-border-left-size = 0
-border-color = #00000000
-
-offset-x = 74%:-5
-offset-y = 15
-
-padding-left = 0
+padding-left = 5
 padding-right = 5
 
 module-margin-left = 3
-module-margin-right = 2
+module-margin-right = 3
 
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;1
+font-0 = Noto Sans:pixelsize=14;2
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;1
+font-2 = FiraCode Nerd Font:pixelsize=14;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;3
 font-4 = FontAwesome:pixelsize=10
 
-modules-right = light separator battery separator wlan separator date
+modules-left = battery separator wlan separator backlight
+modules-center= bspwm
+modules-right= pulseaudio separator cpu separator date
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/info_outer]
-monitor = ${env:MONITOR:eDP-1}
-width = 26%
-height = 60
-fixed-center = true
-override-redirect = true
-wm-restack = bspwm
-background = ${colors.background-alt}
-foreground = ${colors.foreground}
+[module/cpu]
+type = internal/cpu
+label = "  "
 
-radius = 20
+bar-load-width = 5
+bar-load-indicator = |
+bar-load-indicator-foreground = #fff
+bar-load-indicator-font = 1
+bar-load-fill = ─
+bar-load-fill-font = 3
+bar-load-fill-foreground = ${colors.background-alt}
+bar-load-empty = ─
+bar-load-empty-font = 3
+bar-load-empty-foreground = ${colors.foreground-alt}
 
-line-size = 0
-line-color = #f00
+format = <label>  <bar-load>
+; Seconds to sleep between updates
+; Default: 1
+interval = 5
 
-border-left-size = 0
-border-color = #00000000
+[module/pulseaudio]
+type = internal/pulseaudio
+label-volume = "墳 "
+click-right = pavucontrol
+format-volume = "<label-volume>   <bar-volume>"
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+enable-scroll = true
 
-offset-x = 71%
-offset-y = 10
+bar-volume-width = 5
+bar-volume-indicator = |
+bar-volume-indicator-foreground = #fff
+bar-volume-indicator-font = 0
+bar-volume-fill = ─
+bar-volume-fill-font = 3
+bar-volume-fill-foreground = ${colors.background-alt}
+bar-volume-empty = ─
+bar-volume-empty-font = 3
+bar-volume-empty-foreground = ${colors.foreground-alt}
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
 
-padding-left = 3
-padding-right = 5
+[module/backlight]
+type = internal/backlight
+label= "    "
+card = intel_backlight
+format = "<label>  <bar>"
 
-module-margin-left = 3
-module-margin-right = 2
+;bar-width = 10
+;bar-indicator = |
+;bar-fill = ─
+;bar-empty = ─
+enable-scroll = true
 
-font-0 = fixed:pixelsize=14;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+bar-width = 5
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 0
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = ${colors.background-alt}
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
 
-
-modules-left = label_info 
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
-[module/label_wm]
-type = custom/text
-content = wm
-
-[module/label_music]
-type = custom/text
-content = music 
-
-[module/label_info]
-type = custom/text
-content = info
 
 [module/separator]
 type = custom/text
-content = |
+content = " |"
 content-foreground = ${colors.background-alt}
 
-[module/light]
-type = custom/script 
-exec = light -G | rev | cut -c 4- | rev
-format = <label>
-tail = false
-label = "   %output%%"
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
 
 label-focused = %name%
-label-focused-background = ${colors.background-alt}
+label-focused-foreground= ${colors.background-alt}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 3
 
@@ -320,47 +158,14 @@ label-urgent = %name%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 3
 
-label-empty =
+label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 3
 
 ; Separator in between workspaces
-; label-separator = |
+label-separator = |
+label-separator-foreground= ${colors.background-alt}
 
-
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-
-label-mode-padding = 5
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-; focused = Active workspace on focused monitor
-label-focused = %name%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 5
-
-; unfocused = Inactive workspace on any monitor
-label-unfocused = %name%
-label-unfocused-padding = 5
-
-; visible = Active workspace on unfocused monitor
-label-visible = %name%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-; urgent = Workspace with urgency hint set
-label-urgent = %name%
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 5
-
-; Separator in between workspaces
-; label-separator = |
 
 
 [module/mpd]
@@ -376,62 +181,28 @@ icon-next = 
 label-song-maxlen = 50
 label-song-ellipsis = true
 
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label>
-label = "   %percentage%%"
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
 [module/wlan]
 type = internal/network
 interface = wlp59s0
 interval = 3.0
 
 format-connected = <label-connected>
-format-connected-underline = #9f78e1
 label-connected = ""    
 ; %upspeed:9%"
 
 format-disconnected = "no internet"
 
-[module/eth]
-type = internal/network
-interface = enp3s0
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = " %downspeed:9%      %upspeed:9%"
-format-disconnected = " no internet"
-
-
 [module/date]
 type = internal/date
 interval = 5
 
-date = %a
-date-alt = %d.%m.%Y
+date = "%{F#fb3d66}%a%{F-}"
+date-alt = "%{F#fb3d66}%d.%m.%Y%{F-}"
 
 time = %H:%M
 time-alt = 
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %date% %time%
+label = %date%  %time%
 
 
 [module/battery]
@@ -440,17 +211,11 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-format-charging = <animation-charging>   <label-charging>
-format-charging-underline = #ffb52a
-
+format-charging = <animation-charging>  
 format-discharging = <ramp-capacity>   
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
+ramp-capacity-0-foreground = #fb3d66
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
@@ -460,14 +225,9 @@ ramp-capacity-foreground = ${colors.foreground}
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground}
+animation-charging-foreground = #bf946b
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [settings]
 screenchange-reload = true
@@ -482,4 +242,3 @@ margin-top = 0
 margin-bottom = 0 
 
 ; vim:ft=dosini
-

@@ -1,15 +1,17 @@
 #! /bin/sh
 
+
 exec $HOME/scripts/bash/autostart.sh &
-exec feh --bg-fill ~/Pictures/Wallpapers/networking.png &>/dev/null &
+exec feh --bg-fill ~/Pictures/Wallpapers/p_red.png &>/dev/null &
+exec sudo powertop --auto-tune &
+exec kitty -e sh -c "neofetch && zsh" & 
 #exec $HOME/scripts/bash/quotewpp.sh &
-exec alacritty -e sh -c "bspc node -t floating && bspc node -z top 200 200 && bspc node -v 0 -200 &&$HOME/scripts/bash/palette.sh && zsh" &
+#exec kitty -e sh -c "bspc node -t floating && bspc node -z top 0 +400 && bspc node -v 0 -200 && $HOME/scripts/bash/palette.sh && zsh" &
 ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
 
 killall picom 
 picom --experimental-backends --dbus &
-
-bspc monitor eDP-1 -d DEV WWW DOC ETC MEDIA 
+bspc monitor eDP-1 -d I II III IV V
 
 killall mpd
 mpd &
@@ -18,11 +20,11 @@ bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_corner 
 
-bspc config border_width 5
-bspc config window_gap 30
-bspc config top_padding 60
-bspc config left_padding 30
-bspc config right_padding 30
+bspc config border_width 2
+bspc config window_gap 20
+bspc config top_padding 25
+#bspc config left_padding 5
+#bspc config right_padding 5
 bspc config border_radius 15
 
 #get xrdb colors
