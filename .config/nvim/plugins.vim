@@ -5,6 +5,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'lukas-reineke/indent-blankline.nvim', {'branch': 'lua'}
 Plug 'Raimondi/delimitMate'
 Plug 'ap/vim-css-color'
+Plug 'lewis6991/gitsigns.nvim'
 
 " completion --------------
 Plug 'neovim/nvim-lspconfig'

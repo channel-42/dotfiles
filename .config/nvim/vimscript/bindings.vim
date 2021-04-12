@@ -3,6 +3,7 @@ command! Format execute 'lua vim.lsp.buf.formatting()'
 
 " space is leader
 map <Space> <Leader>
+map <Leader>sb :Telescope file_browser<CR>
 
 " register leader key
 call which_key#register('<Space>', "g:which_key_map")
@@ -30,6 +31,7 @@ let g:which_key_map['e'] = [ ':NvimTreeToggle', 'explorer' ]
 let g:which_key_map['?'] = [ ':NvimTreeFindFile', 'find current file' ]
 let g:which_key_map['r'] = [ ':FloatermNew ranger', 'ranger' ]
 let g:which_key_map['M'] = [ ':call MaximizeToggle()', 'maximize buffer' ]
+let g:which_key_map['G'] = [ 'gf', 'goto file' ]
 let g:which_key_map['F'] = [ 'Format', 'format code' ]
 let g:which_key_map[' '] = [ 'za', 'toggle fold' ]
 
@@ -42,8 +44,21 @@ let g:which_key_map.g = {
       \ 'g' : [':Neogit', 'status'],
       \ 'l' : [':Neogit log', 'log'],
       \ 'c' : [':Neogit commit', 'commit'],
-      \ 'p' : [':Neogit push', 'push'],
-      \ 'P' : [':Neogit pull', 'pull'],
+      \ 'r' : {
+      \ 'name' : '+remote',
+        \ 'p' : [':Neogit push', 'push'],
+        \ 'P' : [':Neogit pull', 'pull'],
+      \ },
+      \ 's' : {
+      \ 'name' : '+stage',
+        \ 'h' : [':Gitsigns stage_bunk', 'stage hunk'],
+        \ 'a' : [':Gitsigns stage_buffer', 'stage buffer'],
+        \ 'u' : [':Gitsigns undo_stage_bunk', 'unstage hunk'],
+      \ },
+      \ 'b' : [':Gitsigns blame_line', 'blame'],
+      \ 'p' : [':Gitsigns preview_hunk', 'preview hunk'],
+      \ 'i' : [':Gitsigns toggle_current_line_blame', 'toggle blame'],
+      \ 'd' : [':Gitsigns toggle_signs', 'toggle signs'],
       \ }
 
 " S is for Session
@@ -65,8 +80,8 @@ let g:which_key_map.s = {
 " t is for terminal
 let g:which_key_map.t = {
       \ 'name' : '+terminal' ,
-      \ 't' : [':FloatermNew', 'terminal'],
-      \ 'f' : [':FloatermNew fzf', 'fzf'],
+      \ 't' : [':FloatermNew --wintype=normal --height=10', 'split'],
+      \ 'f' : [':FloatermNew', 'floating'],
       \ 'g' : [':FloatermNew lazygit', 'lazygit'],
       \ }
 
@@ -88,6 +103,7 @@ let g:which_key_map.l = {
         \ '1': [':call v:lua.StopLsp(1)', 'client 1'],
         \ '2': [':call v:lua.StopLsp(2)', 'client 2'],
         \ '3': [':call v:lua.StopLsp(3)', 'client 3'],
+        \ '4': [':call v:lua.StopLsp(3)', 'client 4'],
         \ },
     \ 'S' : {
         \ 'name' : '+start',

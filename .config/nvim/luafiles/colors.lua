@@ -49,6 +49,11 @@ vim.cmd('au ColorScheme * hi EndOfBuffer ctermfg=magenta guibg=None guifg='.. co
 vim.cmd('au ColorScheme * hi StatusLine guifg=None guibg=None')
 vim.cmd('au ColorScheme * hi StatusLineNC guibg=None')
 
+--git signs
+vim.cmd('au ColorScheme * hi GitSignsAdd guibg=None guifg='.. colors.color2)
+vim.cmd('au ColorScheme * hi GitSignsChange guibg=None guifg='.. colors.color3)
+vim.cmd('au ColorScheme * hi GitSignsDelete guibg=None guifg='.. colors.color1)
+
 -- lsp virt text hl
 vim.cmd('au ColorScheme * hi! LspDiagnosticsDefaultError ctermfg=1 guifg='.. colors.color1)
 vim.cmd('au ColorScheme * hi! LspDiagnosticsVirtualTextWarning ctermfg=3 guifg='.. colors.color3)

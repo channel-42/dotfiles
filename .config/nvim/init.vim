@@ -12,7 +12,6 @@ let &packpath = &runtimepath
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/vimscript/bindings.vim
 source ~/.config/nvim/vimscript/lsp.vim
-source ~/.config/nvim/vimscript/fzf.vim
 source ~/.config/nvim/vimscript/floatterm.vim
 source ~/.config/nvim/vimscript/zen.vim
 source ~/.config/nvim/vimscript/other.vim
@@ -27,6 +26,7 @@ luafile ~/.config/nvim/luafiles/galaxy.lua
 luafile ~/.config/nvim/luafiles/neogit.lua
 luafile ~/.config/nvim/luafiles/telescope.lua
 luafile ~/.config/nvim/luafiles/bufferline.lua
+luafile ~/.config/nvim/luafiles/gitsign.lua
 
 " add debugging
 packadd termdebug
