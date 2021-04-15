@@ -10,6 +10,7 @@ local colors = {
     darkblue=    '#55648',
     cyan=     '#7b8e93',
     bg_light= "#323b3e",
+    bg_alt= "#202325",
     bg_red = '#182332',
     fg=    '#f7f8f8',
     clear= 'None',
@@ -27,7 +28,7 @@ require "bufferline".setup {
         max_name_length = 14,
         max_prefix_length = 13,
         tab_size = 18,
-        enforce_regular_tabs = true,
+        enforce_regular_tabs = false,
         view = "multiwindow",
         show_buffer_close_icons = true,
         separator_style = "slant"
@@ -35,7 +36,7 @@ require "bufferline".setup {
     highlights = {
         background = {
             guifg = comment_fg,
-            guibg = colors.bg
+            guibg = colors.bg_alt
         },
         fill = {
             guifg = comment_fg,
@@ -57,15 +58,15 @@ require "bufferline".setup {
         },
         buffer_visible = {
             guifg = colors.color6,
-            guibg = colors.bg_red
+            guibg = colors.bg_alt
         },
         separator_visible = {
             guifg = colors.bg, 
-            guibg = colors.bg
+            guibg = colors.bg_alt
         },
         separator_selected = {
             guifg = colors.bg, 
-            guibg = colors.bg
+            guibg = colors.bg_light
         },
         separator = {
             guifg = colors.bg, 

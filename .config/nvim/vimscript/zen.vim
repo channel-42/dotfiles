@@ -21,6 +21,7 @@ endfunction
 function s:goyo_enter()
     hi! VertSplit guibg=None
     hi! StatusLineNC guifg= guibg=None
+    hi! EndOfBuffer guifg=#1d1f22
 endfunction
 
 function s:goyo_leave()
@@ -28,6 +29,7 @@ function s:goyo_leave()
     hi NonText ctermbg=none ctermfg=NONE 
     hi EndOfBuffer ctermbg=none
     hi LineNr ctermbg=none
+    hi! EndOfBuffer guifg=#323b3e
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()

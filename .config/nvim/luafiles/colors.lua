@@ -47,7 +47,7 @@ vim.cmd('au ColorScheme * hi CursorLineNr cterm=None guibg=None ctermfg=5 guifg=
 vim.cmd('au ColorScheme * hi CursorLine ctermbg=0 ctermfg=None guifg=None guibg=' .. colors.color0)
 vim.cmd('au ColorScheme * hi EndOfBuffer ctermfg=magenta guibg=None guifg='.. colors.color8)
 vim.cmd('au ColorScheme * hi StatusLine guifg=None guibg=None')
-vim.cmd('au ColorScheme * hi StatusLineNC guibg=None')
+vim.cmd('au ColorScheme * hi StatusLineNC gui=underline guibg=NONE guifg='.. colors.color8)
 
 --git signs
 vim.cmd('au ColorScheme * hi GitSignsAdd guibg=None guifg='.. colors.color2)

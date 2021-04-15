@@ -4,7 +4,8 @@ local condition = require('galaxyline.condition')
 local gls = gl.section
 
 -- short bar types
-gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+--gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+gl.short_line_list = {" "}
 
 -- custom colors
 local colors = {
@@ -245,7 +246,7 @@ gls.right[13] = {
   },
 }
 
--- bar short left
+--[[ bar short left
 
 gls.short_line_left[1] = {
   RoundLeftLight = {provider = function() return ' ' end},
@@ -270,3 +271,4 @@ gls.short_line_left[3] = {
 gls.short_line_left[4] = {
     RoundRightLight = {provider = function() return "" end},
 }
+--]]
