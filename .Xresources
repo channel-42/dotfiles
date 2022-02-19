@@ -1,11 +1,3 @@
-! __   __                                                              
-!/\ \ /\ \                                                             
-!\ `\`\/'/'  _ __    __    ____    ___   __  __    ___     __    ____  
-! `\/ > <   /\`'__\/'__`\ /',__\  / __`\/\ \/\ \  /'___\ /'__`\ /',__\ 
-! __ \/'/\`\\ \ \//\  __//\__, `\/\ \L\ \ \ \_\ \/\ \__//\  __//\__, `\
-!/\_\/\_\\ \_\ \_\\ \____\/\____/\ \____/\ \____/\ \____\ \____\/\____/
-!\/_/\/_/ \/_/\/_/ \/____/\/___/  \/___/  \/___/  \/____/\/____/\/___/ 
-
 !Copy paste bindings
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
@@ -27,41 +19,43 @@ URxvt.background: [80]#1d1f21
 !COLORSCHMES
 ! special
 *.foreground:   #ffffff
-*.background:  #1d1f21
+*.background:  #000000
 
-*.solid-background: #1d1f21
+*.solid-background: #000000
 *.cursorColor:  #ffffff
 
-*.highlight:    #fb3d66
+!*.highlight:    #fb3d66
+*.highlight:    #00d8b4
 
 ! black
-*.color0:       #1d1f21
-*.color8:       #323b3e
+*.color0: #000000
+*.color8: #282828
 
-! red
-*.color1:       #f8818e
-*.color9:       #fb3d66
+!red
+*.color1: #a60000
+*.color9: #972500
 
-! green
-*.color2:       #7b9679
-*.color10:      #6d8c63
+!green
+*.color2: #005e00
+*.color10: #315b00
 
-! yellow
-*.color3:       #bf946b
-*.color11:      #e4cd7b
+!yellow
+*.color3: #813e00
+*.color11: #70480f
 
 ! blue
-*.color4:       #8b9eb2
-*.color12:      #b0ecee
+!*.color4: #003497
+*.color4: #00d8b4
+*.color12: #0f3d8c
 
 ! magenta
-*.color5:       #796e7f
-*.color13:      #cdafd9
+*.color5: #721045
+*.color13: #8f0075
 
 ! cyan
-*.color6:       #7b8e93
-*.color14:      #556468
+*.color6: #00538b
+*.color14: #30517f
 
 ! white
-*.color7:       #b3bec1
-*.color15:      #f7f8f8
+*.color7: #ffffff
+*.color15: #f0f0f0

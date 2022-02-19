@@ -1,0 +1,36 @@
+set selection-clipboard clipboard
+
+set default-bg                  "#000000"
+set default-fg                  "#f0f0f0"
+
+set statusbar-fg                "#f0f0f0"
+set statusbar-bg                "#282828"
+
+set inputbar-bg                 "#000000"
+set inputbar-fg                 "#fdf6e3"
+
+set notification-bg             "#000000"
+set notification-fg             "#fdf6e3"
+
+set notification-error-bg       "#000000"
+set notification-error-fg       "#dc322f"
+
+set notification-warning-bg     "#000000"
+set notification-warning-fg     "#dc322f"
+
+set highlight-color             "#e4cd7b"
+set highlight-active-color      "#268bd2"
+
+set completion-bg               "#000000"
+set completion-fg               "#0f3d8c"
+
+set completion-highlight-fg     "#00d8b4"
+set completion-highlight-bg     "#000000"
+
+set recolor-lightcolor          "#000000"
+set recolor-darkcolor           "#f0f0f0"
+
+set recolor                     "true"
+set recolor-keephue             "false"
+
+# vim: ft=rc

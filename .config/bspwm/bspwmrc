@@ -1,41 +1,42 @@
 #! /bin/sh
-
-
+# autostart
 exec $HOME/scripts/bash/autostart.sh &
-exec feh --bg-fill ~/Pictures/Wallpapers/p_red.png &>/dev/null &
+exec $HOME/scripts/bash/wpp -c $HOME/Pictures/Wallpapers/saturn_4k.jpg &
 exec sudo powertop --auto-tune &
-exec kitty -e sh -c "neofetch && zsh" & 
-#exec $HOME/scripts/bash/quotewpp.sh &
-#exec kitty -e sh -c "bspc node -t floating && bspc node -z top 0 +400 && bspc node -v 0 -200 && $HOME/scripts/bash/palette.sh && zsh" &
+exec emacs --daemon &> /dev/null &
 ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
 
 killall picom 
-picom --experimental-backends --dbus &
-bspc monitor eDP-1 -d I II III IV V
+picom --experimental-backends &
+
+# setup workspaces
+bspc monitor eDP1 -d I II III IV V
 
 killall mpd
 mpd &
 
+# get xrdb colors
+highlight=$(xrdb -query | grep "*.highlight" | cut -f 2)
+background=$(xrdb -query | grep "*.background" | cut -f 2)
+
+# config bindings
 bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_corner 
-
-bspc config border_width 2
-bspc config window_gap 20
-bspc config top_padding 25
-#bspc config left_padding 5
-#bspc config right_padding 5
-bspc config border_radius 15
-
-#get xrdb colors
-highlight=$(xrdb -query | grep "*.highlight" | cut -f 2)
-background=$(xrdb -query | grep "*.background-no-transparancy:" | cut -f 2)
-
+# config window properties
+bspc config border_width 0
+bspc config window_gap 0
+bspc config top_padding 35
+bspc config border_radius 0
+# more configs
+bspc config focus_follows_pointer true
 bspc config focused_border_color "$highlight"
 bspc config normal_border_color "$background"
-
-bspc config focus_follows_pointer true
 bspc config split_ratio 0.52
 bspc config borderless_monocle true
 bspc config gapless_monocle false
 
+# rules
+bspc rule -a "Emacs" state=fullscreen
+bspc rule -a "*:*:emacs-run-launcher" state=floating
+bspc rule -a "pinentry-qt" state=floating

@@ -8,13 +8,19 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show run -lines 3 -eh 2 -width 100 -theme $HOME/.config/rofi/materia.rasi 
+        emacsclient -a "" -n -e "(call-interactively 'emacs-run-launcher)" &> /dev/null
+        #dmenu_run -fn "FiraCode" -h 35 -sb "#8c4688" -sf "#ffffff" -p "run:"
+	    #rofi -show run -lines 3 -eh 2 -width 100 -theme $HOME/.config/rofi/materia.rasi 
+
 alt + Tab
         rofi -show window -lines 8 -eh 1 -width 100 -theme $HOME/.config/rofi/materia_wd.rasi 
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+super + i
+    tdrop -ma -w 70% -y 45 -x 15% kitty 
 
 #
 # bspwm hotkeys
@@ -40,11 +46,15 @@ super + y
 super + g
 	bspc node -s biggest
 
-super + x
+super + ctrl + l
     mantablockscreen
 
 super + w
     qutebrowser 
+
+super + ctrl + e
+   exec ~/scripts/bash/emacs_init.sh 
+
 #
 # Audio and Brightness
 #

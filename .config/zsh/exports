@@ -1,0 +1,20 @@
+# xdg stuff
+export XDG_CONFIG_HOME=$HOME/.config/
+export XDG_CACHE_HOME=$HOME/.cache/
+export XDG_DATA_HOME=$HOME/.local/share
+
+# clean up home dir
+export GOPATH=$XDG_DATA_HOME/go
+export CUDA_PATH=/opt/cuda
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export GRIPHOME=$XDG_CONFIG_HOME/grip
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+#export XAUTHORITY=$XDG_RUNTIME_DIR/Xauthority
+export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+
+# other
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim" 
+export MANPAGER="nvim +Man!"
+
+# vim: ft=sh

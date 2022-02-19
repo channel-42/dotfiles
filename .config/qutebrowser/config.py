@@ -14,31 +14,31 @@ c: ConfigContainer = c
 # ==== colorscheme ====== {{{
 
 c.content.user_stylesheets = ['~/.config/qutebrowser/css/'
-                              'apprentice-all-sites.css']
+                              'modus-all-sites.css']
 
-base00 = "#1d1f21"
-base08 = "#323b3e"
-base01 = "#f8818e"
-base09 = "#fb3d66"
-base02 = "#7b9679"
-base0A = "#6d8c63"
-base03 = "#bf946b"
-base0B = "#e4cd7b"
-base04 = "#8b9eb2"
-base0C = "#b0ecee"
-base05 = "#796e7f"
-base0D = "#cdafd9"
-base06 = "#7b8e93"
-base0E = "#556468"
-base07 = "#b3bec1"
-base0F = "#f7f8f8"
+base00 = "#000000"
+base08 = "#282828"
+base01 = "#a60000"
+base09 = "#972500"
+base02 = "#005e00"
+base0A = "#315b00"
+base03 = "#813e00"
+base0B = "#70480f"
+base04 = "#003497"
+base0C = "#0f3d8c"
+base05 = "#721045"
+base0D = "#8f0075"
+base06 = "#00538b"
+base0E = "#30517f"
+base07 = "#ffffff"
+base0F = "#f0f0f0"
 
-highlight = "#fb3d66"
-bgalt = "#292c2f"
+highlight = "#00d8b4"
+bgalt = "#282828"
 
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.
-c.colors.completion.fg = base01
+c.colors.completion.fg = base06
 
 # Background color of the completion widget for odd rows.
 c.colors.completion.odd.bg = base00
@@ -47,7 +47,7 @@ c.colors.completion.odd.bg = base00
 c.colors.completion.even.bg = base00
 
 # Foreground color of completion widget category headers.
-c.colors.completion.category.fg = base09
+c.colors.completion.category.fg = highlight
 
 # Background color of the completion widget category headers.
 c.colors.completion.category.bg = bgalt 
@@ -59,22 +59,22 @@ c.colors.completion.category.border.top = base00
 c.colors.completion.category.border.bottom = base00
 
 # Foreground color of the selected completion item.
-c.colors.completion.item.selected.fg = base05
+c.colors.completion.item.selected.fg = highlight
 
 # Background color of the selected completion item.
-c.colors.completion.item.selected.bg = base01
+c.colors.completion.item.selected.bg = bgalt
 
 # Top border color of the selected completion item.
-c.colors.completion.item.selected.border.top = base01
+c.colors.completion.item.selected.border.top = bgalt 
 
 # Bottom border color of the selected completion item.
-c.colors.completion.item.selected.border.bottom = base01
+c.colors.completion.item.selected.border.bottom = bgalt
 
 # Foreground color of the matched text in the selected completion item.
-c.colors.completion.item.selected.match.fg = base05
+c.colors.completion.item.selected.match.fg = base02
 
 # Foreground color of the matched text in the completion.
-c.colors.completion.match.fg = base03
+c.colors.completion.match.fg = base02
 
 # Color of the scrollbar handle in the completion view.
 c.colors.completion.scrollbar.fg = base05
@@ -127,7 +127,7 @@ c.colors.hints.fg = base00
 c.colors.hints.bg = base0A
 
 # Font color for the matched part of hints.
-c.colors.hints.match.fg = base05
+c.colors.hints.match.fg = base02
 
 # Text color for the keyhint widget.
 c.colors.keyhint.fg = base05
@@ -178,7 +178,7 @@ c.colors.prompts.bg = base00
 c.colors.prompts.selected.bg = base01
 
 # Foreground color of the statusbar.
-c.colors.statusbar.normal.fg = base05
+c.colors.statusbar.normal.fg = base0A
 
 # Background color of the statusbar.
 c.colors.statusbar.normal.bg = base00
@@ -202,10 +202,10 @@ c.colors.statusbar.private.fg = base0E
 c.colors.statusbar.private.bg = base00
 
 # Foreground color of the statusbar in command mode.
-c.colors.statusbar.command.fg = base04
+c.colors.statusbar.command.fg = highlight
 
 # Background color of the statusbar in command mode.
-c.colors.statusbar.command.bg = bgalt
+c.colors.statusbar.command.bg = base00
 
 # Foreground color of the statusbar in private browsing + command mode.
 c.colors.statusbar.command.private.fg = base0E
@@ -229,21 +229,21 @@ c.colors.statusbar.caret.selection.bg = base00
 c.colors.statusbar.progress.bg = base0D
 
 # Default foreground color of the URL in the statusbar.
-c.colors.statusbar.url.fg = base05
+c.colors.statusbar.url.fg = highlight
 
 # Foreground color of the URL in the statusbar on error.
 c.colors.statusbar.url.error.fg = base08
 
 # Foreground color of the URL in the statusbar for hovered links.
-c.colors.statusbar.url.hover.fg = base09
+c.colors.statusbar.url.hover.fg = base02
 
 # Foreground color of the URL in the statusbar on successful load
 # (http).
-c.colors.statusbar.url.success.http.fg = base0B
+c.colors.statusbar.url.success.http.fg = highlight
 
 # Foreground color of the URL in the statusbar on successful load
 # (https).
-c.colors.statusbar.url.success.https.fg = base0B
+c.colors.statusbar.url.success.https.fg = highlight
 
 # Foreground color of the URL in the statusbar when there's a warning.
 c.colors.statusbar.url.warn.fg = base0E
@@ -288,22 +288,22 @@ c.colors.tabs.pinned.odd.fg = base00
 c.colors.tabs.pinned.selected.even.bg = base02
 
 # Foreground color of pinned selected even tabs.
-c.colors.tabs.pinned.selected.even.fg = base05
+c.colors.tabs.pinned.selected.even.fg = base00
 
 # Background color of pinned selected odd tabs.
 c.colors.tabs.pinned.selected.odd.bg = base02
 
 # Foreground color of pinned selected odd tabs.
-c.colors.tabs.pinned.selected.odd.fg = base05
+c.colors.tabs.pinned.selected.odd.fg = base00
 
 # Foreground color of selected odd tabs.
-c.colors.tabs.selected.odd.fg = base05
+c.colors.tabs.selected.odd.fg = base00
 
 # Background color of selected odd tabs.
 c.colors.tabs.selected.odd.bg = highlight 
 
 # Foreground color of selected even tabs.
-c.colors.tabs.selected.even.fg = base05
+c.colors.tabs.selected.even.fg = base00
 
 # Background color of selected even tabs.
 c.colors.tabs.selected.even.bg = highlight 
@@ -316,7 +316,7 @@ c.colors.webpage.bg = base00
 # ==== general ====== {{{
 config.load_autoconfig(False)
 c.downloads.location.directory = '~/Downloads'
-c.url.searchengines = {'DEFAULT': 'https://searx.prvcy.eu/?q={}',
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
                        'am': 'https://www.amazon.com/s?k={}',
                        'gw': 'https://wiki.gentoo.org/?search={}',
                        'aw': 'https://wiki.archlinux.org/?search={}',
@@ -360,6 +360,9 @@ c.fonts.statusbar = '13pt "FiraCode Nerd Font"'
 # }}}
 
 # ==== bindings ====== {{{
+config.bind(
+    ',md', 'config-cycle content.user_stylesheets '
+    '~/.config/qutebrowser/css/modus-all-sites.css ""')
 config.bind(
     ',ap', 'config-cycle content.user_stylesheets '
     '~/.config/qutebrowser/css/apprentice-all-sites.css ""')
