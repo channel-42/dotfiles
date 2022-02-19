@@ -1,0 +1,2914 @@
+#+AUTHOR: channel-42
+#+STARTUP: overview 
+#+OPTIONS: num:nil ^:{}
+
+#+HTML:<div align=center><a href="https://github.com/channel-42/dotfiles"><img alt="cover image" width="100%"  src=".resources/main.png"></a>
+
+* channel-42's dotfiles
+[[https://github.com/channel-42/dotfile/tree/master][https://img.shields.io/badge/Branch-Laptop-green.svg]]
+[[https://github.com/channel-42/dotfiles/tree/tower_branch][https://img.shields.io/badge/Branch-Tower-purple.svg]]
+[[https://img.shields.io/badge/License-MIT-orange.svg]]
+[[https://img.shields.io/badge/Distro-Arch-blue.svg]]
+
+/These are the dotfiles of my arch-laptop. Should you have any question about this setup, you can reach out to me via mail (see my profile)./
+
+#+HTML:</div>
+
+* Table of Contents :TOC:noexport:
+- [[#channel-42s-dotfiles][channel-42's dotfiles]]
+- [[#about][About]]
+- [[#theme][Theme]]
+- [[#config][Config]]
+  - [[#emacs][emacs]]
+  - [[#xresources][Xresources]]
+  - [[#bspwm][bspwm]]
+  - [[#sxhkd][sxhkd]]
+  - [[#polybar][polybar]]
+  - [[#qutebrowser][qutebrowser]]
+  - [[#zsh][zsh]]
+  - [[#zathura][zathura]]
+  - [[#dunst][dunst]]
+  - [[#kitty][kitty]]
+
+* About
+This is my main Arch laptop setup. The Arch desktop setup can be found in this repo as a separate branch. For my gentoo system, see [[https://github.com/channel-42/gentoo][this]] repo.
+
+The most important configs are located in this org document and then tangled to the required path. Older configs, e.g. for nvim, firefox, rofi, etc. will still be kept in the repo for documentation. However, they will no longer be maintained!
+
+Here's a brief overview of the most important programs used:
+
+#+HTML:<div align=center>
+
+| Category   | Name                  |
+|------------+-----------------------|
+| wm         | bpswm-rounded-corners |
+| statusbar  | polybar               |
+| launcher   | emacs                 |
+| compositor | picom-git             |
+| terminal   | kitty                 |
+| browser    | qutebrowser           |
+| editor     | emacs                 |
+
+#+HTML:</div>
+
+* Theme
+The entire config is based on emacs' modus theme, a high-contrast dark colorscheme. This is due to my workflow being centered around emacs, i.e. the emacs theme dictates the whole systeme’s theme.
+
+* Config
+** emacs
+My emacs config files can be found in my [[https://github.com/channel-42/gmacs][gmacs]] repo.
+** Xresources
+#+begin_src conf :tangle ~/.Xresources
+!Copy paste bindings
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-C: builtin-string: 
+URxvt.keysym.Control-Meta-V: builtin-string: 
+URxvt.iso14755: false
+
+!General settings
+URxvt.scrollBar: false
+URxvt.internalBorder:  40
+URxvt*font: xft:Hack Nerd Font Mono:size=11, xft:Symbola:style=Regular:size=14,xft:M+ 1c
+URxvt.cursorBlink: True
+URxvt*iconFile: /usr/share/icons/custom/urxvt_ico.png
+!ROFI SETUP
+rofi.hide-scrollbar: true
+rofi.show-icons: True
+URxvt*depth: 32
+URxvt.background: [80]#1d1f21
+!COLORSCHMES
+! special
+*.foreground:   #ffffff
+*.background:  #000000
+
+*.solid-background: #000000
+*.cursorColor:  #ffffff
+
+!*.highlight:    #fb3d66
+*.highlight:    #00d8b4
+
+! black
+*.color0: #000000
+*.color8: #282828
+
+!red
+*.color1: #a60000
+*.color9: #972500
+
+!green
+*.color2: #005e00
+*.color10: #315b00
+
+!yellow
+*.color3: #813e00
+*.color11: #70480f
+
+! blue
+!*.color4: #003497
+*.color4: #00d8b4
+*.color12: #0f3d8c
+
+! magenta
+*.color5: #721045
+*.color13: #8f0075
+
+! cyan
+*.color6: #00538b
+*.color14: #30517f
+
+! white
+*.color7: #ffffff
+*.color15: #f0f0f0
+#+end_src
+** bspwm
+#+begin_src shell :tangle ~/.config/bspwm/bspwmrc
+#! /bin/sh
+# autostart
+exec $HOME/scripts/bash/autostart.sh &
+exec $HOME/scripts/bash/wpp -c $HOME/Pictures/Wallpapers/saturn_4k.jpg &
+exec sudo powertop --auto-tune &
+exec emacs --daemon &> /dev/null &
+ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
+
+killall picom 
+picom --experimental-backends &
+
+# setup workspaces
+bspc monitor eDP1 -d I II III IV V
+
+killall mpd
+mpd &
+
+# get xrdb colors
+highlight=$(xrdb -query | grep "*.highlight" | cut -f 2)
+background=$(xrdb -query | grep "*.background" | cut -f 2)
+
+# config bindings
+bspc config pointer_modifier mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_corner 
+# config window properties
+bspc config border_width 0
+bspc config window_gap 0
+bspc config top_padding 35
+bspc config border_radius 0
+# more configs
+bspc config focus_follows_pointer true
+bspc config focused_border_color "$highlight"
+bspc config normal_border_color "$background"
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle false
+
+# rules
+bspc rule -a "Emacs" state=fullscreen
+bspc rule -a "*:*:emacs-run-launcher" state=floating
+bspc rule -a "pinentry-qt" state=floating
+#+end_src
+
+** sxhkd
+#+begin_src conf :tangle ~/.config/sxhkd/sxhkdrc
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+        kitty	
+
+# program launcher
+super + @space
+        emacsclient -a "" -n -e "(call-interactively 'emacs-run-launcher)" &> /dev/null
+        #dmenu_run -fn "FiraCode" -h 35 -sb "#8c4688" -sf "#ffffff" -p "run:"
+	    #rofi -show run -lines 3 -eh 2 -width 100 -theme $HOME/.config/rofi/materia.rasi 
+
+alt + Tab
+        rofi -show window -lines 8 -eh 1 -width 100 -theme $HOME/.config/rofi/materia_wd.rasi 
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+super + i
+    tdrop -ma -w 70% -y 45 -x 15% kitty 
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+super + ctrl + l
+    mantablockscreen
+
+super + w
+    qutebrowser 
+
+super + ctrl + e
+   exec ~/scripts/bash/emacs_init.sh 
+
+#
+# Audio and Brightness
+#
+
+#Audio Control
+XF86AudioRaiseVolume
+        pactl set-sink-volume @DEFAULT_SINK@ +10%
+XF86AudioLowerVolume 
+        pactl set-sink-volume @DEFAULT_SINK@ -10%
+XF86AudioMute
+        pactl set-sink-mute @DEFAULT_SINK@ toggle
+XF86AudioMicMute
+        pactl set-source-mute @DEFAULT_SOURCE@ toggle
+XF86AudioPlay
+        mpc toggle
+XF86AudioNext
+        mpc next
+XF86AudioPrev
+        mpc prev
+
+# Laptop screen brightness control
+XF86MonBrightnessUp 
+        sudo light -A 10
+XF86MonBrightnessDown 
+        sudo light -U 10
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+#rotate windown 90° around parent window
+super + v
+        bspc node @parent -R 90
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -40 0,bottom 0 40,top 0 -40,right 40 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}
+
+# expand a window by moving one of its side outward
+super + alt + {Left,Up,Down,Right}
+	bspc node -z {left -40 0,bottom 0 40,top 0 -40,right 40 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {Left,Up,Down,Right}
+	bspc node -z {right -40 0,top 0 40,bottom 0 -40,left 40 0}
+# move a floating window
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+#+end_src
+
+** polybar
+#+begin_src conf :tangle ~/.config/polybar/config
+[colors]
+;background = ${xrdb:color0:#222}
+background = ${xrdb:background}
+background-alt = ${xrdb:highlight}
+;foreground = ${xrdb:color7:#222}
+foreground = #dfdfdf
+foreground-alt = #555
+primary = #ffb52a
+secondary = #00538b 
+alert = #bd2c40
+
+[bar/wm]
+monitor = ${env:MONITOR:eDP1}
+width = 100%:-20
+height = 35
+fixed-center = true
+override-redirect = true
+wm-restack = bspwm
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+radius = 0
+
+line-size = 0
+line-color = #f00
+
+border-color = #00000000
+
+offset-x = 0%:10
+offset-y = 5
+
+padding-left = 5
+padding-right = 5
+
+module-margin-left = 2
+module-margin-right = 3
+
+font-0 = Noto Sans:pixelsize=14;2
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;1
+font-2 = FiraCode Nerd Font:pixelsize=14;1
+font-3 = FontAwesome5Free:style=Solid:pixelsize=15:antialias=true;3
+font-4 = FontAwesome:pixelsize=10
+
+modules-left =  battery separator wlan separator backlight separator xwindow 
+modules-center= bspwm
+modules-right= pulseaudio separator cpu separator date
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+; Available tags:
+;   <label> (default)
+format = <label>
+format-foreground = ${colors.background-alt}
+format-padding = 4
+
+; Available tokens:
+;   %title%
+; Default: %title%
+label = %title%
+label-maxlen = 20
+
+; Used instead of label when there is no window title
+; Available tokens:
+
+[module/cpu]
+type = internal/cpu
+label = "  "
+
+bar-load-width = 5
+bar-load-indicator = |
+bar-load-indicator-foreground = #fff
+bar-load-indicator-font = 1
+bar-load-fill = ─
+bar-load-fill-font = 3
+bar-load-fill-foreground = ${colors.background-alt}
+bar-load-empty = ─
+bar-load-empty-font = 3
+bar-load-empty-foreground = ${colors.foreground-alt}
+
+format = <label>  <bar-load>
+; Seconds to sleep between updates
+; Default: 1
+interval = 5
+
+[module/pulseaudio]
+type = internal/pulseaudio
+label-volume = "墳 "
+label-muted = " "
+label-muted-foreground = #fff 
+click-right = pavucontrol
+format-volume = "<label-volume>   <bar-volume>"
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+enable-scroll = true
+
+bar-volume-width = 5
+bar-volume-indicator = |
+bar-volume-indicator-foreground = #fff
+bar-volume-indicator-font = 0
+bar-volume-fill = ─
+bar-volume-fill-font = 3
+bar-volume-fill-foreground = ${colors.background-alt}
+bar-volume-empty = ─
+bar-volume-empty-font = 3
+bar-volume-empty-foreground = ${colors.foreground-alt}
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+[module/backlight]
+type = internal/backlight
+label= "    "
+card = intel_backlight
+format = "<label>  <bar>"
+
+;bar-width = 10
+;bar-indicator = |
+;bar-fill = ─
+;bar-empty = ─
+enable-scroll = true
+
+bar-width = 5
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 0
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = ${colors.background-alt}
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+
+[module/separator]
+type = custom/text
+content = "|"
+content-foreground = ${colors.background-alt}
+
+[module/blocks]
+type = custom/text
+content = "%{F#D00070}██%{F-}%{F#8C4799}█%{F-}%{F#0032A0}██%{F-}"
+content-foreground = ${colors.background-alt}
+
+
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %name%
+label-focused-foreground= ${colors.secondary}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 3
+
+label-occupied = %name%
+label-occupied-padding = 3
+
+label-urgent = %name%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 3
+
+; Separator in between workspaces
+label-separator = |
+label-separator-foreground= ${colors.background-alt}
+
+
+
+[module/mpd]
+type = internal/mpd
+format-online = "<label-song>          <icon-prev>     <icon-stop>     <toggle>    <icon-next>"
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 50
+label-song-ellipsis = true
+
+[module/wlan]
+type = internal/network
+interface = wlp59s0
+interval = 3.0
+
+format-connected = <label-connected>
+label-connected = "  "    
+; %upspeed:9%"
+
+format-disconnected = "no internet"
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%{F#00538b}%a%{F-}"
+date-alt = "%{F#00538b}%d.%m.%Y%{F-}"
+
+time = %H:%M
+time-alt = 
+
+label = %date%  %time%
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+format-charging = <animation-charging>  
+format-discharging = <ramp-capacity>   
+label-full = ﴞ
+
+ramp-capacity-0 = "  "
+ramp-capacity-0-foreground = #fb3d66
+ramp-capacity-1 = "  "
+ramp-capacity-2 = "  "
+ramp-capacity-3 = "  "
+ramp-capacity-4 = "  "
+ramp-capacity-foreground = ${colors.foreground}
+
+animation-charging-0 = "  "
+animation-charging-1 = "  "
+animation-charging-2 = "  "
+animation-charging-foreground = #bf946b
+animation-charging-framerate = 750
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0 
+margin-bottom = 0 
+
+; vim:ft=dosini
+#+end_src
+
+** qutebrowser
+#+begin_src python :tangle ~/.config/qutebrowser/config.py
+# CHANNEL-42's QUTEBROWSER CONFIGS
+# Documentation:
+#   qute://help/configuring.html
+#   qute://help/settings.html
+
+# remove lsp warnings and errors {{{
+from qutebrowser.api import interceptor
+from qutebrowser.config.configfiles import ConfigAPI
+from qutebrowser.config.config import ConfigContainer
+config: ConfigAPI = config
+c: ConfigContainer = c
+# }}}
+
+# ==== colorscheme ====== {{{
+
+c.content.user_stylesheets = ['~/.config/qutebrowser/css/'
+                              'modus-all-sites.css']
+
+base00 = "#000000"
+base08 = "#282828"
+base01 = "#a60000"
+base09 = "#972500"
+base02 = "#005e00"
+base0A = "#315b00"
+base03 = "#813e00"
+base0B = "#70480f"
+base04 = "#003497"
+base0C = "#0f3d8c"
+base05 = "#721045"
+base0D = "#8f0075"
+base06 = "#00538b"
+base0E = "#30517f"
+base07 = "#ffffff"
+base0F = "#f0f0f0"
+
+highlight = "#00d8b4"
+bgalt = "#282828"
+
+# Text color of the completion widget. May be a single color to use for
+# all columns or a list of three colors, one for each column.
+c.colors.completion.fg = base06
+
+# Background color of the completion widget for odd rows.
+c.colors.completion.odd.bg = base00
+
+# Background color of the completion widget for even rows.
+c.colors.completion.even.bg = base00
+
+# Foreground color of completion widget category headers.
+c.colors.completion.category.fg = highlight
+
+# Background color of the completion widget category headers.
+c.colors.completion.category.bg = bgalt 
+
+# Top border color of the completion widget category headers.
+c.colors.completion.category.border.top = base00
+
+# Bottom border color of the completion widget category headers.
+c.colors.completion.category.border.bottom = base00
+
+# Foreground color of the selected completion item.
+c.colors.completion.item.selected.fg = highlight
+
+# Background color of the selected completion item.
+c.colors.completion.item.selected.bg = bgalt
+
+# Top border color of the selected completion item.
+c.colors.completion.item.selected.border.top = bgalt 
+
+# Bottom border color of the selected completion item.
+c.colors.completion.item.selected.border.bottom = bgalt
+
+# Foreground color of the matched text in the selected completion item.
+c.colors.completion.item.selected.match.fg = base02
+
+# Foreground color of the matched text in the completion.
+c.colors.completion.match.fg = base02
+
+# Color of the scrollbar handle in the completion view.
+c.colors.completion.scrollbar.fg = base05
+
+# Color of the scrollbar in the completion view.
+c.colors.completion.scrollbar.bg = base00
+
+# Background color of disabled items in the context menu.
+c.colors.contextmenu.disabled.bg = base01
+
+# Foreground color of disabled items in the context menu.
+c.colors.contextmenu.disabled.fg = base04
+
+# Background color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.bg = base00
+
+# Foreground color of the context menu. If set to null, the Qt default is used.
+c.colors.contextmenu.menu.fg = base05
+
+# Background color of the
+# context menu’s selected item.
+c.colors.contextmenu.selected.bg = base01
+
+# Foreground color of the context menu’s selected item.
+c.colors.contextmenu.selected.fg = base05
+
+# Background color for the download bar.
+c.colors.downloads.bar.bg = base00
+
+# Color gradient start for download text.
+c.colors.downloads.start.fg = base00
+
+# Color gradient start for download backgrounds.
+c.colors.downloads.start.bg = base0D
+
+# Color gradient end for download text.
+c.colors.downloads.stop.fg = base00
+
+# Color gradient stop for download backgrounds.
+c.colors.downloads.stop.bg = base0C
+
+# Foreground color for downloads with errors.
+c.colors.downloads.error.fg = base08
+
+# Font color for hints.
+c.colors.hints.fg = base00
+
+# Background color for hints. Note that you can use a `rgba(...)` value
+# for transparency.
+c.colors.hints.bg = base0A
+
+# Font color for the matched part of hints.
+c.colors.hints.match.fg = base02
+
+# Text color for the keyhint widget.
+c.colors.keyhint.fg = base05
+
+# Highlight color for keys to complete the current keychain.
+c.colors.keyhint.suffix.fg = base05
+
+# Background color of the keyhint widget.
+c.colors.keyhint.bg = base00
+
+# Foreground color of an error message.
+c.colors.messages.error.fg = base00
+
+# Background color of an error message.
+c.colors.messages.error.bg = base08
+
+# Border color of an error message.
+c.colors.messages.error.border = base08
+
+# Foreground color of a warning message.
+c.colors.messages.warning.fg = base00
+
+# Background color of a warning message.
+c.colors.messages.warning.bg = base0E
+
+# Border color of a warning message.
+c.colors.messages.warning.border = base0E
+
+# Foreground color of an info message.
+c.colors.messages.info.fg = base05
+
+# Background color of an info message.
+c.colors.messages.info.bg = base00
+
+# Border color of an info message.
+c.colors.messages.info.border = base00
+
+# Foreground color for prompts.
+c.colors.prompts.fg = base05
+
+# Border used around UI elements in prompts.
+c.colors.prompts.border = base00
+
+# Background color for prompts.
+c.colors.prompts.bg = base00
+
+# Background color for the selected item in filename prompts.
+c.colors.prompts.selected.bg = base01
+
+# Foreground color of the statusbar.
+c.colors.statusbar.normal.fg = base0A
+
+# Background color of the statusbar.
+c.colors.statusbar.normal.bg = base00
+
+# Foreground color of the statusbar in insert mode.
+c.colors.statusbar.insert.fg = base0C
+
+# Background color of the statusbar in insert mode.
+c.colors.statusbar.insert.bg = bgalt
+
+# Foreground color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.fg = base0A
+
+# Background color of the statusbar in passthrough mode.
+c.colors.statusbar.passthrough.bg = base00
+
+# Foreground color of the statusbar in private browsing mode.
+c.colors.statusbar.private.fg = base0E
+
+# Background color of the statusbar in private browsing mode.
+c.colors.statusbar.private.bg = base00
+
+# Foreground color of the statusbar in command mode.
+c.colors.statusbar.command.fg = highlight
+
+# Background color of the statusbar in command mode.
+c.colors.statusbar.command.bg = base00
+
+# Foreground color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.fg = base0E
+
+# Background color of the statusbar in private browsing + command mode.
+c.colors.statusbar.command.private.bg = bgalt 
+
+# Foreground color of the statusbar in caret mode.
+c.colors.statusbar.caret.fg = base0D
+
+# Background color of the statusbar in caret mode.
+c.colors.statusbar.caret.bg = base00
+
+# Foreground color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.fg = base0D
+
+# Background color of the statusbar in caret mode with a selection.
+c.colors.statusbar.caret.selection.bg = base00
+
+# Background color of the progress bar.
+c.colors.statusbar.progress.bg = base0D
+
+# Default foreground color of the URL in the statusbar.
+c.colors.statusbar.url.fg = highlight
+
+# Foreground color of the URL in the statusbar on error.
+c.colors.statusbar.url.error.fg = base08
+
+# Foreground color of the URL in the statusbar for hovered links.
+c.colors.statusbar.url.hover.fg = base02
+
+# Foreground color of the URL in the statusbar on successful load
+# (http).
+c.colors.statusbar.url.success.http.fg = highlight
+
+# Foreground color of the URL in the statusbar on successful load
+# (https).
+c.colors.statusbar.url.success.https.fg = highlight
+
+# Foreground color of the URL in the statusbar when there's a warning.
+c.colors.statusbar.url.warn.fg = base0E
+
+# Background color of the tab bar.
+c.colors.tabs.bar.bg = base00
+
+# Color gradient start for the tab indicator.
+c.colors.tabs.indicator.start = base01
+
+# Color gradient end for the tab indicator.
+c.colors.tabs.indicator.stop = base09
+
+# Color for the tab indicator on errors.
+c.colors.tabs.indicator.error = base03
+
+# Foreground color of unselected odd tabs.
+c.colors.tabs.odd.fg = base05
+
+# Background color of unselected odd tabs.
+c.colors.tabs.odd.bg = base00
+
+# Foreground color of unselected even tabs.
+c.colors.tabs.even.fg = base05
+
+# Background color of unselected even tabs.
+c.colors.tabs.even.bg = base00
+
+# Background color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.bg = base0B
+
+# Foreground color of pinned unselected even tabs.
+c.colors.tabs.pinned.even.fg = base00
+
+# Background color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.bg = base0B
+
+# Foreground color of pinned unselected odd tabs.
+c.colors.tabs.pinned.odd.fg = base00
+
+# Background color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.bg = base02
+
+# Foreground color of pinned selected even tabs.
+c.colors.tabs.pinned.selected.even.fg = base00
+
+# Background color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.bg = base02
+
+# Foreground color of pinned selected odd tabs.
+c.colors.tabs.pinned.selected.odd.fg = base00
+
+# Foreground color of selected odd tabs.
+c.colors.tabs.selected.odd.fg = base00
+
+# Background color of selected odd tabs.
+c.colors.tabs.selected.odd.bg = highlight 
+
+# Foreground color of selected even tabs.
+c.colors.tabs.selected.even.fg = base00
+
+# Background color of selected even tabs.
+c.colors.tabs.selected.even.bg = highlight 
+
+# Background color for webpages if unset (or empty to use the theme's
+# color).
+c.colors.webpage.bg = base00
+# }}}
+
+# ==== general ====== {{{
+config.load_autoconfig(False)
+c.downloads.location.directory = '~/Downloads'
+c.url.searchengines = {'DEFAULT': 'https://www.google.com/search?q={}',
+                       'am': 'https://www.amazon.com/s?k={}',
+                       'gw': 'https://wiki.gentoo.org/?search={}',
+                       'aw': 'https://wiki.archlinux.org/?search={}',
+                       'goog': 'https://www.google.com/search?q={}',
+                       're': 'https://www.reddit.com/r/{}',
+                       'wiki': 'https://en.wikipedia.org/wiki/{}',
+                       'yt': 'https://www.youtube.com/results?search_query={}',
+                       'odd': 'https://odysee.com/$/search?q={}'}
+
+c.scrolling.smooth = True
+c.tabs.padding = {'bottom': 5, 'left': 5, 'right': 5, 'top': 5}
+c.url.start_pages = ["~/.config/startpage/index.html"]
+c.url.default_page = "~/.config/startpage/index.html"
+
+# }}}
+
+# ==== yt add-blocking ====== {{{
+# taken from Gavin Freeborn
+# https://odysee.com/@GavinFreeborn:d/why-i-use-qutebrowser-and-how-i:3
+
+
+def ytfilter(info: interceptor.Request):
+    url = info.request_url
+    if(url.host() == "www.youtube.com"
+       and url.path() == "/get_video_info"
+       and "&adformat" in url.query()
+       ):
+        info.block()
+
+
+interceptor.register(ytfilter)
+# }}}
+
+# ==== fonts ====== {{{
+c.fonts.default_family = '"FiraCode Nerd Font"'
+c.fonts.default_size = '13pt'
+c.fonts.completion.entry = '13pt "FiraCode Nerd Font"'
+c.fonts.debug_console = '13pt "FiraCode Nerd Font"'
+c.fonts.prompts = 'default_size sans-serif'
+c.fonts.statusbar = '13pt "FiraCode Nerd Font"'
+# }}}
+
+# ==== bindings ====== {{{
+config.bind(
+    ',md', 'config-cycle content.user_stylesheets '
+    '~/.config/qutebrowser/css/modus-all-sites.css ""')
+config.bind(
+    ',ap', 'config-cycle content.user_stylesheets '
+    '~/.config/qutebrowser/css/apprentice-all-sites.css ""')
+config.bind(
+    ',sl', 'config-cycle content.user_stylesheets '
+    '~/.config/qutebrowser/css/solarized-light-all-sites.css ""')
+config.bind(
+    ',sd', 'config-cycle content.user_stylesheets '
+    '~/.config/qutebrowser/css/solarized-dark-all-sites.css ""')
+config.bind('xb', 'config-cycle statusbar.show never always')
+config.bind('xt', 'config-cycle tabs.show never always ')
+config.bind('xx', 'config-cycle statusbar.show never always;; config-cycle tabs.show never always ')
+config.bind('j', 'run-with-count 3 scroll down')
+config.bind('k', 'run-with-count 3 scroll up')
+# }}}
+
+# ==== useragent, js, images ====== {{{
+
+# Type: String
+# Valid values:
+#   - all
+#   - no-3rdparty
+#   - no-unknown-3rdparty
+#   - never
+
+config.set('content.cookies.accept', 'no-3rdparty', 'chrome-devtools://*')
+config.set('content.cookies.accept', 'no-3rdparty', 'devtools://*')
+
+# Type: FormatString
+config.set('content.headers.user_agent',
+           'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}', 'https://web.whatsapp.com/')
+config.set('content.headers.user_agent',
+           'Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version} Edg/{upstream_browser_version}', 'https://accounts.google.com/*')
+config.set('content.headers.user_agent',
+           'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
+
+# Load images automatically in web pages.
+# Type: Bool
+config.set('content.images', True, 'chrome-devtools://*')
+
+# Load images automatically in web pages.
+# Type: Bool
+config.set('content.images', True, 'devtools://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'chrome-devtools://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'devtools://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'chrome://*/*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'qute://*/*')
+# }}}
+
+# vim:fileencoding=utf-8:ft=python:foldmethod=marker
+#+end_src
+
+** zsh
+#+begin_src shell :tangle ~/.config/zsh/exports
+# xdg stuff
+export XDG_CONFIG_HOME=$HOME/.config/
+export XDG_CACHE_HOME=$HOME/.cache/
+export XDG_DATA_HOME=$HOME/.local/share
+
+# clean up home dir
+export GOPATH=$XDG_DATA_HOME/go
+export CUDA_PATH=/opt/cuda
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
+export GRIPHOME=$XDG_CONFIG_HOME/grip
+export CARGO_HOME=$XDG_DATA_HOME/cargo
+#export XAUTHORITY=$XDG_RUNTIME_DIR/Xauthority
+export GTK2_RC_FILES=$XDG_CONFIG_HOME/gtk-2.0/gtkrc
+
+# other
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim" 
+export MANPAGER="nvim +Man!"
+
+# vim: ft=sh
+#+end_src
+
+#+begin_src shell  :tangle ~/.config/zsh/.zshrc
+#load oh-my-zsh
+export ZSH=/usr/share/oh-my-zsh
+source $HOME/.config/zsh/exports
+autoload -U colors && colors
+#is overwritten by oh-my-zsh
+PROMPT="%B%n@%M [ %~ ] 
+> "
+#"%B%{%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[red]%} [ %{$fg[magenta]%}%~ %{$fg[red]%}]%{$reset_color%}%b% 
+#> "
+ZSH_THEME="candy_mod"
+
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+
+#PLUGINS
+plugins=(git zsh-autosuggestions)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=14"
+alias wpp="$HOME/scripts/bash/wpp"
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -v '^?' backward-delete-char
+
+#aliases
+alias icat='kitty icat'
+alias vim='nvim'
+alias dgit='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME' 
+alias ugit='/usr/bin/git --git-dir=$HOME/Documents/.uni --work-tree=$HOME/Documents' 
+alias down='systemctl suspend'
+alias vpn='sudo openvpn /etc/openvpn/client/client.ovpn'
+alias btt='cat /sys/class/power_supply/BAT0/capacity'
+alias banner='$HOME/scripts/bash/palette.sh'
+alias gtp='gotop -c vice'
+alias rpush='rsync -urvhP $HOME/Documents/share pi@rpi.local:/home/pi/'
+alias rpull='rsync -urvhP pi@rpi.local:/home/pi/share $HOME/Documents/'
+
+source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+alias l='exa -s type'
+alias la='exa -las type'
+#+end_src
+
+** zathura
+#+begin_src conf :tangle ~/.config/zathura/zathurarc
+set selection-clipboard clipboard
+
+set default-bg                  "#000000"
+set default-fg                  "#f0f0f0"
+
+set statusbar-fg                "#f0f0f0"
+set statusbar-bg                "#282828"
+
+set inputbar-bg                 "#000000"
+set inputbar-fg                 "#fdf6e3"
+
+set notification-bg             "#000000"
+set notification-fg             "#fdf6e3"
+
+set notification-error-bg       "#000000"
+set notification-error-fg       "#dc322f"
+
+set notification-warning-bg     "#000000"
+set notification-warning-fg     "#dc322f"
+
+set highlight-color             "#e4cd7b"
+set highlight-active-color      "#268bd2"
+
+set completion-bg               "#000000"
+set completion-fg               "#0f3d8c"
+
+set completion-highlight-fg     "#00d8b4"
+set completion-highlight-bg     "#000000"
+
+set recolor-lightcolor          "#000000"
+set recolor-darkcolor           "#f0f0f0"
+
+set recolor                     "true"
+set recolor-keephue             "false"
+
+# vim: ft=rc
+#+end_src
+
+** dunst
+#+begin_src conf :tangle ~/.config/dunst/dunstrc
+n pixels.  If the width is omitted but the height is given
+    # ("-geometry x2"), the message window expands over the whole screen
+    # (dmenu-like).  If width is 0, the window expands to the longest
+    # message displayed.  A positive x is measured from the left, a
+    # negative from the right side of the screen.  Y is measured from
+    # the top and down respectively.
+    # The width can be negative.  In this case the actual width is the
+    # screen width minus the width defined in within the geometry option.
+    geometry = "x5"
+
+    # Show how many messages are currently hidden (because of geometry).
+    indicate_hidden = yes
+
+    # Shrink window if it's smaller than the width.  Will be ignored if
+    # width is 0.
+    shrink = no
+
+    # The transparency of the window.  Range: [0; 100].
+    # This option will only work if a compositing window manager is
+    # present (e.g. xcompmgr, compiz, etc.).
+    transparency = 0
+
+    # The height of the entire notification.  If the height is smaller
+    # than the font height and padding combined, it will be raised
+    # to the font height and padding.
+    notification_height = 0
+
+    # Draw a line of "separator_height" pixel height between two
+    # notifications.
+    # Set to 0 to disable.
+    separator_height = 2
+
+    # Padding between text and separator.
+    padding = 8
+
+    # Horizontal padding.
+    horizontal_padding = 8
+
+    # Defines width in pixels of frame around the notification window.
+    # Set to 0 to disable.
+    frame_width = 0
+
+    # Defines color of the frame around the notification window.
+    frame_color = "#fb3d66"
+
+    # Define a color for the separator.
+    # possible values are:
+    #  * auto: dunst tries to find a color fitting to the background;
+    #  * foreground: use the same color as the foreground;
+    #  * frame: use the same color as the frame;
+    #  * anything else will be interpreted as a X color.
+    separator_color = frame
+
+    # Sort messages by urgency.
+    sort = yes
+
+    # Don't remove messages, if the user is idle (no mouse or keyboard input)
+    # for longer than idle_threshold seconds.
+    # Set to 0 to disable.
+    # A client can set the 'transient' hint to bypass this. See the rules
+    # section for how to disable this if necessary
+    idle_threshold = 120
+
+    ### Text ###
+
+    font = Monospace 10
+
+    # The spacing between lines.  If the height is smaller than the
+    # font height, it will get raised to the font height.
+    line_height = 0
+
+    # Possible values are:
+    # full: Allow a small subset of html markup in notifications:
+    #        <b>bold</b>
+    #        <i>italic</i>
+    #        <s>strikethrough</s>
+    #        <u>underline</u>
+    #
+    #        For a complete reference see
+    #        <https://developer.gnome.org/pango/stable/pango-Markup.html>.
+    #
+    # strip: This setting is provided for compatibility with some broken
+    #        clients that send markup even though it's not enabled on the
+    #        server. Dunst will try to strip the markup but the parsing is
+    #        simplistic so using this option outside of matching rules for
+    #        specific applications *IS GREATLY DISCOURAGED*.
+    #
+    # no:    Disable markup parsing, incoming notifications will be treated as
+    #        plain text. Dunst will not advertise that it has the body-markup
+    #        capability if this is set as a global setting.
+    #
+    # It's important to note that markup inside the format option will be parsed
+    # regardless of what this is set to.
+    markup = full
+
+    # The format of the message.  Possible variables are:
+    #   %a  appname
+    #   %s  summary
+    #   %b  body
+    #   %i  iconname (including its path)
+    #   %I  iconname (without its path)
+    #   %p  progress value if set ([  0%] to [100%]) or nothing
+    #   %n  progress value if set without any extra characters
+    #   %%  Literal %
+    # Markup is allowed
+    format = "<b>%s</b>\n%b"
+
+    # Alignment of message text.
+    # Possible values are "left", "center" and "right".
+    alignment = center 
+
+    # Vertical alignment of message text and icon.
+    # Possible values are "top", "center" and "bottom".
+    vertical_alignment = center
+
+    # Show age of message if message is older than show_age_threshold
+    # seconds.
+    # Set to -1 to disable.
+    show_age_threshold = 60
+
+    # Split notifications into multiple lines if they don't fit into
+    # geometry.
+    word_wrap = yes
+
+    # When word_wrap is set to no, specify where to make an ellipsis in long lines.
+    # Possible values are "start", "middle" and "end".
+    ellipsize = middle
+
+    # Ignore newlines '\n' in notifications.
+    ignore_newline = no
+
+    # Stack together notifications with the same content
+    stack_duplicates = true
+
+    # Hide the count of stacked notifications with the same content
+    hide_duplicate_count = false
+
+    # Display indicators for URLs (U) and actions (A).
+    show_indicators = yes
+
+    ### Icons ###
+
+    # Align icons left/right/off
+    icon_position = left
+
+    # Scale small icons up to this size, set to 0 to disable. Helpful
+    # for e.g. small files or high-dpi screens. In case of conflict,
+    # max_icon_size takes precedence over this.
+    min_icon_size = 0
+
+    # Scale larger icons down to this size, set to 0 to disable
+    max_icon_size = 32
+
+    # Paths to default icons.
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+
+    ### History ###
+
+    # Should a notification popped up from history be sticky or timeout
+    # as if it would normally do.
+    sticky_history = yes
+
+    # Maximum amount of notifications kept in history
+    history_length = 20
+
+    ### Misc/Advanced ###
+
+    # dmenu path.
+    dmenu = /usr/bin/dmenu -p dunst:
+
+    # Browser for opening urls in context menu.
+    browser = /usr/bin/firefox -new-tab
+
+    # Always run rule-defined scripts, even if the notification is suppressed
+    always_run_script = true
+
+    # Define the title of the windows spawned by dunst
+    title = Dunst
+
+    # Define the class of the windows spawned by dunst
+    class = Dunst
+
+    # Print a notification on startup.
+    # This is mainly for error detection, since dbus (re-)starts dunst
+    # automatically after a crash.
+    startup_notification = false
+
+    # Manage dunst's desire for talking
+    # Can be one of the following values:
+    #  crit: Critical features. Dunst aborts
+    #  warn: Only non-fatal warnings
+    #  mesg: Important Messages
+    #  info: all unimportant stuff
+    # debug: all less than unimportant stuff
+    verbosity = mesg
+
+    # Define the corner radius of the notification window
+    # in pixel size. If the radius is 0, you have no rounded
+    # corners.
+    # The radius will be automatically lowered if it exceeds half of the
+    # notification height to avoid clipping text and/or icons.
+    corner_radius = 20
+
+    # Ignore the dbus closeNotification message.
+    # Useful to enforce the timeout set by dunst configuration. Without this
+    # parameter, an application may close the notification sent before the 
+    # user defined timeout.
+    ignore_dbusclose = false
+
+    ### Legacy
+
+    # Use the Xinerama extension instead of RandR for multi-monitor support.
+    # This setting is provided for compatibility with older nVidia drivers that
+    # do not support RandR and using it on systems that support RandR is highly
+    # discouraged.
+    #
+    # By enabling this setting dunst will not be able to detect when a monitor
+    # is connected or disconnected which might break follow mode if the screen
+    # layout changes.
+    force_xinerama = false
+
+    ### mouse
+
+    # Defines list of actions for each mouse event
+    # Possible values are:
+    # * none: Don't do anything.
+    # * do_action: If the notification has exactly one action, or one is marked as default,
+    #              invoke it. If there are multiple and no default, open the context menu.
+    # * close_current: Close current notification.
+    # * close_all: Close all notifications.
+    # These values can be strung together for each mouse event, and
+    # will be executed in sequence.
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+
+# Experimental features that may or may not work correctly. Do not expect them
+# to have a consistent behaviour across releases.
+[experimental]
+    # Calculate the dpi to use on a per-monitor basis.
+    # If this setting is enabled the Xft.dpi value will be ignored and instead
+    # dunst will attempt to calculate an appropriate dpi value for each monitor
+    # using the resolution and physical size. This might be useful in setups
+    # where there are multiple screens with very different dpi values.
+    per_monitor_dpi = false
+
+[shortcuts]
+
+    # Shortcuts are specified as [modifier+][modifier+]...key
+    # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
+    # "mod3" and "mod4" (windows-key).
+    # Xev might be helpful to find names for keys.
+
+    # Close notification.
+    close = ctrl+space
+
+    # Close all notifications.
+    close_all = ctrl+shift+space
+
+    # Redisplay last message(s).
+    # On the US keyboard layout "grave" is normally above TAB and left
+    # of "1". Make sure this key actually exists on your keyboard layout,
+    # e.g. check output of 'xmodmap -pke'
+    history = ctrl+grave
+
+    # Context menu.
+    context = ctrl+shift+period
+
+[urgency_low]
+    # IMPORTANT: colors have to be defined in quotation marks.
+    # Otherwise the "#" and following would be interpreted as a comment.
+    background = "#222222"
+    foreground = "#888888"
+    timeout = 10
+    # Icon for notifications with low urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_normal]
+    background = "#282828"
+    foreground = "#ffffff"
+    timeout = 10
+    # Icon for notifications with normal urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_critical]
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#ff0000"
+    timeout = 0
+    # Icon for notifications with critical urgency, uncomment to enable
+    #icon = /path/to/icon
+
+# Every section that isn't one of the above is interpreted as a rules to
+# override settings for certain messages.
+#
+# Messages can be matched by
+#    appname (discouraged, see desktop_entry)
+#    body
+#    category
+#    desktop_entry
+#    icon
+#    match_transient
+#    msg_urgency
+#    stack_tag
+#    summary
+#
+# and you can override the
+#    background
+#    foreground
+#    format
+#    frame_color
+#    fullscreen
+#    new_icon
+#    set_stack_tag
+#    set_transient
+#    timeout
+#    urgency
+#
+# Shell-like globbing will get expanded.
+#
+# Instead of the appname filter, it's recommended to use the desktop_entry filter.
+# GLib based applications export their desktop-entry name. In comparison to the appname,
+# the desktop-entry won't get localized.
+#
+# SCRIPTING
+# You can specify a script that gets run when the rule matches by
+# setting the "script" option.
+# The script will be called as follows:
+#   script appname summary body icon urgency
+# where urgency can be "LOW", "NORMAL" or "CRITICAL".
+#
+# NOTE: if you don't want a notification to be displayed, set the format
+# to "".
+# NOTE: It might be helpful to run dunst -print in a terminal in order
+# to find fitting options for rules.
+
+# Disable the transient hint so that idle_threshold cannot be bypassed from the
+# client
+#[transient_disable]
+#    match_transient = yes
+#    set_transient = no
+#
+# Make the handling of transient notifications more strict by making them not
+# be placed in history.
+#[transient_history_ignore]
+#    match_transient = yes
+#    history_ignore = yes
+
+# fullscreen values
+# show: show the notifications, regardless if there is a fullscreen window opened
+# delay: displays the new notification, if there is no fullscreen window active
+#        If the notification is already drawn, it won't get undrawn.
+# pushback: same as delay, but when switching into fullscreen, the notification will get
+#           withdrawn from screen again and will get delayed like a new notification
+#[fullscreen_delay_everything]
+#    fullscreen = delay
+#[fullscreen_show_critical]
+#    msg_urgency = critical
+#    fullscreen = show
+
+#[espeak]
+#    summary = "*"
+#    script = dunst_espeak.sh
+
+#[script-test]
+#    summary = "*script*"
+#    script = dunst_test.sh
+
+#[ignore]
+#    # This notification will not be displayed
+#    summary = "foobar"
+#    format = ""
+
+#[history-ignore]
+#    # This notification will not be saved in history
+#    summary = "foobar"
+#    history_ignore = yes
+
+#[skip-display]
+#    # This notification will not be displayed, but will be included in the history
+#    summary = "foobar"
+#    skip_display = yes
+
+#[signed_on]
+#    appname = Pidgin
+#    summary = "*signed on*"
+#    urgency = low
+#
+#[signed_off]
+#    appname = Pidgin
+#    summary = *signed off*
+#    urgency = low
+#
+#[says]
+#    appname = Pidgin
+#    summary = *says*
+#    urgency = critical
+#
+#[twitter]
+#    appname = Pidgin
+#    summary = *twitter.com*
+#    urgency = normal
+#
+#[stack-volumes]
+#    appname = "some_volume_notifiers"
+#    set_stack_tag = "volume"
+#
+# vim: ft=cfg
+#+end_src
+
+** kitty
+#+begin_src conf :tangle ~/.config/kitty/kitty.conf
+# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+
+#: Fonts {{{
+
+#: kitty has very powerful font management. You can configure
+#: individual font faces and even specify special fonts for particular
+#: characters.
+
+font_family      FiraCode Nerd Font
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+
+#: You can specify different fonts for the bold/italic/bold-italic
+#: variants. To get a full list of supported fonts use the `kitty
+#: list-fonts` command. By default they are derived automatically, by
+#: the OSes font system. Setting them manually is useful for font
+#: families that have many weight variants like Book, Medium, Thick,
+#: etc. For example::
+#:     font_family      Operator Mono Book
+#:     bold_font        Operator Mono Medium
+#:     italic_font      Operator Mono Book Italic
+#:     bold_italic_font Operator Mono Medium Italic
+
+font_size 13.0
+
+#: Font size (in pts)
+
+force_ltr no
+
+#: kitty does not support BIDI (bidirectional text), however, for RTL
+#: scripts, words are automatically displayed in RTL. That is to say,
+#: in an RTL script, the words "HELLO WORLD" display in kitty as
+#: "WORLD HELLO", and if you try to select a substring of an RTL-
+#: shaped string, you will get the character that would be there had
+#: the the string been LTR. For example, assuming the Hebrew word
+#: ירושלים, selecting the character that on the screen appears to be ם
+#: actually writes into the selection buffer the character י.
+
+#: kitty's default behavior is useful in conjunction with a filter to
+#: reverse the word order, however, if you wish to manipulate RTL
+#: glyphs, it can be very challenging to work with, so this option is
+#: provided to turn it off. Furthermore, this option can be used with
+#: the command line program GNU FriBidi
+#: <https://github.com/fribidi/fribidi#executable> to get BIDI
+#: support, because it will force kitty to always treat the text as
+#: LTR, which FriBidi expects for terminals.
+
+adjust_line_height  0
+adjust_column_width 0
+
+#: Change the size of each character cell kitty renders. You can use
+#: either numbers, which are interpreted as pixels or percentages
+#: (number followed by %), which are interpreted as percentages of the
+#: unmodified values. You can use negative pixels or percentages less
+#: than 100% to reduce sizes (but this might cause rendering
+#: artifacts).
+
+# symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
+
+#: Map the specified unicode codepoints to a particular font. Useful
+#: if you need special rendering for some symbols, such as for
+#: Powerline. Avoids the need for patched fonts. Each unicode code
+#: point is specified in the form U+<code point in hexadecimal>. You
+#: can specify multiple code points, separated by commas and ranges
+#: separated by hyphens. symbol_map itself can be specified multiple
+#: times. Syntax is::
+
+#:     symbol_map codepoints Font Family Name
+
+disable_ligatures never
+
+#: Choose how you want to handle multi-character ligatures. The
+#: default is to always render them.  You can tell kitty to not render
+#: them when the cursor is over them by using cursor to make editing
+#: easier, or have kitty never render them at all by using always, if
+#: you don't like them. The ligature strategy can be set per-window
+#: either using the kitty remote control facility or by defining
+#: shortcuts for it in kitty.conf, for example::
+
+#:     map alt+1 disable_ligatures_in active always
+#:     map alt+2 disable_ligatures_in all never
+#:     map alt+3 disable_ligatures_in tab cursor
+
+#: Note that this refers to programming ligatures, typically
+#: implemented using the calt OpenType feature. For disabling general
+#: ligatures, use the font_features setting.
+
+font_features none
+
+#: Choose exactly which OpenType features to enable or disable. This
+#: is useful as some fonts might have features worthwhile in a
+#: terminal. For example, Fira Code Retina includes a discretionary
+#: feature, zero, which in that font changes the appearance of the
+#: zero (0), to make it more easily distinguishable from Ø. Fira Code
+#: Retina also includes other discretionary features known as
+#: Stylistic Sets which have the tags ss01 through ss20.
+
+#: Note that this code is indexed by PostScript name, and not the font
+#: family. This allows you to define very precise feature settings;
+#: e.g. you can disable a feature in the italic font but not in the
+#: regular font.
+
+#: On Linux, these are read from the FontConfig database first and
+#: then this, setting is applied, so they can be configured in a
+#: single, central place.
+
+#: To get the PostScript name for a font, use kitty + list-fonts
+#: --psnames:
+
+#: .. code-block:: sh
+
+#:     $ kitty + list-fonts --psnames | grep Fira
+#:     Fira Code
+#:     Fira Code Bold (FiraCode-Bold)
+#:     Fira Code Light (FiraCode-Light)
+#:     Fira Code Medium (FiraCode-Medium)
+#:     Fira Code Regular (FiraCode-Regular)
+#:     Fira Code Retina (FiraCode-Retina)
+
+#: The part in brackets is the PostScript name.
+
+#: Enable alternate zero and oldstyle numerals::
+
+#:     font_features FiraCode-Retina +zero +onum
+
+#: Enable only alternate zero::
+
+#:     font_features FiraCode-Retina +zero
+
+#: Disable the normal ligatures, but keep the calt feature which (in
+#: this font) breaks up monotony::
+
+#:     font_features TT2020StyleB-Regular -liga +calt
+
+#: In conjunction with force_ltr, you may want to disable Arabic
+#: shaping entirely, and only look at their isolated forms if they
+#: show up in a document. You can do this with e.g.::
+
+#:     font_features UnifontMedium +isol -medi -fina -init
+
+box_drawing_scale 0.001, 1, 1.5, 2
+
+#: Change the sizes of the lines used for the box drawing unicode
+#: characters These values are in pts. They will be scaled by the
+#: monitor DPI to arrive at a pixel value. There must be four values
+#: corresponding to thin, normal, thick, and very thick lines.
+
+#: }}}
+
+#: Cursor customization {{{
+
+cursor #bf946b
+
+#: Default cursor color
+
+#cursor_text_color #111111
+cursor_text_color #323b3e
+
+#: Choose the color of text under the cursor. If you want it rendered
+#: with the background color of the cell underneath instead, use the
+#: special keyword: background
+
+cursor_shape block
+
+#: The cursor shape can be one of (block, beam, underline)
+
+cursor_beam_thickness 1.5
+
+#: Defines the thickness of the beam cursor (in pts)
+
+cursor_underline_thickness 2.0
+
+#: Defines the thickness of the underline cursor (in pts)
+
+cursor_blink_interval -1
+
+#: The interval (in seconds) at which to blink the cursor. Set to zero
+#: to disable blinking. Negative values mean use system default. Note
+#: that numbers smaller than repaint_delay will be limited to
+#: repaint_delay.
+
+cursor_stop_blinking_after 15.0
+
+#: Stop blinking cursor after the specified number of seconds of
+#: keyboard inactivity.  Set to zero to never stop blinking.
+
+#: }}}
+
+#: Scrollback {{{
+
+scrollback_lines 2000
+
+#: Number of lines of history to keep in memory for scrolling back.
+#: Memory is allocated on demand. Negative numbers are (effectively)
+#: infinite scrollback. Note that using very large scrollback is not
+#: recommended as it can slow down performance of the terminal and
+#: also use large amounts of RAM. Instead, consider using
+#: scrollback_pager_history_size.
+
+scrollback_pager less --chop-long-lines --RAW-CONTROL-CHARS +INPUT_LINE_NUMBER
+
+#: Program with which to view scrollback in a new window. The
+#: scrollback buffer is passed as STDIN to this program. If you change
+#: it, make sure the program you use can handle ANSI escape sequences
+#: for colors and text formatting. INPUT_LINE_NUMBER in the command
+#: line above will be replaced by an integer representing which line
+#: should be at the top of the screen. Similarly CURSOR_LINE and
+#: CURSOR_COLUMN will be replaced by the current cursor position.
+
+scrollback_pager_history_size 0
+
+#: Separate scrollback history size, used only for browsing the
+#: scrollback buffer (in MB). This separate buffer is not available
+#: for interactive scrolling but will be piped to the pager program
+#: when viewing scrollback buffer in a separate window. The current
+#: implementation stores the data in UTF-8, so approximatively 10000
+#: lines per megabyte at 100 chars per line, for pure ASCII text,
+#: unformatted text. A value of zero or less disables this feature.
+#: The maximum allowed size is 4GB.
+
+wheel_scroll_multiplier 5.0
+
+#: Modify the amount scrolled by the mouse wheel. Note this is only
+#: used for low precision scrolling devices, not for high precision
+#: scrolling on platforms such as macOS and Wayland. Use negative
+#: numbers to change scroll direction.
+
+touch_scroll_multiplier 1.0
+
+#: Modify the amount scrolled by a touchpad. Note this is only used
+#: for high precision scrolling devices on platforms such as macOS and
+#: Wayland. Use negative numbers to change scroll direction.
+
+#: }}}
+
+#: Mouse {{{
+
+mouse_hide_wait 3.0
+
+#: Hide mouse cursor after the specified number of seconds of the
+#: mouse not being used. Set to zero to disable mouse cursor hiding.
+#: Set to a negative value to hide the mouse cursor immediately when
+#: typing text. Disabled by default on macOS as getting it to work
+#: robustly with the ever-changing sea of bugs that is Cocoa is too
+#: much effort.
+
+url_color #0087bd
+url_style curly
+
+#: The color and style for highlighting URLs on mouse-over. url_style
+#: can be one of: none, single, double, curly
+
+open_url_modifiers double
+
+#: The modifier keys to press when clicking with the mouse on URLs to
+#: open the URL
+
+open_url_with qutebrowser
+
+#: The program with which to open URLs that are clicked on. The
+#: special value default means to use the operating system's default
+#: URL handler.
+
+url_prefixes http https file ftp
+
+#: The set of URL prefixes to look for when detecting a URL under the
+#: mouse cursor.
+
+detect_urls yes
+
+#: Detect URLs under the mouse. Detected URLs are highlighted with an
+#: underline and the mouse cursor becomes a hand over them. Even if
+#: this option is disabled, URLs are still clickable.
+
+copy_on_select no
+
+#: Copy to clipboard or a private buffer on select. With this set to
+#: clipboard, simply selecting text with the mouse will cause the text
+#: to be copied to clipboard. Useful on platforms such as macOS that
+#: do not have the concept of primary selections. You can instead
+#: specify a name such as a1 to copy to a private kitty buffer
+#: instead. Map a shortcut with the paste_from_buffer action to paste
+#: from this private buffer. For example::
+
+#:     map cmd+shift+v paste_from_buffer a1
+
+#: Note that copying to the clipboard is a security risk, as all
+#: programs, including websites open in your browser can read the
+#: contents of the system clipboard.
+
+strip_trailing_spaces never
+
+#: Remove spaces at the end of lines when copying to clipboard. A
+#: value of smart will do it when using normal selections, but not
+#: rectangle selections. always will always do it.
+
+rectangle_select_modifiers ctrl+alt
+
+#: The modifiers to use rectangular selection (i.e. to select text in
+#: a rectangular block with the mouse)
+
+terminal_select_modifiers shift
+
+#: The modifiers to override mouse selection even when a terminal
+#: application has grabbed the mouse
+
+select_by_word_characters @-./_~?&=%+#
+
+#: Characters considered part of a word when double clicking. In
+#: addition to these characters any character that is marked as an
+#: alphanumeric character in the unicode database will be matched.
+
+click_interval -1.0
+
+#: The interval between successive clicks to detect double/triple
+#: clicks (in seconds). Negative numbers will use the system default
+#: instead, if available, or fallback to 0.5.
+
+focus_follows_mouse no
+
+#: Set the active window to the window under the mouse when moving the
+#: mouse around
+
+pointer_shape_when_grabbed arrow
+
+#: The shape of the mouse pointer when the program running in the
+#: terminal grabs the mouse. Valid values are: arrow, beam and hand
+
+default_pointer_shape beam
+
+#: The default shape of the mouse pointer. Valid values are: arrow,
+#: beam and hand
+
+pointer_shape_when_dragging beam
+
+#: The default shape of the mouse pointer when dragging across text.
+#: Valid values are: arrow, beam and hand
+
+#: }}}
+
+#: Performance tuning {{{
+
+repaint_delay 10
+
+#: Delay (in milliseconds) between screen updates. Decreasing it,
+#: increases frames-per-second (FPS) at the cost of more CPU usage.
+#: The default value yields ~100 FPS which is more than sufficient for
+#: most uses. Note that to actually achieve 100 FPS you have to either
+#: set sync_to_monitor to no or use a monitor with a high refresh
+#: rate. Also, to minimize latency when there is pending input to be
+#: processed, repaint_delay is ignored.
+
+input_delay 3
+
+#: Delay (in milliseconds) before input from the program running in
+#: the terminal is processed. Note that decreasing it will increase
+#: responsiveness, but also increase CPU usage and might cause flicker
+#: in full screen programs that redraw the entire screen on each loop,
+#: because kitty is so fast that partial screen updates will be drawn.
+
+sync_to_monitor yes
+
+#: Sync screen updates to the refresh rate of the monitor. This
+#: prevents tearing (https://en.wikipedia.org/wiki/Screen_tearing)
+#: when scrolling. However, it limits the rendering speed to the
+#: refresh rate of your monitor. With a very high speed mouse/high
+#: keyboard repeat rate, you may notice some slight input latency. If
+#: so, set this to no.
+
+#: }}}
+
+#: Terminal bell {{{
+
+enable_audio_bell no
+
+#: Enable/disable the audio bell. Useful in environments that require
+#: silence.
+
+visual_bell_duration 0.0
+
+#: Visual bell duration. Flash the screen when a bell occurs for the
+#: specified number of seconds. Set to zero to disable.
+
+window_alert_on_bell yes
+
+#: Request window attention on bell. Makes the dock icon bounce on
+#: macOS or the taskbar flash on linux.
+
+bell_on_tab yes
+
+#: Show a bell symbol on the tab if a bell occurs in one of the
+#: windows in the tab and the window is not the currently focused
+#: window
+
+command_on_bell none
+
+#: Program to run when a bell occurs.
+
+#: }}}
+
+#: Window layout {{{
+
+remember_window_size  yes
+initial_window_width  640
+initial_window_height 400
+
+#: If enabled, the window size will be remembered so that new
+#: instances of kitty will have the same size as the previous
+#: instance. If disabled, the window will initially have size
+#: configured by initial_window_width/height, in pixels. You can use a
+#: suffix of "c" on the width/height values to have them interpreted
+#: as number of cells instead of pixels.
+
+enabled_layouts *
+
+#: The enabled window layouts. A comma separated list of layout names.
+#: The special value all means all layouts. The first listed layout
+#: will be used as the startup layout. Default configuration is all
+#: layouts in alphabetical order. For a list of available layouts, see
+#: the https://sw.kovidgoyal.net/kitty/index.html#layouts.
+
+window_resize_step_cells 2
+window_resize_step_lines 2
+
+#: The step size (in units of cell width/cell height) to use when
+#: resizing windows. The cells value is used for horizontal resizing
+#: and the lines value for vertical resizing.
+
+window_border_width 0.5pt
+
+#: The width of window borders. Can be either in pixels (px) or pts
+#: (pt). Values in pts will be rounded to the nearest number of pixels
+#: based on screen resolution. If not specified the unit is assumed to
+#: be pts. Note that borders are displayed only when more than one
+#: window is visible. They are meant to separate multiple windows.
+
+draw_minimal_borders yes
+
+#: Draw only the minimum borders needed. This means that only the
+#: minimum needed borders for inactive windows are drawn. That is only
+#: the borders that separate the inactive window from a neighbor. Note
+#: that setting a non-zero window margin overrides this and causes all
+#: borders to be drawn.
+
+window_margin_width 0
+
+#: The window margin (in pts) (blank area outside the border). A
+#: single value sets all four sides. Two values set the vertical and
+#: horizontal sides. Three values set top, horizontal and bottom. Four
+#: values set top, right, bottom and left.
+
+single_window_margin_width -1
+
+#: The window margin (in pts) to use when only a single window is
+#: visible. Negative values will cause the value of
+#: window_margin_width to be used instead. A single value sets all
+#: four sides. Two values set the vertical and horizontal sides. Three
+#: values set top, horizontal and bottom. Four values set top, right,
+#: bottom and left.
+
+window_padding_width 10
+
+#: The window padding (in pts) (blank area between the text and the
+#: window border). A single value sets all four sides. Two values set
+#: the vertical and horizontal sides. Three values set top, horizontal
+#: and bottom. Four values set top, right, bottom and left.
+
+placement_strategy center
+
+#: When the window size is not an exact multiple of the cell size, the
+#: cell area of the terminal window will have some extra padding on
+#: the sides. You can control how that padding is distributed with
+#: this option. Using a value of center means the cell area will be
+#: placed centrally. A value of top-left means the padding will be on
+#: only the bottom and right edges.
+
+active_border_color #00ff00
+
+#: The color for the border of the active window. Set this to none to
+#: not draw borders around the active window.
+
+inactive_border_color #cccccc
+
+#: The color for the border of inactive windows
+
+bell_border_color #ff5a00
+
+#: The color for the border of inactive windows in which a bell has
+#: occurred
+
+inactive_text_alpha 1.0
+
+#: Fade the text in inactive windows by the specified amount (a number
+#: between zero and one, with zero being fully faded).
+
+hide_window_decorations no
+
+#: Hide the window decorations (title-bar and window borders) with
+#: yes. On macOS, titlebar-only can be used to only hide the titlebar.
+#: Whether this works and exactly what effect it has depends on the
+#: window manager/operating system.
+
+resize_debounce_time 0.1
+
+#: The time (in seconds) to wait before redrawing the screen when a
+#: resize event is received. On platforms such as macOS, where the
+#: operating system sends events corresponding to the start and end of
+#: a resize, this number is ignored.
+
+resize_draw_strategy static
+
+#: Choose how kitty draws a window while a resize is in progress. A
+#: value of static means draw the current window contents, mostly
+#: unchanged. A value of scale means draw the current window contents
+#: scaled. A value of blank means draw a blank window. A value of size
+#: means show the window size in cells.
+
+resize_in_steps no
+
+#: Resize the OS window in steps as large as the cells, instead of
+#: with the usual pixel accuracy. Combined with an
+#: initial_window_width and initial_window_height in number of cells,
+#: this option can be used to keep the margins as small as possible
+#: when resizing the OS window. Note that this does not currently work
+#: on Wayland.
+
+confirm_os_window_close 0
+
+#: Ask for confirmation when closing an OS window or a tab that has at
+#: least this number of kitty windows in it. A value of zero disables
+#: confirmation. This confirmation also applies to requests to quit
+#: the entire application (all OS windows, via the quit action).
+
+#: }}}
+
+#: Tab bar {{{
+
+tab_bar_edge bottom
+
+#: Which edge to show the tab bar on, top or bottom
+
+tab_bar_margin_width 0.0
+
+#: The margin to the left and right of the tab bar (in pts)
+
+tab_bar_style fade
+
+#: The tab bar style, can be one of: fade, separator, powerline, or
+#: hidden. In the fade style, each tab's edges fade into the
+#: background color, in the separator style, tabs are separated by a
+#: configurable separator, and the powerline shows the tabs as a
+#: continuous line. If you use the hidden style, you might want to
+#: create a mapping for the select_tab action which presents you with
+#: a list of tabs and allows for easy switching to a tab.
+
+tab_bar_min_tabs 2
+
+#: The minimum number of tabs that must exist before the tab bar is
+#: shown
+
+tab_switch_strategy previous
+
+#: The algorithm to use when switching to a tab when the current tab
+#: is closed. The default of previous will switch to the last used
+#: tab. A value of left will switch to the tab to the left of the
+#: closed tab. A value of right will switch to the tab to the right of
+#: the closed tab. A value of last will switch to the right-most tab.
+
+tab_fade 0.25 0.5 0.75 1
+
+#: Control how each tab fades into the background when using fade for
+#: the tab_bar_style. Each number is an alpha (between zero and one)
+#: that controls how much the corresponding cell fades into the
+#: background, with zero being no fade and one being full fade. You
+#: can change the number of cells used by adding/removing entries to
+#: this list.
+
+tab_separator " ┇"
+
+#: The separator between tabs in the tab bar when using separator as
+#: the tab_bar_style.
+
+tab_activity_symbol none
+
+#: Some text or a unicode symbol to show on the tab if a window in the
+#: tab that does not have focus has some activity.
+
+tab_title_template "{title}"
+
+#: A template to render the tab title. The default just renders the
+#: title. If you wish to include the tab-index as well, use something
+#: like: {index}: {title}. Useful if you have shortcuts mapped for
+#: goto_tab N. In addition you can use {layout_name} for the current
+#: layout name and {num_windows} for the number of windows in the tab.
+#: Note that formatting is done by Python's string formatting
+#: machinery, so you can use, for instance, {layout_name[:2].upper()}
+#: to show only the first two letters of the layout name, upper-cased.
+#: If you want to style the text, you can use styling directives, for
+#: example: {fmt.fg.red}red{fmt.fg.default}normal{fmt.bg._00FF00}green
+#: bg{fmt.bg.normal}. Similarly, for bold and italic:
+#: {fmt.bold}bold{fmt.nobold}normal{fmt.italic}italic{fmt.noitalic}.
+
+active_tab_title_template none
+
+#: Template to use for active tabs, if not specified falls back to
+#: tab_title_template.
+
+active_tab_foreground   #000
+active_tab_background   #eee
+active_tab_font_style   bold-italic
+inactive_tab_foreground #444
+inactive_tab_background #999
+inactive_tab_font_style normal
+
+#: Tab bar colors and styles
+
+tab_bar_background none
+
+#: Background color for the tab bar. Defaults to using the terminal
+#: background color.
+
+#: }}}
+
+#: Color scheme {{{
+
+#foreground #a9b1d6
+#background #1a1b26
+foreground #ffffff
+background #000000
+
+#: The foreground and background colors
+
+background_opacity 0.93
+
+#: The opacity of the background. A number between 0 and 1, where 1 is
+#: opaque and 0 is fully transparent.  This will only work if
+#: supported by the OS (for instance, when using a compositor under
+#: X11). Note that it only sets the background color's opacity in
+#: cells that have the same background color as the default terminal
+#: background. This is so that things like the status bar in vim,
+#: powerline prompts, etc. still look good.  But it means that if you
+#: use a color theme with a background color in your editor, it will
+#: not be rendered as transparent.  Instead you should change the
+#: default background color in your kitty config and not use a
+#: background color in the editor color scheme. Or use the escape
+#: codes to set the terminals default colors in a shell script to
+#: launch your editor.  Be aware that using a value less than 1.0 is a
+#: (possibly significant) performance hit.  If you want to dynamically
+#: change transparency of windows set dynamic_background_opacity to
+#: yes (this is off by default as it has a performance cost)
+
+background_image none
+
+#: Path to a background image. Must be in PNG format.
+
+background_image_layout tiled
+
+#: Whether to tile or scale the background image.
+
+background_image_linear no
+
+#: When background image is scaled, whether linear interpolation
+#: should be used.
+
+dynamic_background_opacity no
+
+#: Allow changing of the background_opacity dynamically, using either
+#: keyboard shortcuts (increase_background_opacity and
+#: decrease_background_opacity) or the remote control facility.
+
+background_tint 0.0
+
+#: How much to tint the background image by the background color. The
+#: tint is applied only under the text area, not margin/borders. Makes
+#: it easier to read the text. Tinting is done using the current
+#: background color for each window. This setting applies only if
+#: background_opacity is set and transparent windows are supported or
+#: background_image is set.
+
+dim_opacity 0.75
+
+#: How much to dim text that has the DIM/FAINT attribute set. One
+#: means no dimming and zero means fully dimmed (i.e. invisible).
+
+selection_foreground #000000
+
+#: The foreground for text selected with the mouse. A value of none
+#: means to leave the color unchanged.
+
+selection_background #fffacd
+
+#: The background for text selected with the mouse.
+
+
+#: The 256 terminal colors. There are 8 basic colors, each color has a
+#: dull and bright version, for the first 16 colors. You can set the
+#: remaining 240 colors as color16 to color255.
+
+# black
+color0 #000000
+color8 #282828
+
+#red
+color1 #a60000
+color9 #972500
+
+#green
+color2 #005e00
+color10 #315b00
+
+#yellow
+color3 #813e00
+color11 #70480f
+
+# blue
+color4 #00d8b4
+color12 #0f3d8c
+
+# magenta
+color5 #721045
+color13 #8f0075
+
+# cyan
+color6 #00538b
+color14 #30517f
+
+# white
+color7 #ffffff
+color15 #f0f0f0
+
+#----------------------- old theme
+## black
+#color0 #1a1b26
+#color8 #444B6A
+#
+##red
+#color1 #ae7eb7
+#color9 #8C579C
+#
+##green
+#color2 #9ECE6A
+#color10 #618041
+#
+##yellow
+#color3 #E0AF68
+#color11 #FF9E64
+#
+## blue
+#color4 #7AA2F7
+#color12 #66d9ef
+#
+## magenta
+#color5 #ad8ee6
+#color13 #ad8ee6
+#
+## cyan
+#color6 #7b8e93
+#color14 #556468
+#
+## white
+#color7 #b3bec1
+#color15 #f7f8f8
+
+mark1_foreground black
+
+#: Color for marks of type 1
+
+mark1_background #98d3cb
+
+#: Color for marks of type 1 (light steel blue)
+
+mark2_foreground black
+
+#: Color for marks of type 2
+
+mark2_background #f2dcd3
+
+#: Color for marks of type 1 (beige)
+
+mark3_foreground black
+
+#: Color for marks of type 3
+
+mark3_background #f274bc
+
+#: Color for marks of type 1 (violet)
+
+#: }}}
+
+#: Advanced {{{
+
+shell .
+
+#: The shell program to execute. The default value of . means to use
+#: whatever shell is set as the default shell for the current user.
+#: Note that on macOS if you change this, you might need to add
+#: --login to ensure that the shell starts in interactive mode and
+#: reads its startup rc files.
+
+editor .
+
+#: The console editor to use when editing the kitty config file or
+#: similar tasks. A value of . means to use the environment variables
+#: VISUAL and EDITOR in that order. Note that this environment
+#: variable has to be set not just in your shell startup scripts but
+#: system-wide, otherwise kitty will not see it.
+
+close_on_child_death no
+
+#: Close the window when the child process (shell) exits. If no (the
+#: default), the terminal will remain open when the child exits as
+#: long as there are still processes outputting to the terminal (for
+#: example disowned or backgrounded processes). If yes, the window
+#: will close as soon as the child process exits. Note that setting it
+#: to yes means that any background processes still using the terminal
+#: can fail silently because their stdout/stderr/stdin no longer work.
+
+allow_remote_control no
+
+#: Allow other programs to control kitty. If you turn this on other
+#: programs can control all aspects of kitty, including sending text
+#: to kitty windows, opening new windows, closing windows, reading the
+#: content of windows, etc.  Note that this even works over ssh
+#: connections. You can chose to either allow any program running
+#: within kitty to control it, with yes or only programs that connect
+#: to the socket specified with the kitty --listen-on command line
+#: option, if you use the value socket-only. The latter is useful if
+#: you want to prevent programs running on a remote computer over ssh
+#: from controlling kitty.
+
+listen_on none
+
+#: Tell kitty to listen to the specified unix/tcp socket for remote
+#: control connections. Note that this will apply to all kitty
+#: instances. It can be overridden by the kitty --listen-on command
+#: line flag. This option accepts only UNIX sockets, such as
+#: unix:${TEMP}/mykitty or (on Linux) unix:@mykitty. Environment
+#: variables are expanded. If {kitty_pid} is present then it is
+#: replaced by the PID of the kitty process, otherwise the PID of the
+#: kitty process is appended to the value, with a hyphen. This option
+#: is ignored unless you also set allow_remote_control to enable
+#: remote control. See the help for kitty --listen-on for more
+#: details.
+
+# env 
+
+#: Specify environment variables to set in all child processes. Note
+#: that environment variables are expanded recursively, so if you
+#: use::
+
+#:     env MYVAR1=a
+#:     env MYVAR2=${MYVAR1}/${HOME}/b
+
+#: The value of MYVAR2 will be a/<path to home directory>/b.
+
+update_check_interval 24
+
+#: Periodically check if an update to kitty is available. If an update
+#: is found a system notification is displayed informing you of the
+#: available update. The default is to check every 24 hrs, set to zero
+#: to disable.
+
+startup_session none
+
+#: Path to a session file to use for all kitty instances. Can be
+#: overridden by using the kitty --session command line option for
+#: individual instances. See
+#: https://sw.kovidgoyal.net/kitty/index.html#sessions in the kitty
+#: documentation for details. Note that relative paths are interpreted
+#: with respect to the kitty config directory. Environment variables
+#: in the path are expanded.
+
+clipboard_control write-clipboard write-primary
+
+#: Allow programs running in kitty to read and write from the
+#: clipboard. You can control exactly which actions are allowed. The
+#: set of possible actions is: write-clipboard read-clipboard write-
+#: primary read-primary. You can additionally specify no-append to
+#: disable kitty's protocol extension for clipboard concatenation. The
+#: default is to allow writing to the clipboard and primary selection
+#: with concatenation enabled. Note that enabling the read
+#: functionality is a security risk as it means that any program, even
+#: one running on a remote server via SSH can read your clipboard.
+
+allow_hyperlinks yes
+
+#: Process hyperlink (OSC 8) escape sequences. If disabled OSC 8
+#: escape sequences are ignored. Otherwise they become clickable
+#: links, that you can click by holding down ctrl+shift and clicking
+#: with the mouse. The special value of ``ask`` means that kitty will
+#: ask before opening the link.
+
+term xterm-kitty
+
+#: The value of the TERM environment variable to set. Changing this
+#: can break many terminal programs, only change it if you know what
+#: you are doing, not because you read some advice on Stack Overflow
+#: to change it. The TERM variable is used by various programs to get
+#: information about the capabilities and behavior of the terminal. If
+#: you change it, depending on what programs you run, and how
+#: different the terminal you are changing it to is, various things
+#: from key-presses, to colors, to various advanced features may not
+#: work.
+
+#: }}}
+
+#: OS specific tweaks {{{
+
+macos_titlebar_color system
+
+#: Change the color of the kitty window's titlebar on macOS. A value
+#: of system means to use the default system color, a value of
+#: background means to use the background color of the currently
+#: active window and finally you can use an arbitrary color, such as
+#: #12af59 or red. WARNING: This option works by using a hack, as
+#: there is no proper Cocoa API for it. It sets the background color
+#: of the entire window and makes the titlebar transparent. As such it
+#: is incompatible with background_opacity. If you want to use both,
+#: you are probably better off just hiding the titlebar with
+#: hide_window_decorations.
+
+macos_option_as_alt no
+
+#: Use the option key as an alt key. With this set to no, kitty will
+#: use the macOS native Option+Key = unicode character behavior. This
+#: will break any Alt+key keyboard shortcuts in your terminal
+#: programs, but you can use the macOS unicode input technique. You
+#: can use the values: left, right, or both to use only the left,
+#: right or both Option keys as Alt, instead.
+
+macos_hide_from_tasks no
+
+#: Hide the kitty window from running tasks (Option+Tab) on macOS.
+
+macos_quit_when_last_window_closed no
+
+#: Have kitty quit when all the top-level windows are closed. By
+#: default, kitty will stay running, even with no open windows, as is
+#: the expected behavior on macOS.
+
+macos_window_resizable yes
+
+#: Disable this if you want kitty top-level (OS) windows to not be
+#: resizable on macOS.
+
+macos_thicken_font 0
+
+#: Draw an extra border around the font with the given width, to
+#: increase legibility at small font sizes. For example, a value of
+#: 0.75 will result in rendering that looks similar to sub-pixel
+#: antialiasing at common font sizes.
+
+macos_traditional_fullscreen no
+
+#: Use the traditional full-screen transition, that is faster, but
+#: less pretty.
+
+macos_show_window_title_in all
+
+#: Show or hide the window title in the macOS window or menu-bar. A
+#: value of window will show the title of the currently active window
+#: at the top of the macOS window. A value of menubar will show the
+#: title of the currently active window in the macOS menu-bar, making
+#: use of otherwise wasted space. all will show the title everywhere
+#: and none hides the title in the window and the menu-bar.
+
+macos_custom_beam_cursor no
+
+#: Enable/disable custom mouse cursor for macOS that is easier to see
+#: on both light and dark backgrounds. WARNING: this might make your
+#: mouse cursor invisible on dual GPU machines.
+
+linux_display_server auto
+
+#: Choose between Wayland and X11 backends. By default, an appropriate
+#: backend based on the system state is chosen automatically. Set it
+#: to x11 or wayland to force the choice.
+
+#: }}}
+
+#: Keyboard shortcuts {{{
+
+#: Keys are identified simply by their lowercase unicode characters.
+#: For example: ``a`` for the A key, ``[`` for the left square bracket
+#: key, etc. For functional keys, such as ``Enter or Escape`` the
+#: names are present at https://sw.kovidgoyal.net/kitty/keyboard-
+#: protocol.html#functional-key-definitions. For a list of modifier
+#: names, see: GLFW mods
+#: <https://www.glfw.org/docs/latest/group__mods.html>
+
+#: On Linux you can also use XKB key names to bind keys that are not
+#: supported by GLFW. See XKB keys
+#: <https://github.com/xkbcommon/libxkbcommon/blob/master/xkbcommon/xkbcommon-
+#: keysyms.h> for a list of key names. The name to use is the part
+#: after the XKB_KEY_ prefix. Note that you can only use an XKB key
+#: name for keys that are not known as GLFW keys.
+
+#: Finally, you can use raw system key codes to map keys, again only
+#: for keys that are not known as GLFW keys. To see the system key
+#: code for a key, start kitty with the kitty --debug-keyboard option.
+#: Then kitty will output some debug text for every key event. In that
+#: text look for ``native_code`` the value of that becomes the key
+#: name in the shortcut. For example:
+
+#: .. code-block:: none
+
+#:     on_key_input: glfw key: 65 native_code: 0x61 action: PRESS mods: 0x0 text: 'a'
+
+#: Here, the key name for the A key is 0x61 and you can use it with::
+
+#:     map ctrl+0x61 something
+
+#: to map ctrl+a to something.
+
+#: You can use the special action no_op to unmap a keyboard shortcut
+#: that is assigned in the default configuration::
+
+#:     map kitty_mod+space no_op
+
+#: You can combine multiple actions to be triggered by a single
+#: shortcut, using the syntax below::
+
+#:     map key combine <separator> action1 <separator> action2 <separator> action3 ...
+
+#: For example::
+
+#:     map kitty_mod+e combine : new_window : next_layout
+
+#: this will create a new window and switch to the next available
+#: layout
+
+#: You can use multi-key shortcuts using the syntax shown below::
+
+#:     map key1>key2>key3 action
+
+#: For example::
+
+#:     map ctrl+f>2 set_font_size 20
+
+kitty_mod ctrl+shift
+
+#: The value of kitty_mod is used as the modifier for all default
+#: shortcuts, you can change it in your kitty.conf to change the
+#: modifiers for all the default shortcuts.
+
+clear_all_shortcuts no
+
+#: You can have kitty remove all shortcut definition seen up to this
+#: point. Useful, for instance, to remove the default shortcuts.
+
+# kitten_alias hints hints --hints-offset=0
+
+#: You can create aliases for kitten names, this allows overriding the
+#: defaults for kitten options and can also be used to shorten
+#: repeated mappings of the same kitten with a specific group of
+#: options. For example, the above alias changes the default value of
+#: kitty +kitten hints --hints-offset to zero for all mappings,
+#: including the builtin ones.
+
+#: Clipboard {{{
+
+map kitty_mod+c copy_to_clipboard
+
+#: There is also a copy_or_interrupt action that can be optionally
+#: mapped to Ctrl+c. It will copy only if there is a selection and
+#: send an interrupt otherwise. Similarly, copy_and_clear_or_interrupt
+#: will copy and clear the selection or send an interrupt if there is
+#: no selection.
+
+map kitty_mod+v  paste_from_clipboard
+map kitty_mod+s  paste_from_selection
+map shift+insert paste_from_selection
+map kitty_mod+o  pass_selection_to_program
+
+#: You can also pass the contents of the current selection to any
+#: program using pass_selection_to_program. By default, the system's
+#: open program is used, but you can specify your own, the selection
+#: will be passed as a command line argument to the program, for
+#: example::
+
+#:     map kitty_mod+o pass_selection_to_program firefox
+
+#: You can pass the current selection to a terminal program running in
+#: a new kitty window, by using the @selection placeholder::
+
+#:     map kitty_mod+y new_window less @selection
+
+#: }}}
+
+#: Scrolling {{{
+
+map kitty_mod+up        scroll_line_up
+map kitty_mod+k         scroll_line_up
+map kitty_mod+down      scroll_line_down
+map kitty_mod+j         scroll_line_down
+map kitty_mod+page_up   scroll_page_up
+map kitty_mod+page_down scroll_page_down
+map kitty_mod+home      scroll_home
+map kitty_mod+end       scroll_end
+map kitty_mod+h         show_scrollback
+
+#: You can pipe the contents of the current screen + history buffer as
+#: STDIN to an arbitrary program using the ``launch`` function. For
+#: example, the following opens the scrollback buffer in less in an
+#: overlay window::
+
+#:     map f1 launch --stdin-source=@screen_scrollback --stdin-add-formatting --type=overlay less +G -R
+
+#: For more details on piping screen and buffer contents to external
+#: programs, see launch.
+
+#: }}}
+
+#: Window management {{{
+
+map kitty_mod+enter new_window
+
+#: You can open a new window running an arbitrary program, for
+#: example::
+
+#:     map kitty_mod+y      launch mutt
+
+#: You can open a new window with the current working directory set to
+#: the working directory of the current window using::
+
+#:     map ctrl+alt+enter    launch --cwd=current
+
+#: You can open a new window that is allowed to control kitty via the
+#: kitty remote control facility by prefixing the command line with @.
+#: Any programs running in that window will be allowed to control
+#: kitty. For example::
+
+#:     map ctrl+enter launch --allow-remote-control some_program
+
+#: You can open a new window next to the currently active window or as
+#: the first window, with::
+
+#:     map ctrl+n launch --location=neighbor some_program
+#:     map ctrl+f launch --location=first some_program
+
+#: For more details, see launch.
+
+map kitty_mod+n new_os_window
+
+#: Works like new_window above, except that it opens a top level OS
+#: kitty window. In particular you can use new_os_window_with_cwd to
+#: open a window with the current working directory.
+
+map kitty_mod+w close_window
+map kitty_mod+] next_window
+map kitty_mod+[ previous_window
+map kitty_mod+f move_window_forward
+map kitty_mod+b move_window_backward
+map kitty_mod+` move_window_to_top
+map kitty_mod+r start_resizing_window
+map kitty_mod+1 first_window
+map kitty_mod+2 second_window
+map kitty_mod+3 third_window
+map kitty_mod+4 fourth_window
+map kitty_mod+5 fifth_window
+map kitty_mod+6 sixth_window
+map kitty_mod+7 seventh_window
+map kitty_mod+8 eighth_window
+map kitty_mod+9 ninth_window
+map kitty_mod+0 tenth_window
+#: }}}
+
+#: Tab management {{{
+
+map kitty_mod+right next_tab
+map kitty_mod+left  previous_tab
+map kitty_mod+t     new_tab
+map kitty_mod+q     close_tab
+map kitty_mod+.     move_tab_forward
+map kitty_mod+,     move_tab_backward
+map kitty_mod+alt+t set_tab_title
+
+#: You can also create shortcuts to go to specific tabs, with 1 being
+#: the first tab, 2 the second tab and -1 being the previously active
+#: tab, and any number larger than the last tab being the last tab::
+
+#:     map ctrl+alt+1 goto_tab 1
+#:     map ctrl+alt+2 goto_tab 2
+
+#: Just as with new_window above, you can also pass the name of
+#: arbitrary commands to run when using new_tab and use
+#: new_tab_with_cwd. Finally, if you want the new tab to open next to
+#: the current tab rather than at the end of the tabs list, use::
+
+#:     map ctrl+t new_tab !neighbor [optional cmd to run]
+#: }}}
+
+#: Layout management {{{
+
+map kitty_mod+l next_layout
+
+#: You can also create shortcuts to switch to specific layouts::
+
+#:     map ctrl+alt+t goto_layout tall
+#:     map ctrl+alt+s goto_layout stack
+
+#: Similarly, to switch back to the previous layout::
+
+#:    map ctrl+alt+p last_used_layout
+#: }}}
+
+#: Font sizes {{{
+
+#: You can change the font size for all top-level kitty OS windows at
+#: a time or only the current one.
+
+map kitty_mod+equal       change_font_size all +2.0
+map kitty_mod+plus        change_font_size all +2.0
+map kitty_mod+kp_add      change_font_size all +2.0
+map kitty_mod+minus       change_font_size all -2.0
+map kitty_mod+kp_subtract change_font_size all -2.0
+map kitty_mod+backspace   change_font_size all 0
+
+#: To setup shortcuts for specific font sizes::
+
+#:     map kitty_mod+f6 change_font_size all 10.0
+
+#: To setup shortcuts to change only the current OS window's font
+#: size::
+
+#:     map kitty_mod+f6 change_font_size current 10.0
+#: }}}
+
+#: Select and act on visible text {{{
+
+#: Use the hints kitten to select text and either pass it to an
+#: external program or insert it into the terminal or copy it to the
+#: clipboard.
+
+map kitty_mod+e kitten hints
+
+#: Open a currently visible URL using the keyboard. The program used
+#: to open the URL is specified in open_url_with.
+
+map kitty_mod+p>f kitten hints --type path --program -
+
+#: Select a path/filename and insert it into the terminal. Useful, for
+#: instance to run git commands on a filename output from a previous
+#: git command.
+
+map kitty_mod+p>shift+f kitten hints --type path
+
+#: Select a path/filename and open it with the default open program.
+
+map kitty_mod+p>l kitten hints --type line --program -
+
+#: Select a line of text and insert it into the terminal. Use for the
+#: output of things like: ls -1
+
+map kitty_mod+p>w kitten hints --type word --program -
+
+#: Select words and insert into terminal.
+
+map kitty_mod+p>h kitten hints --type hash --program -
+
+#: Select something that looks like a hash and insert it into the
+#: terminal. Useful with git, which uses sha1 hashes to identify
+#: commits
+
+map kitty_mod+p>n kitten hints --type linenum
+
+#: Select something that looks like filename:linenum and open it in
+#: vim at the specified line number.
+
+map kitty_mod+p>y kitten hints --type hyperlink
+
+#: Select a hyperlink (i.e. a URL that has been marked as such by the
+#: terminal program, for example, by ls --hyperlink=auto).
+
+
+#: The hints kitten has many more modes of operation that you can map
+#: to different shortcuts. For a full description see kittens/hints.
+#: }}}
+
+#: Miscellaneous {{{
+
+map kitty_mod+f11    toggle_fullscreen
+map kitty_mod+f10    toggle_maximized
+map kitty_mod+u      kitten unicode_input
+map kitty_mod+f2     edit_config_file
+map kitty_mod+escape kitty_shell window
+
+#: Open the kitty shell in a new window/tab/overlay/os_window to
+#: control kitty using commands.
+
+map kitty_mod+a>m    set_background_opacity +0.1
+map kitty_mod+a>l    set_background_opacity -0.1
+map kitty_mod+a>1    set_background_opacity 1
+map kitty_mod+a>d    set_background_opacity default
+map kitty_mod+delete clear_terminal reset active
+
+#: You can create shortcuts to clear/reset the terminal. For example::
+
+#:     # Reset the terminal
+#:     map kitty_mod+f9 clear_terminal reset active
+#:     # Clear the terminal screen by erasing all contents
+#:     map kitty_mod+f10 clear_terminal clear active
+#:     # Clear the terminal scrollback by erasing it
+#:     map kitty_mod+f11 clear_terminal scrollback active
+#:     # Scroll the contents of the screen into the scrollback
+#:     map kitty_mod+f12 clear_terminal scroll active
+
+#: If you want to operate on all windows instead of just the current
+#: one, use all instead of active.
+
+#: It is also possible to remap Ctrl+L to both scroll the current
+#: screen contents into the scrollback buffer and clear the screen,
+#: instead of just clearing the screen::
+
+#:     map ctrl+l combine : clear_terminal scroll active : send_text normal,application \x0c
+
+
+#: You can tell kitty to send arbitrary (UTF-8) encoded text to the
+#: client program when pressing specified shortcut keys. For example::
+
+#:     map ctrl+alt+a send_text all Special text
+
+#: This will send "Special text" when you press the ctrl+alt+a key
+#: combination.  The text to be sent is a python string literal so you
+#: can use escapes like \x1b to send control codes or \u21fb to send
+#: unicode characters (or you can just input the unicode characters
+#: directly as UTF-8 text). The first argument to send_text is the
+#: keyboard modes in which to activate the shortcut. The possible
+#: values are normal or application or kitty or a comma separated
+#: combination of them.  The special keyword all means all modes. The
+#: modes normal and application refer to the DECCKM cursor key mode
+#: for terminals, and kitty refers to the special kitty extended
+#: keyboard protocol.
+
+#: Another example, that outputs a word and then moves the cursor to
+#: the start of the line (same as pressing the Home key)::
+
+#:     map ctrl+alt+a send_text normal Word\x1b[H
+#:     map ctrl+alt+a send_text application Word\x1bOH
+
+#: }}}
+
+# }}}
+
+#+end_src
