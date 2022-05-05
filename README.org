@@ -52,8 +52,7 @@ Here's a brief overview of the most important programs used:
 #+HTML:</div>
 
 * Theme
-The entire config is based on emacs' modus theme, a high-contrast dark colorscheme. This is due to my workflow being centered around emacs, i.e. the emacs theme dictates the whole systeme’s theme.
-
+The entire config is based on github's dark default theme, a high-contrast dark colorscheme. 
 * Config
 ** emacs
 My emacs config files can be found in my [[https://github.com/channel-42/gmacs][gmacs]] repo.
@@ -79,54 +78,37 @@ URxvt*depth: 32
 URxvt.background: [80]#1d1f21
 !COLORSCHMES
 ! special
-*.foreground:   #ffffff
-*.background:  #000000
+*.background: #0d1117
+*.foreground: #b3b1ad
+*.highlight: #a5d6ff
+! normal
+*.color0: #0d1117
+*.color1: #ff7b72
+*.color2: #3fb950
+*.color3: #d29922
+*.color4: #58a6ff
+*.color5: #bc8cff
+*.color6: #39c5cf
+*.color7: #b1bac4
 
-*.solid-background: #000000
-*.cursorColor:  #ffffff
+! bright
+*.color8: #6e7681
+*.color9: #ffa198
+*.color10: #56d364
+*.color11: #e3b341
+*.color12: #79c0ff
+*.color13: #d2a8ff
+*.color14: #56d4dd
+*.color15: #f0f6fc
 
-!*.highlight:    #fb3d66
-*.highlight:    #00d8b4
 
-! black
-*.color0: #000000
-*.color8: #282828
-
-!red
-*.color1: #a60000
-*.color9: #972500
-
-!green
-*.color2: #005e00
-*.color10: #315b00
-
-!yellow
-*.color3: #813e00
-*.color11: #70480f
-
-! blue
-!*.color4: #003497
-*.color4: #00d8b4
-*.color12: #0f3d8c
-
-! magenta
-*.color5: #721045
-*.color13: #8f0075
-
-! cyan
-*.color6: #00538b
-*.color14: #30517f
-
-! white
-*.color7: #ffffff
-*.color15: #f0f0f0
 #+end_src
 ** bspwm
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
 #! /bin/sh
 # autostart
 exec $HOME/scripts/bash/autostart.sh &
-exec $HOME/scripts/bash/wpp -c $HOME/Pictures/Wallpapers/saturn_4k.jpg &
+exec $HOME/scripts/bash/wpp -c $HOME/Pictures/Wallpapers/ios.jpg &
 exec sudo powertop --auto-tune &
 exec emacs --daemon &> /dev/null &
 ffplay -nodisp -autoexit -volume 15 $HOME/.resources/boot_sound.mp3 >/dev/null 2>&1 &
@@ -150,9 +132,9 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_corner 
 # config window properties
 bspc config border_width 0
-bspc config window_gap 0
-bspc config top_padding 35
-bspc config border_radius 0
+bspc config window_gap 10
+bspc config top_padding 45
+bspc config border_radius 10
 # more configs
 bspc config focus_follows_pointer true
 bspc config focused_border_color "$highlight"
@@ -359,7 +341,7 @@ background-alt = ${xrdb:highlight}
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
-secondary = #00538b 
+secondary = ${xrdb:color4}
 alert = #bd2c40
 
 [bar/wm]
@@ -372,7 +354,7 @@ wm-restack = bspwm
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-radius = 0
+radius = 10
 
 line-size = 0
 line-color = #f00
@@ -509,6 +491,7 @@ label-focused-underline= ${colors.primary}
 label-focused-padding = 3
 
 label-occupied = %name%
+label-occupied-foreground= ${colors.background-alt}
 label-occupied-padding = 3
 
 label-urgent = %name%!
@@ -622,29 +605,33 @@ c: ConfigContainer = c
 c.content.user_stylesheets = ['~/.config/qutebrowser/css/'
                               'modus-all-sites.css']
 
-base00 = "#000000"
-base08 = "#282828"
-base01 = "#a60000"
-base09 = "#972500"
-base02 = "#005e00"
-base0A = "#315b00"
-base03 = "#813e00"
-base0B = "#70480f"
-base04 = "#003497"
-base0C = "#0f3d8c"
-base05 = "#721045"
-base0D = "#8f0075"
-base06 = "#00538b"
-base0E = "#30517f"
-base07 = "#ffffff"
-base0F = "#f0f0f0"
+background = "#0d1117"
+highlight = "#58a6ff"
 
-highlight = "#00d8b4"
+base00= "#0d1117"
+base01= "#ff7b72"
+base02= "#3fb950"
+base03= "#d29922"
+base04= "#58a6ff"
+base05= "#bc8cff"
+base06= "#39c5cf"
+base07= "#b1bac4"
+
+base08= "#6e7681"
+base09= "#ffa198"
+base0A= "#56d364"
+base0B= "#e3b341"
+base0C= "#79c0ff"
+base0D= "#d2a8ff"
+base0E= "#56d4dd"
+base0F= "#f0f6fc"
+
+
 bgalt = "#282828"
 
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.
-c.colors.completion.fg = base06
+c.colors.completion.fg = base08
 
 # Background color of the completion widget for odd rows.
 c.colors.completion.odd.bg = base00
@@ -1116,34 +1103,34 @@ alias la='exa -las type'
 #+begin_src conf :tangle ~/.config/zathura/zathurarc
 set selection-clipboard clipboard
 
-set default-bg                  "#000000"
+set default-bg                  "#0d1117"
 set default-fg                  "#f0f0f0"
 
 set statusbar-fg                "#f0f0f0"
 set statusbar-bg                "#282828"
 
-set inputbar-bg                 "#000000"
+set inputbar-bg                 "#0d1117"
 set inputbar-fg                 "#fdf6e3"
 
-set notification-bg             "#000000"
+set notification-bg             "#0d1117"
 set notification-fg             "#fdf6e3"
 
-set notification-error-bg       "#000000"
-set notification-error-fg       "#dc322f"
+set notification-error-bg       "#0d1117"
+set notification-error-fg       "#ff7b72"
 
-set notification-warning-bg     "#000000"
-set notification-warning-fg     "#dc322f"
+set notification-warning-bg     "#0d1117"
+set notification-warning-fg     "#ff7b72"
 
-set highlight-color             "#e4cd7b"
-set highlight-active-color      "#268bd2"
+set highlight-color             "#e3b341"
+set highlight-active-color      "#79c0ff"
 
-set completion-bg               "#000000"
-set completion-fg               "#0f3d8c"
+set completion-bg               "#0d1117"
+set completion-fg               "#58a6ff"
 
-set completion-highlight-fg     "#00d8b4"
-set completion-highlight-bg     "#000000"
+set completion-highlight-fg     "#a5d6ff"
+set completion-highlight-bg     "#0d1117"
 
-set recolor-lightcolor          "#000000"
+set recolor-lightcolor          "#0d1117"
 set recolor-darkcolor           "#f0f0f0"
 
 set recolor                     "true"
@@ -2192,111 +2179,48 @@ tab_bar_background none
 
 #: Color scheme {{{
 
-#foreground #a9b1d6
-#background #1a1b26
-foreground #ffffff
-background #000000
+# github colors for Kitty
+background #0d1117
+foreground #b3b1ad
+selection_background #163356
+selection_foreground #b3b1ad
+url_color #b3b1ad
+cursor #73b7f2
+cursor_text_color background
 
-#: The foreground and background colors
+# Tabs
+active_tab_background #58a6ff
+active_tab_foreground #090c10
+inactive_tab_background #4d5566
+inactive_tab_foreground #090c10
 
-background_opacity 0.93
+# Windows Border
+active_border_color #b3b1ad
+inactive_border_color #b3b1ad
 
-#: The opacity of the background. A number between 0 and 1, where 1 is
-#: opaque and 0 is fully transparent.  This will only work if
-#: supported by the OS (for instance, when using a compositor under
-#: X11). Note that it only sets the background color's opacity in
-#: cells that have the same background color as the default terminal
-#: background. This is so that things like the status bar in vim,
-#: powerline prompts, etc. still look good.  But it means that if you
-#: use a color theme with a background color in your editor, it will
-#: not be rendered as transparent.  Instead you should change the
-#: default background color in your kitty config and not use a
-#: background color in the editor color scheme. Or use the escape
-#: codes to set the terminals default colors in a shell script to
-#: launch your editor.  Be aware that using a value less than 1.0 is a
-#: (possibly significant) performance hit.  If you want to dynamically
-#: change transparency of windows set dynamic_background_opacity to
-#: yes (this is off by default as it has a performance cost)
+# normal
+color0 #484f58
+color1 #ff7b72
+color2 #3fb950
+color3 #d29922
+color4 #58a6ff
+color5 #bc8cff
+color6 #39c5cf
+color7 #b1bac4
 
-background_image none
+# bright
+color8 #6e7681
+color9 #ffa198
+color10 #56d364
+color11 #e3b341
+color12 #79c0ff
+color13 #d2a8ff
+color14 #56d4dd
+color15 #f0f6fc
 
-#: Path to a background image. Must be in PNG format.
-
-background_image_layout tiled
-
-#: Whether to tile or scale the background image.
-
-background_image_linear no
-
-#: When background image is scaled, whether linear interpolation
-#: should be used.
-
-dynamic_background_opacity no
-
-#: Allow changing of the background_opacity dynamically, using either
-#: keyboard shortcuts (increase_background_opacity and
-#: decrease_background_opacity) or the remote control facility.
-
-background_tint 0.0
-
-#: How much to tint the background image by the background color. The
-#: tint is applied only under the text area, not margin/borders. Makes
-#: it easier to read the text. Tinting is done using the current
-#: background color for each window. This setting applies only if
-#: background_opacity is set and transparent windows are supported or
-#: background_image is set.
-
-dim_opacity 0.75
-
-#: How much to dim text that has the DIM/FAINT attribute set. One
-#: means no dimming and zero means fully dimmed (i.e. invisible).
-
-selection_foreground #000000
-
-#: The foreground for text selected with the mouse. A value of none
-#: means to leave the color unchanged.
-
-selection_background #fffacd
-
-#: The background for text selected with the mouse.
-
-
-#: The 256 terminal colors. There are 8 basic colors, each color has a
-#: dull and bright version, for the first 16 colors. You can set the
-#: remaining 240 colors as color16 to color255.
-
-# black
-color0 #000000
-color8 #282828
-
-#red
-color1 #a60000
-color9 #972500
-
-#green
-color2 #005e00
-color10 #315b00
-
-#yellow
-color3 #813e00
-color11 #70480f
-
-# blue
-color4 #00d8b4
-color12 #0f3d8c
-
-# magenta
-color5 #721045
-color13 #8f0075
-
-# cyan
-color6 #00538b
-color14 #30517f
-
-# white
-color7 #ffffff
-color15 #f0f0f0
-
+# extended colors
+color16 #e3b341
+color17 #ffa198
 #----------------------- old theme
 ## black
 #color0 #1a1b26
