@@ -20,6 +20,7 @@
 - [[#theme][Theme]]
 - [[#config][Config]]
   - [[#emacs][emacs]]
+  - [[#nvim][nvim]]
   - [[#xresources][Xresources]]
   - [[#bspwm][bspwm]]
   - [[#sxhkd][sxhkd]]
@@ -56,6 +57,305 @@ The entire config is based on github's dark default theme, a high-contrast dark 
 * Config
 ** emacs
 My emacs config files can be found in my [[https://github.com/channel-42/gmacs][gmacs]] repo.
+** nvim
+My minimal nvim config. Mainly used for editing config files.
+*** init
+#+begin_src vimrc :tangle ~/.config/nvim/init.vim
+let &packpath = &runtimepath
+
+source ~/.config/nvim/plugins.vim
+luafile ~/.config/nvim/galaxy.lua
+
+syntax enable
+set mouse=a
+set hidden
+set splitbelow 
+set splitright
+set number relativenumber
+set encoding=utf-8
+set backspace=indent,eol,start
+set cursorline
+set complete+=kspell
+set termguicolors
+set nospell
+set clipboard+=unnamedplus
+" versplit char
+set fillchars+=vert:\▏
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set smartindent
+set autoindent
+set updatetime=300
+set conceallevel=0
+set shortmess+=c
+set tags=./tags,tags;$HOME
+set timeout 
+
+colorscheme github_dark_default
+#+end_src
+
+*** Plugins
+#+begin_src vimrc :tangle ~/.config/nvim/plugins.vim
+call plug#begin(stdpath('data') . '/plugged')
+
+Plug 'projekt0n/github-nvim-theme'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'kyazdani42/nvim-web-devicons' " lua
+Plug 'Raimondi/delimitMate'
+Plug 'ap/vim-css-color'
+
+call plug#end()
+filetype plugin indent on "required
+#+end_src
+
+*** galaxyline
+#+begin_src lua :tangle ~/.config/nvim/galaxy.lua
+-- imports
+local gl = require('galaxyline')
+local condition = require('galaxyline.condition')
+local gls = gl.section
+
+-- short bar types
+--gl.short_line_list = {'NvimTree','vista','dbui','packer'}
+gl.short_line_list = {" "}
+
+-- custom colors
+local colors = {
+    bg=     '#0d1117',
+    red=     '#ff7b72',
+    green=     '#3fb950',
+    yellow=     '#d29922',
+    orange=    '#bf946b',
+    blue=     '#58a6ff',
+    violet=    '#cdafd9',
+    magenta=     '#796e7f',
+    darkblue=    '#55648',
+    cyan=     '#7b8e93',
+    bg_light= "#282828",
+    bg_blue = '#282828',
+    fg=    '#f7f8f8',
+    clear= 'None',
+}
+
+-- left bar
+gls.left[1] = {
+  RoundLeftLight= {
+    provider = function() return "" end,
+    highlight = {colors.bg_light,colors.bg}
+  },
+}
+gls.left[2] = {
+  ViMode = {
+    provider = function()
+      -- auto change color according the vim mode
+      local mode_color = {n = colors.red, i = colors.green,v=colors.blue,
+                          [''] = colors.blue,V=colors.blue,
+                          c = colors.magenta,no = colors.red,s = colors.orange,
+                          S=colors.orange,[''] = colors.orange,
+                          ic = colors.yellow,R = colors.violet,Rv = colors.violet,
+                          cv = colors.red,ce=colors.red, r = colors.cyan,
+                          rm = colors.cyan, ['r?'] = colors.cyan,
+                          ['!']  = colors.red,t = colors.red
+                        }
+      vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim.fn.mode()])
+      return '    '
+    end,
+    highlight = {colors.red,colors.bg_light,'bold'},
+  },
+}
+
+gls.left[3] = {
+  PaddingBlue = {
+    provider = function() return " " end,
+    highlight = {colors.bg_blue,colors.bg_blue}
+  },
+}
+
+gls.left[4] = {
+  FileSize = {
+    provider = 'FileSize',
+    condition = condition.buffer_not_empty,
+    highlight = {colors.fg,colors.bg_blue}
+  }
+}
+
+
+gls.left[5] ={
+  FileIcon = {
+    provider = 'FileIcon',
+    condition = condition.buffer_not_empty,
+    highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg_blue},
+  },
+}
+
+gls.left[6] = {
+  FileName = {
+    provider = 'FileName',
+    condition = condition.buffer_not_empty,
+    highlight = {colors.red,colors.bg_blue,'bold'}
+  }
+}
+
+
+gls.left[7] = {
+  PerCent = {
+    provider = 'LinePercent',
+    highlight = {colors.fg,colors.bg_blue,'bold'},
+  }
+}
+
+-- LSP stuff
+
+gls.left[8] = {
+  DiagnosticError = {
+    provider = 'DiagnosticError',
+    icon = '  ',
+    highlight = {colors.red,colors.bg_blue}
+  }
+}
+gls.left[9] = {
+  DiagnosticWarn = {
+    provider = 'DiagnosticWarn',
+    icon = '  ',
+    highlight = {colors.orange,colors.bg_blue},
+  }
+}
+
+gls.left[10] = {
+  DiagnosticHint = {
+    provider = 'DiagnosticHint',
+    icon = '  ',
+    highlight = {colors.cyan,colors.bg_blue},
+  }
+}
+
+gls.left[11] = {
+  DiagnosticInfo = {
+    provider = 'DiagnosticInfo',
+    icon = '  ',
+    highlight = {colors.blue,colors.bg_blue},
+  }
+}
+gls.left[12] = {
+  RoundRightBlue = {
+    provider = function() return "" end,
+    highlight = {colors.bg_blue,colors.bg}
+  },
+}
+
+-- right bar
+
+gls.right[1] = {
+  RoundLeftBlue = {
+    provider = function() return "" end,
+    highlight = {colors.bg_blue,colors.bg}
+  },
+}
+
+gls.right[2] = {
+  FileEncode = {
+    provider = 'FileEncode',
+    condition = condition.hide_in_width,
+    highlight = {colors.red,colors.bg_blue,'bold'}
+  }
+}
+gls.right[4] = {
+    PaddingBlue = {provider = function() return " " end}
+}
+
+gls.right[5] = {
+  FileFormat = {
+    provider = 'FileFormat',
+    condition = condition.hide_in_width,
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg_light},
+    highlight = {colors.red,colors.bg_light,'bold'}
+  }
+}
+
+-- git stuff
+
+gls.right[6] = {
+  GitIcon = {
+    provider = function() return '  ' end,
+    condition = condition.check_git_workspace,
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg_light},
+    highlight = {colors.violet,colors.bg_light,'bold'},
+  }
+}
+
+gls.right[7] = {
+  GitBranch = {
+    provider = 'GitBranch',
+    condition = condition.check_git_workspace,
+    highlight = {colors.violet,colors.bg_light,'bold'},
+  }
+}
+
+gls.right[8] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    condition = condition.hide_in_width,
+    icon = '  ',
+    highlight = {colors.green,colors.bg_light},
+  }
+}
+gls.right[9] = {
+  DiffModified = {
+    provider = 'DiffModified',
+    condition = condition.hide_in_width,
+    icon = ' 柳',
+    highlight = {colors.orange,colors.bg_light},
+  }
+}
+
+gls.right[10] = {
+  DiffRemove = {
+    provider = 'DiffRemove',
+    condition = condition.hide_in_width,
+    icon = '  ',
+    highlight = {colors.red,colors.bg_light},
+  }
+}
+
+
+gls.right[11] = {
+  RoundRightLight = {
+    provider = function() return "" end,
+    highlight = {colors.bg_light,colors.bg}
+  },
+}
+
+--[[ bar short left
+
+gls.short_line_left[1] = {
+  RoundLeftLight = {provider = function() return ' ' end},
+}
+
+gls.short_line_left[2] = {
+  FileIconGrey = {
+    provider = 'FileIcon',
+    condition = condition.buffer_not_empty,
+        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.bg_light},
+  },
+}
+
+gls.short_line_left[3] = {
+  SFileName = {
+    provider =  'SFileName',
+    condition = condition.buffer_not_empty,
+    highlight = {colors.fg,colors.bg_light,'bold'}
+  }
+}
+
+gls.short_line_left[4] = {
+    RoundRightLight = {provider = function() return "" end},
+}
+--]]
+#+end_src
+
 ** Xresources
 #+begin_src conf :tangle ~/.Xresources
 !Copy paste bindings
@@ -103,6 +403,7 @@ URxvt.background: [80]#1d1f21
 
 
 #+end_src
+
 ** bspwm
 #+begin_src shell :tangle ~/.config/bspwm/bspwmrc
 #! /bin/sh
@@ -2836,3 +3137,4 @@ map kitty_mod+delete clear_terminal reset active
 # }}}
 
 #+end_src
+
